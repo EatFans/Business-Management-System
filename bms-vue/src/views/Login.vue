@@ -20,7 +20,29 @@
 
         <!--登陆表-->
         <div class="login-form" :class="{ close: isChangedLogin}" >
-          <p>账号登陆</p>
+          <div class="form-item">
+            <p class="form-title">账号登录</p>
+          </div>
+
+          <div class="form-group">
+            <input type="text" placeholder="账号" v-model="loginData.username"/>
+            <p v-if="isUsernameError"> * {{ usernameErrorMessage }}</p>
+          </div>
+
+          <div class="form-group">
+            <input type="password" placeholder="密码" v-model="loginData.password" />
+            <p v-if="isPasswordError"> * {{ passwordErrorMessage }}</p>
+          </div>
+
+          <div class="form-group-with-code">
+            <input type="text" placeholder="验证码" v-model="loginData.code"/>
+
+            <!--  TODO: 图片人机验证码  -->
+          </div>
+
+          <div class="login-button">
+            <p>登录</p>
+          </div>
         </div>
 
         <!---微信扫码哦-->
@@ -41,7 +63,22 @@ export default {
   data() {
     return {
       // 是否切换登陆方式
-      isChangedLogin: false
+      isChangedLogin: false,
+      // 用户名输入是否合法
+      isUsernameError: false,
+      // 用户名输入错误信息
+      usernameErrorMessage: '不存在该用户',
+      // 密码输入是否错误
+      isPasswordError: false,
+      // 密码输入错误消息
+      passwordErrorMessage: '密码错误！',
+
+
+      loginData: {
+        username: '',
+        password: '',
+        code: ''
+      }
     }
   },
   methods: {
@@ -53,6 +90,74 @@ export default {
 </script>
 
 <style scoped>
+/*  */
+.login-button:hover {
+  background: #38d51e;
+}
+
+/* 登录按钮样式 */
+.login-button {
+  width: 80%;
+  height: 40px;
+  margin-top:20px;
+  background: #2db417;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 20px
+}
+
+.form-group-with-code {
+  width: 80%;
+  height: 40px;
+  margin-top: 5px;
+}
+
+.form-group-with-code input {
+  width: 40%;
+  height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.form-title {
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.form-item {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-group {
+  width: 80%;
+  height: 60px;
+  margin-top: 5px;
+  //border: red solid 1px;
+}
+
+.form-group input {
+  width: 95%;
+  height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* 错误文本样式 */
+.form-group p {
+  font-size: 12px;
+  color: red;
+  margin-left: 5px;
+  padding-top: 2px;
+}
+
+
 /* 登陆页面主要容器样式 */
 .login-page-container {
   width: 100%;
@@ -125,7 +230,9 @@ export default {
 .login-form {
   width: 100%;
   height: 340px;
-  //border: red solid 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 账号登陆表关闭样式 */
