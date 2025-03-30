@@ -41,9 +41,15 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>cn.bms</groupId>
             <artifactId>bms-framework</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.bms</groupId>
+            <artifactId>bms-common</artifactId>
         </dependency>
     </dependencies>
 

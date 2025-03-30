@@ -36,8 +36,10 @@
 
           <div class="form-group-with-code">
             <input type="text" placeholder="验证码" v-model="loginData.code"/>
-
             <!--  TODO: 图片人机验证码  -->
+            <div class="image-code">
+              <img src="" alt="">
+            </div>
           </div>
 
           <div class="login-button">
@@ -73,12 +75,15 @@ export default {
       // 密码输入错误消息
       passwordErrorMessage: '密码错误！',
 
-
+      // 登录数据
       loginData: {
-        username: '',
-        password: '',
-        code: ''
-      }
+        username: 'admin',
+        password: '123456@abc',
+        code: '',
+        uuid: ''
+      },
+
+
     }
   },
   methods: {
@@ -90,7 +95,7 @@ export default {
 </script>
 
 <style scoped>
-/*  */
+/* 当鼠标放在登录按钮上面时候的登录按钮样式  */
 .login-button:hover {
   background: #38d51e;
 }
@@ -109,12 +114,29 @@ export default {
   font-size: 20px
 }
 
+/* 图片验证码图片样式 */
+.image-code img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 图片验证码 */
+.image-code {
+  width: auto;
+  height: 100%;
+  border: none;
+}
+
+/* 表验证码输入物品 */
 .form-group-with-code {
   width: 80%;
   height: 40px;
   margin-top: 5px;
+  display: flex;
+  flex-direction: row;
 }
 
+/* 验证码输入框样式 */
 .form-group-with-code input {
   width: 40%;
   height: 35px;
@@ -122,11 +144,13 @@ export default {
   padding-right: 10px;
 }
 
+/* 表标题 */
 .form-title {
   font-size: 26px;
   font-weight: 400;
 }
 
+/* 表单个物品样式 */
 .form-item {
   width: 100%;
   height: 60px;
@@ -135,6 +159,7 @@ export default {
   justify-content: center;
 }
 
+/* 表组物品样式 */
 .form-group {
   width: 80%;
   height: 60px;

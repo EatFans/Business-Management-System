@@ -21,6 +21,7 @@
         <spring-framework.version>5.3.39</spring-framework.version>
         <spring-boot.version>2.5.15</spring-boot.version>
         <swagger.version>3.0.0</swagger.version>
+        <kaptcha.version>2.3.3</kaptcha.version>
 
         <bms-framework.version>1.0.0</bms-framework.version>
         <bms-common.version>1.0.0</bms-common.version>
@@ -69,6 +70,14 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+            <!--图片验证码依赖-->
+            <dependency>
+                <groupId>pro.fessional</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+
 
             <!--核心模块-->
             <dependency>
