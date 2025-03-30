@@ -5,6 +5,10 @@
   <router-view />
 </template>
 
-<style scoped>
-
+<style>
+/* 初始化样式 */
+* {
+  padding: 0;
+  margin: 0;
+}
 </style>
