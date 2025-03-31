@@ -3,13 +3,16 @@ package cn.bms.web.controller;
 import cn.bms.common.constant.CacheConstants;
 import cn.bms.common.core.domain.ApiResponse;
 import cn.bms.common.utils.UuidUtil;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.code.kaptcha.Producer;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Base64;
 
 
 /**
@@ -19,7 +22,7 @@ import java.awt.image.BufferedImage;
  */
 @RestController
 public class CaptchaController {
-    private final String IMAGE_CODE_TYPE = "char";  // 后续将其改成可从配置文件中修改
+    private final String IMAGE_CODE_TYPE = "math";  // 后续将其改成可从配置文件中修改
 
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
@@ -31,7 +34,7 @@ public class CaptchaController {
      * 获取图片验证码
      */
     @GetMapping("/captchaCode")
-    public ApiResponse getImageCode(){
+    public ApiResponse getImageCode() throws IOException {
         ApiResponse response = ApiResponse.success();
 
         // 存储验证码信息
@@ -42,19 +45,24 @@ public class CaptchaController {
         BufferedImage image = null;
 
         // 生成验证码
-        if ("math".equals(IMAGE_CODE_TYPE)) {
-            String capText = captchaProducerMath.createText();
-            capStr = capText.substring(0, capText.lastIndexOf("@"));
-            code = capText.substring(capText.lastIndexOf("@") + 1);
-            image = captchaProducerMath.createImage(capStr);
-        } else if ("char".equals(IMAGE_CODE_TYPE)) {
-            capStr = code = captchaProducer.createText();
-            image = captchaProducer.createImage(capStr);
-        }
+        capStr = code = captchaProducer.createText();
+        image = captchaProducer.createImage(capStr);
 
         // TODO:
+        // redis 将图片验证码信息存入缓存
 
+        // 转换流
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image,"jpg",baos);
+            byte[] imageBytes = baos.toByteArray();
+            response.put("img", Base64.getEncoder().encodeToString(imageBytes));
+            response.put("uuid",uuid);
+        } catch (IOException e){
+            return ApiResponse.error(e.getMessage());
+        }
         return response;
 
     }
+
 }

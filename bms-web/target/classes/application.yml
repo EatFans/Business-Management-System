@@ -1,0 +1,9 @@
+# business manager system config 企业管理系统配置
+bms:
+  # 系统名称
+  name: 企业管理系统
+  # 版本号
+  version: 1.0.0
+  # 验证码类型 math 数字计算 char 字符验证
+  captchaType: char
+

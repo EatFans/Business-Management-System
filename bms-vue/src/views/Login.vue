@@ -37,8 +37,8 @@
           <div class="form-group-with-code">
             <input type="text" placeholder="验证码" v-model="loginData.code"/>
             <!--  TODO: 图片人机验证码  -->
-            <div class="image-code">
-              <img src="" alt="">
+            <div @click="getCode" class="image-code">
+              <img :src="codeUrl" alt="" />
             </div>
           </div>
 
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import {getCodeImg} from "@/api/login.js";
 
 export default {
   name: "Login",
@@ -83,13 +84,32 @@ export default {
         uuid: ''
       },
 
+      // 是否启用图片验证码
+      captchaEnabled: true,
+      // 图片验证码图片url
+      codeUrl: ''
 
     }
   },
   methods: {
+    // 切换登录方式
     toggleChangedLogin() {
       this.isChangedLogin = !this.isChangedLogin;
-    }
+    },
+
+    // 获取验证码
+    getCode() {
+      getCodeImg().then(res => {
+        console.log(res.img);
+        if (this.captchaEnabled) {
+          this.codeUrl = "data:image/jpeg;base64," + res.img;
+          this.loginData.uuid = res.uuid;
+        }
+
+      });
+    },
+
+
   }
 }
 </script>
@@ -117,7 +137,7 @@ export default {
 /* 图片验证码图片样式 */
 .image-code img {
   width: 100%;
-  height: 100%;
+  height: 38px;
 }
 
 /* 图片验证码 */
