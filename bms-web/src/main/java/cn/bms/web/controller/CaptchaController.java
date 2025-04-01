@@ -36,7 +36,6 @@ public class CaptchaController {
     @GetMapping("/captchaCode")
     public ApiResponse getImageCode() throws IOException {
         ApiResponse response = ApiResponse.success();
-
         // 存储验证码信息
         String uuid = UuidUtil.easyUUID();
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
@@ -48,9 +47,7 @@ public class CaptchaController {
         capStr = code = captchaProducer.createText();
         image = captchaProducer.createImage(capStr);
 
-        // TODO:
-        // redis 将图片验证码信息存入缓存
-
+        // TODO: redis 将图片验证码信息存入缓存
         // 转换流
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

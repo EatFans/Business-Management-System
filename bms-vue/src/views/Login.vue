@@ -36,7 +36,6 @@
 
           <div class="form-group-with-code">
             <input type="text" placeholder="验证码" v-model="loginData.code"/>
-            <!--  TODO: 图片人机验证码  -->
             <div @click="getCode" class="image-code">
               <img :src="codeUrl" alt="" />
             </div>
@@ -90,6 +89,9 @@ export default {
       codeUrl: ''
 
     }
+  },
+  created() {
+    this.getCode(); // 创建时候获取图片验证码
   },
   methods: {
     // 切换登录方式
