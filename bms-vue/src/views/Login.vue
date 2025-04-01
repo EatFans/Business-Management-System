@@ -44,11 +44,38 @@
           <div class="login-button">
             <p>登录</p>
           </div>
+
+          <!-- 其他登录框 -->
+          <div class="other-login-box">
+            <div class="other-login-box-title">
+              <div class="line"></div>
+              <p>其他登录</p>
+              <div class="line"></div>
+            </div>
+
+            <div class="other-login-items">
+              <a href="#" id="github-login">
+                <svg t="1743484836052" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4189" width="128" height="128"><path d="M512 42.666667A464.64 464.64 0 0 0 42.666667 502.186667 460.373333 460.373333 0 0 0 363.52 938.666667c23.466667 4.266667 32-9.813333 32-22.186667v-78.08c-130.56 27.733333-158.293333-61.44-158.293333-61.44a122.026667 122.026667 0 0 0-52.053334-67.413333c-42.666667-28.16 3.413333-27.733333 3.413334-27.733334a98.56 98.56 0 0 1 71.68 47.36 101.12 101.12 0 0 0 136.533333 37.973334 99.413333 99.413333 0 0 1 29.866667-61.44c-104.106667-11.52-213.333333-50.773333-213.333334-226.986667a177.066667 177.066667 0 0 1 47.36-124.16 161.28 161.28 0 0 1 4.693334-121.173333s39.68-12.373333 128 46.933333a455.68 455.68 0 0 1 234.666666 0c89.6-59.306667 128-46.933333 128-46.933333a161.28 161.28 0 0 1 4.693334 121.173333A177.066667 177.066667 0 0 1 810.666667 477.866667c0 176.64-110.08 215.466667-213.333334 226.986666a106.666667 106.666667 0 0 1 32 85.333334v125.866666c0 14.933333 8.533333 26.88 32 22.186667A460.8 460.8 0 0 0 981.333333 502.186667 464.64 464.64 0 0 0 512 42.666667" fill="#231F20" p-id="4190"></path></svg>
+              </a>
+
+              <a href="#" id="gitee-login">
+                <svg t="1743484896077" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5165" width="128" height="128"><path d="M512 1024C229.2224 1024 0 794.7776 0 512S229.2224 0 512 0s512 229.2224 512 512-229.2224 512-512 512z m259.1488-568.8832H480.4096a25.2928 25.2928 0 0 0-25.2928 25.2928l-0.0256 63.2064c0 13.952 11.3152 25.2928 25.2672 25.2928h177.024c13.9776 0 25.2928 11.3152 25.2928 25.2672v12.6464a75.8528 75.8528 0 0 1-75.8528 75.8528H366.592a25.2928 25.2928 0 0 1-25.2672-25.2928v-240.1792a75.8528 75.8528 0 0 1 75.8272-75.8528h353.9456a25.2928 25.2928 0 0 0 25.2672-25.2928l0.0768-63.2064a25.2928 25.2928 0 0 0-25.2672-25.2928H417.152a189.6192 189.6192 0 0 0-189.6192 189.6448v353.9456c0 13.9776 11.3152 25.2928 25.2928 25.2928h372.9408a170.6496 170.6496 0 0 0 170.6496-170.6496v-145.408a25.2928 25.2928 0 0 0-25.2928-25.2672z" fill="#C71D23" p-id="5166"></path></svg>
+              </a>
+            </div>
+          </div>
         </div>
 
         <!---微信扫码哦-->
         <div class="wechat-login-form" :class="{ close: !isChangedLogin }" >
-          <p>微信扫码</p>
+          <div class="form-item">
+            <p class="form-title">微信扫码</p>
+          </div>
+
+          <div class="wechat-login-content">
+            <div class="wechat-qrcode-box">
+              <img src="" alt="">
+            </div>
+          </div>
         </div>
       </div>
 
@@ -117,6 +144,80 @@ export default {
 </script>
 
 <style scoped>
+.wechat-qrcode-box img {
+  width: 100%;
+  height: 100%;
+}
+
+.wechat-qrcode-box {
+  width: 200px;
+  height: 200px;
+  border: black solid 1px;
+}
+
+.wechat-login-content {
+  width: 100%;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* 分割线 */
+.line {
+  width: 180px;
+  height: 1px;
+  background: black;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* 其他登录物品样式 */
+#github-login, #gitee-login {
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+/* 其他登录物品图标样式 */
+#github-login svg, #gitee-login svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 其他登录物品们样式 */
+.other-login-items {
+  width: 100%;
+  height: 40px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 其他登录选项标题 */
+.other-login-box-title {
+  text-align: center;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 200;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 其他登录选项盒子 */
+.other-login-box {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+}
+
 /* 当鼠标放在登录按钮上面时候的登录按钮样式  */
 .login-button:hover {
   background: #38d51e;
@@ -186,7 +287,6 @@ export default {
   width: 80%;
   height: 60px;
   margin-top: 5px;
-  //border: red solid 1px;
 }
 
 .form-group input {
@@ -240,6 +340,7 @@ export default {
 /* 登陆盒子主体样式 */
 .login-box-content {
   width: 100%;
+  height: auto;
   background: #f5f5f5;
   border-radius: 8px;
 }
@@ -247,7 +348,7 @@ export default {
 /* 登陆方式切换盒样式 */
 .change-login {
   width: 100%;
-  height: 60px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -263,8 +364,9 @@ export default {
 }
 
 .qrcode {
-  width: 50px;
-  height: 50px;
+  margin-top: 20px;
+  width: 30px;
+  height: 30px;
 }
 
 .qrcode svg {
