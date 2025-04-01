@@ -46,6 +46,11 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>cn.bms</groupId>
+            <artifactId>bms-common</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
