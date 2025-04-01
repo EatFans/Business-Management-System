@@ -28,7 +28,11 @@
             <artifactId>spring-web</artifactId>
         </dependency>
 
-
+        <!-- Lombok依赖 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
 
 

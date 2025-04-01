@@ -22,6 +22,7 @@
         <spring-boot.version>2.5.15</spring-boot.version>
         <swagger.version>3.0.0</swagger.version>
         <kaptcha.version>2.3.3</kaptcha.version>
+        <lombok.version>1.18.32</lombok.version>
 
         <bms-framework.version>1.0.0</bms-framework.version>
         <bms-common.version>1.0.0</bms-common.version>
@@ -98,6 +99,12 @@
                 <groupId>cn.bms</groupId>
                 <artifactId>bms-system</artifactId>
                 <version>${bms-system.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
