@@ -40,7 +40,7 @@ public class TokenService {
     // TODO: TokenService待完成
 
     /**
-     * 获取
+     * 获取登录用户
      * @param request
      * @return
      */

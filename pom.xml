@@ -22,7 +22,7 @@
         <spring-boot.version>2.5.15</spring-boot.version>
         <swagger.version>3.0.0</swagger.version>
         <kaptcha.version>2.3.3</kaptcha.version>
-        <lombok.version>1.18.32</lombok.version>
+<!--        <lombok.version>1.18.32</lombok.version>-->
         <fastjson.version>2.0.53</fastjson.version>
         <jwt.version>0.9.1</jwt.version>
 
@@ -103,11 +103,11 @@
                 <version>${bms-system.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.projectlombok</groupId>-->
+<!--                <artifactId>lombok</artifactId>-->
+<!--                <version>${lombok.version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
