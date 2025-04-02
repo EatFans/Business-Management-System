@@ -1,9 +1,13 @@
 package cn.bms.framework.web.service;
 
+import cn.bms.common.core.domain.model.LoginUser;
 import cn.bms.common.core.redis.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * token 业务处理
  *
@@ -12,13 +16,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenService {
 
-    @Value("token.value")
+    @Value("${token.header}")
     private String header;
 
-    @Value("token.secret")
+    @Value("${token.secret}")
     private String secret;
 
-    @Value("token.expireTime")
+    @Value("${token.expireTime}")
     private int expireTime;
     protected static final long MILLIS_SECOND = 1000;
 
@@ -34,4 +38,14 @@ public class TokenService {
     }
 
     // TODO: TokenService待完成
+
+    /**
+     * 获取
+     * @param request
+     * @return
+     */
+    public LoginUser getLoginUser(HttpServletRequest request){
+
+        return null;
+    }
 }
