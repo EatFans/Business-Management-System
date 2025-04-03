@@ -1,7 +1,12 @@
 package cn.bms.framework.web.service;
 
+import cn.bms.common.constant.CacheConstants;
+import cn.bms.common.constant.Constants;
 import cn.bms.common.core.domain.model.LoginUser;
 import cn.bms.common.core.redis.RedisCache;
+import cn.bms.common.utils.StringUtil;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -41,11 +46,66 @@ public class TokenService {
 
     /**
      * 获取登录用户
-     * @param request
-     * @return
+     * @param request 请求信息
+     * @return 返回登录用户
      */
     public LoginUser getLoginUser(HttpServletRequest request){
+        String token = getToken(request);
+        // 检查token令牌是否为空
+        if (StringUtil.isEmpty(token)){
+            try {
+                Claims claims = parseToken(token);
+                String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
+                String tokenKey = getTokenKey(uuid);
+                LoginUser user = redisCache.getCacheObject(tokenKey);
 
+                return user;
+
+            } catch (Exception e){
+                // TODO： 将异常记录到日志文件中
+                e.printStackTrace();
+            }
+        }
         return null;
+    }
+
+    /**
+     * 获取请求token
+     *
+     * @param request 请求信息
+     * @return 返回token
+     */
+    private String getToken(HttpServletRequest request){
+        String token = request.getHeader(this.header);
+        if (StringUtil.isEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)){
+            token = token.replace(Constants.TOKEN_PREFIX, "");
+        }
+        return token;
+    }
+
+    /**
+     * 解析token
+     * @param token token令牌
+     * @return 返回解析后的数据
+     */
+    private Claims parseToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    /**
+     * 获取token令牌token
+     * @param uuid 唯一标识符
+     * @return 返回token Key
+     */
+    private String getTokenKey(String uuid) {
+        return CacheConstants.LOGIN_TOKEN_KEY + uuid;
+    }
+
+    public String createToken(LoginUser user){
+
+        return "";
     }
 }
