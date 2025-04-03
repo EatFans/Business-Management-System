@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="bms-system" />
         <module name="bms-web" />
+        <module name="bms-task" />
         <module name="bms-framework" />
         <module name="bms-common" />
       </profile>

@@ -130,6 +130,7 @@
         <module>bms-web</module>
         <module>bms-framework</module>
         <module>bms-system</module>
+        <module>bms-task</module>
     </modules>
 
     <build>

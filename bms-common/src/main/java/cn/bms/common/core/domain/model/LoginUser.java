@@ -9,5 +9,22 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 //public class LoginUser implements UserDetails
 public class LoginUser {
+    private String username;
+    private String token;
 
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public void setToken(String token){
+        this.token = token;
+    }
+
+    public String getToken(){
+        return token;
+    }
 }

@@ -4,6 +4,7 @@ import cn.bms.common.constant.CacheConstants;
 import cn.bms.common.constant.Constants;
 import cn.bms.common.core.domain.model.LoginUser;
 import cn.bms.common.core.redis.RedisCache;
+import cn.bms.common.utils.IdUtils;
 import cn.bms.common.utils.StringUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * token 业务处理
@@ -104,8 +107,33 @@ public class TokenService {
         return CacheConstants.LOGIN_TOKEN_KEY + uuid;
     }
 
-    public String createToken(LoginUser user){
+    /**
+     * 创建Token
+     * @param loginUser 登录用户
+     * @return 返回创建完成的token
+     */
+    public String createToken(LoginUser loginUser){
+        String token = IdUtils.fastUUID();
+        loginUser.setToken(token);
+        setUserAgent(loginUser);
+        refreshToken(loginUser);
 
-        return "";
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(Constants.LOGIN_USER_KEY, token);
+        claims.put(Constants.JWT_USERNAME, loginUser.getUsername());
+        return createToken(claims);
+    }
+
+    public void setUserAgent(LoginUser loginUser){
+
+    }
+
+    public void refreshToken(LoginUser loginUser){
+
+    }
+
+    public String createToken(Map<String,Object> claims) {
+        // TODO:
+        return " ";
     }
 }
