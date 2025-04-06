@@ -374,7 +374,7 @@ export default {
 }
 
 .qrcode {
-  margin-top: 20px;
+  margin-top: 5px;
   width: 30px;
   height: 30px;
 }
@@ -392,6 +392,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 5px;
 }
 
 /* 账号登陆表关闭样式 */

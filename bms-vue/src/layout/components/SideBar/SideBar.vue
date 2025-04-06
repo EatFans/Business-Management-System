@@ -21,9 +21,11 @@
 </template>
 
 <script>
-	export default {
+	import Menu from "@/layout/components/SideBar/Menu.vue";
+
+  export default {
 		name: 'SideBar',
-		components: '',
+		components: {Menu},
 		data() {
 			return {
         // 是否打开侧边栏
@@ -69,7 +71,7 @@
 .side-bar-middle {
   width: 100%;
   height: calc(100% - 53px - 54px);
-  border: white solid 1px;
+  /*border: white solid 1px;*/
 }
 
 /* 侧边栏底部部分 */
