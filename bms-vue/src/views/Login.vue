@@ -41,7 +41,7 @@
             </div>
           </div>
 
-          <div class="login-button">
+          <div class="login-button" @click="login">
             <p>登录</p>
           </div>
 
@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import {getCodeImg} from "@/api/login.js";
+import {getCodeImg, login} from "@/api/login.js";
 
 export default {
   name: "Login",
@@ -129,7 +129,7 @@ export default {
     // 获取验证码
     getCode() {
       getCodeImg().then(res => {
-        console.log(res.img);
+        // console.log(res.img);
         if (this.captchaEnabled) {
           this.codeUrl = "data:image/jpeg;base64," + res.img;
           this.loginData.uuid = res.uuid;
@@ -138,6 +138,16 @@ export default {
       });
     },
 
+	/**
+	 * 登录
+	 */
+	login() {
+		console.log("登录中...");
+		login(this.loginData.username,this.loginData.password, this.loginData.code, this.loginData.uuid).then(res => {
+			if (res !== null)
+				console.log(res);
+		})
+	}
 
   }
 }

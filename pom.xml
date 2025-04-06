@@ -25,6 +25,7 @@
 <!--        <lombok.version>1.18.32</lombok.version>-->
         <fastjson.version>2.0.53</fastjson.version>
         <jwt.version>0.9.1</jwt.version>
+        <bitwalker.version>1.21</bitwalker.version>
 
         <bms-framework.version>1.0.0</bms-framework.version>
         <bms-common.version>1.0.0</bms-common.version>
@@ -120,6 +121,13 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jwt.version}</version>
+            </dependency>
+
+            <!-- 解析客户端操作系统、浏览器等 -->
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>${bitwalker.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

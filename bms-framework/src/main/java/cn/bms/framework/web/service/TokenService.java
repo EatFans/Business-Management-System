@@ -15,9 +15,12 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * token 业务处理
+ *
+ // TODO: TokenService待完成
  *
  * @author Fan
  */
@@ -45,7 +48,6 @@ public class TokenService {
         this.redisCache = redisCache;
     }
 
-    // TODO: TokenService待完成
 
     /**
      * 获取登录用户
@@ -113,23 +115,35 @@ public class TokenService {
      * @return 返回创建完成的token
      */
     public String createToken(LoginUser loginUser){
-        String token = IdUtils.fastUUID();
-        loginUser.setToken(token);
-        setUserAgent(loginUser);
-        refreshToken(loginUser);
+//        String token = IdUtils.fastUUID();
+//        loginUser.setToken(token);
+//        setUserAgent(loginUser);
+//        refreshToken(loginUser);
+//
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put(Constants.LOGIN_USER_KEY, token);
+//        claims.put(Constants.JWT_USERNAME, loginUser.getUsername());
+//        return createToken(claims);
 
-        Map<String, Object> claims = new HashMap<>();
-        claims.put(Constants.LOGIN_USER_KEY, token);
-        claims.put(Constants.JWT_USERNAME, loginUser.getUsername());
-        return createToken(claims);
+        return "";
     }
 
     public void setUserAgent(LoginUser loginUser){
-
+        // TODO
+//        UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
+//        String ip = IpUtils.getIpAddr();
+//        loginUser.setIpaddr(ip);
+//        loginUser.setLoginLocation(AddressUtils.getRealAddressByIP(ip));
+//        loginUser.setBrowser(userAgent.getBrowser().getName());
+//        loginUser.setOs(userAgent.getOperatingSystem().getName());
     }
 
     public void refreshToken(LoginUser loginUser){
-
+//        loginUser.setLoginTime(System.currentTimeMillis());
+//        loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
+//        // 根据uuid将loginUser缓存
+//        String userKey = getTokenKey(loginUser.getToken());
+//        redisCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
     }
 
     public String createToken(Map<String,Object> claims) {

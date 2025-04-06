@@ -1,6 +1,12 @@
 package cn.bms.common.core.domain.model;
 
+import cn.bms.common.core.domain.entity.SysUser;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -8,23 +14,42 @@ import org.springframework.security.core.userdetails.UserDetails;
  * 
  */
 //public class LoginUser implements UserDetails
-public class LoginUser {
-    private String username;
-    private String token;
+public class LoginUser implements UserDetails {
+    private SysUser sysUser;
 
-    public void setUsername(String username){
-        this.username = username;
+    private List<String> permissions;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
-    public String getUsername(){
-        return username;
+    @Override
+    public String getPassword() {
+        return sysUser.getPassword();
     }
 
-    public void setToken(String token){
-        this.token = token;
+    @Override
+    public String getUsername() {
+        return sysUser.getUserName();
     }
 
-    public String getToken(){
-        return token;
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

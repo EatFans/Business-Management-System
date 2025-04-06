@@ -9,6 +9,10 @@ const publicRouter =  [
     {
         path: '/index',
         component: () => import('@/views/Index.vue'),
+    },
+    {
+        path: '/',
+        component: () => import('@/views/Index.vue'),
     }
 ];
 

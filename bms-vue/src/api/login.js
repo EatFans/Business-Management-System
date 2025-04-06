@@ -8,3 +8,19 @@ export function getCodeImg() {
         timeout: 20000
     });
 }
+
+// 登录请求
+export function login(username,password,code,uuid) {
+	const data = {
+		username,
+		password,
+		code,
+		uuid
+	}
+	return request({
+		url: '/login,',
+		method: 'post',
+		data: data,
+		timeout: 20000
+	})
+}

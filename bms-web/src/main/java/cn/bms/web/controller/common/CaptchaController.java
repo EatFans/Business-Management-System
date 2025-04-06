@@ -1,4 +1,4 @@
-package cn.bms.web.controller;
+package cn.bms.web.controller.common;
 
 import cn.bms.common.constant.CacheConstants;
 import cn.bms.common.core.domain.ApiResponse;
