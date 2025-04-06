@@ -16,25 +16,25 @@ export default {
       itemList: [
         {
           icon: 'bx bx-home-alt',
-          text: '首页',
+          text: '仪表盘',
           link: '/home',
           isHighlight: true
         },
         {
           icon: 'bx bx-user',
-          text: '员工管理',
+          text: '项目',
           link: '/employee',
           isHighlight: false
         },
         {
           icon: 'bx bx-dock-bottom',
-          text: '岗位管理',
+          text: '日历',
           link: '/department',
           isHighlight: false
         },
         {
           icon: 'bx bx-buildings',
-          text: '部门管理',
+          text: '假期',
           link: '/position',
           isHighlight: false
         },
@@ -46,7 +46,7 @@ export default {
         },
         {
           icon: 'bx bx-task',
-          text: '任务',
+          text: '消息',
           link: '/home',
           isHighlight: false
         },

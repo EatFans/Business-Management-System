@@ -2,6 +2,10 @@
   <div class="index-page-container">
     <SideBar />
 
+    <!-- index页面主要内容 -->
+    <div class="index-page-content">
+
+    </div>
   </div>
 </template>
 
@@ -26,11 +30,18 @@ export default {
 </script>
 
 <style scoped>
+.index-page-content {
+  width: 100%;
+  height: 100vh;
+}
+
 .index-page-container {
   height: 100vh;
   width: 100%;
-  background: #e9e9e9;
+  background: #eaeff5;
   padding: 5px;
+  display: flex;
+  flex-direction: row;
 }
 
 </style>
