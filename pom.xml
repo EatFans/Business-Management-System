@@ -14,17 +14,20 @@
     <description>企业管理系统</description>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <!-- 定义Java版本 -->
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-security.version>5.7.12</spring-security.version>
         <spring-framework.version>5.3.39</spring-framework.version>
         <spring-boot.version>2.5.15</spring-boot.version>
         <swagger.version>3.0.0</swagger.version>
         <kaptcha.version>2.3.3</kaptcha.version>
-        <lombok.version>1.18.32</lombok.version>
+<!--        <lombok.version>1.18.32</lombok.version>-->
         <fastjson.version>2.0.53</fastjson.version>
         <jwt.version>0.9.1</jwt.version>
+        <bitwalker.version>1.21</bitwalker.version>
 
         <bms-framework.version>1.0.0</bms-framework.version>
         <bms-common.version>1.0.0</bms-common.version>
@@ -103,11 +106,11 @@
                 <version>${bms-system.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.projectlombok</groupId>-->
+<!--                <artifactId>lombok</artifactId>-->
+<!--                <version>${lombok.version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
@@ -121,6 +124,13 @@
                 <artifactId>jjwt</artifactId>
                 <version>${jwt.version}</version>
             </dependency>
+
+            <!-- 解析客户端操作系统、浏览器等 -->
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>${bitwalker.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -130,6 +140,7 @@
         <module>bms-web</module>
         <module>bms-framework</module>
         <module>bms-system</module>
+        <module>bms-task</module>
     </modules>
 
     <build>

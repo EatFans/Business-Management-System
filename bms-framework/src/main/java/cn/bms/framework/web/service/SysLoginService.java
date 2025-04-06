@@ -2,8 +2,10 @@ package cn.bms.framework.web.service;
 
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class SysLoginService {
+
 
     public SysLoginService(){
 
@@ -21,7 +23,10 @@ public class SysLoginService {
         checkImageCode(username,code,uuid); // 检查图片验证码
         loginPreCheck(username,password);  // 登录前置条件检查
 
+        // 登录验证
 
+
+        // 生成token
         return " ";
     }
 
