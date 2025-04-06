@@ -1,4 +1,4 @@
-package cn.bms.common.utils;
+package cn.bms.common.utils.uuid;
 
 
 import cn.bms.common.utils.uuid.UUID;
