@@ -1,7 +1,10 @@
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">企业管理系统 v1.0.0</h1>  
 <h4 align="center">基于SpringBoot+Vue前后端分离的企业管理系统</h4>  
 <p align="center">  
+	<img alt="Static Badge" src="https://img.shields.io/badge/BMS-v1.0.0-blue">
+	<img alt="Static Badge" src="https://img.shields.io/badge/lang-java-java?style=flat&logo=java&logoColor=white">
     <a href="https://gitee.com/y_project/RuoYi-Vue/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>  
+
 </p>  
 
 ## 项目介绍
