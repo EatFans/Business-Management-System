@@ -17,14 +17,12 @@
 <script>
 import SideBar from "@/layout/components/SideBar/SideBar.vue";
 import HeaderBox from "@/layout/components/HeaderBox.vue";
-import IndexSection from "@/layout/components/IndexSection.vue";
 
 export default {
   name: 'Index',
   components: {
     SideBar,
     HeaderBox,
-    IndexSection
   },
   data() {
     return {
