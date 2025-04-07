@@ -12,7 +12,7 @@
     <!-- 侧边栏中部菜单部分 -->
     <div class="side-bar-middle">
       <!-- 菜单部分 -->
-      <Menu />
+      <Menu :itemList="menuItemList"/>
     </div>
 
     <!-- 侧边栏底部部分 -->
@@ -31,10 +31,16 @@
   export default {
 		name: 'SideBar',
 		components: {Menu},
+    props: {
+      menuItemList: Array,
+      required: true
+    },
 		data() {
 			return {
         // 是否打开侧边栏
         isOpenSideBar: true,
+
+
 			}
 		}
 	}

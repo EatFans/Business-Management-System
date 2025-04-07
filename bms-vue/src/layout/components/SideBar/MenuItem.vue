@@ -1,7 +1,7 @@
 <!-- 菜单物品组件 -->
 <template>
   <a :href="item.link">
-    <div class="menu-item-container">
+    <div class="menu-item-container" :class="{highlight:item.isHighlight}">
       <div class="menu-item-content">
         <i :class='item.icon'></i>
         <p>{{item.text}}</p>
@@ -89,5 +89,20 @@ a {
   margin-left: 15px;
 }
 
+/* 选项高亮样式 */
+.menu-item-container.highlight .menu-item-content {
+  background-color: #e3eaf6;
+}
+
+.menu-item-container.highlight .menu-item-content i, .menu-item-container.highlight .menu-item-content p{
+  color: #2f7cee;
+}
+
+.menu-item-container.highlight .decorative-board {
+  width: 5px;
+  height: 100%;
+  background: #2f7cee;
+  margin-left: 15px;
+}
 /**/
 </style>
