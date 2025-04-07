@@ -33,12 +33,12 @@ export default {
         {
           icon: 'bx bx-dock-bottom',
           text: '日历',
-          link: '/department',
+          link: '/calendar',
           isHighlight: false
         },
         {
           icon: 'bx bx-buildings',
-          text: '假期',
+          text: '考勤',
           link: '/position',
           isHighlight: false
         },

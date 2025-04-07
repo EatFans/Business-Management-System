@@ -17,6 +17,10 @@ const publicRouter =  [
     {
         path: '/project',
         component: () => import('@/views/Project.vue')
+    },
+    {
+        path: '/calendar',
+        component: () => import('@/views/Calendar.vue')
     }
 ];
 

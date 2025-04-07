@@ -4,18 +4,22 @@
 
     <!-- index页面主要内容 -->
     <div class="index-page-content">
+      <HeaderBox />
     </div>
+
+
   </div>
 </template>
 
 <script>
 import SideBar from "@/layout/components/SideBar/SideBar.vue";
+import HeaderBox from "@/layout/components/HeaderBox.vue";
 
 export default {
   name: 'Index',
   components: {
-    SideBar
-
+    SideBar,
+    HeaderBox
   },
   data() {
     return {
@@ -35,7 +39,7 @@ export default {
         {
           icon: 'bx bx-dock-bottom',
           text: '日历',
-          link: '/department',
+          link: '/calendar',
           isHighlight: false
         },
         {
