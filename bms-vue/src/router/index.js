@@ -7,12 +7,16 @@ const publicRouter =  [
         component: () => import('@/views/Login.vue'),
     },
     {
-        path: '/index',
+        path: '/dashboard',
         component: () => import('@/views/Index.vue'),
     },
     {
         path: '/',
         component: () => import('@/views/Index.vue'),
+    },
+    {
+        path: '/project',
+        component: () => import('@/views/Project.vue')
     }
 ];
 

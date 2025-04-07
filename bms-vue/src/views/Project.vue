@@ -1,9 +1,10 @@
+<!-- 项目界面 -->
 <template>
-  <div class="index-page-container">
+  <div class="project-page-container">
     <SideBar :menuItemList="itemList"/>
 
     <!-- index页面主要内容 -->
-    <div class="index-page-content">
+    <div class="project-page-content">
     </div>
   </div>
 </template>
@@ -12,11 +13,8 @@
 import SideBar from "@/layout/components/SideBar/SideBar.vue";
 
 export default {
-  name: 'Index',
-  components: {
-    SideBar
-
-  },
+  name: "Project",
+  components: {SideBar},
   data() {
     return {
       itemList: [
@@ -24,13 +22,13 @@ export default {
           icon: 'bx bx-home-alt',
           text: '仪表盘',
           link: '/dashboard',
-          isHighlight: true
+          isHighlight: false
         },
         {
           icon: 'bx bx-user',
           text: '项目',
           link: '/project',
-          isHighlight: false
+          isHighlight: true,
         },
         {
           icon: 'bx bx-dock-bottom',
@@ -58,20 +56,21 @@ export default {
         },
       ]
     }
-  },
-  methods: {
 
   }
+
+
 }
 </script>
 
+
 <style scoped>
-.index-page-content {
+.project-page-content {
   width: 100%;
   height: 100vh;
 }
 
-.index-page-container {
+.project-page-container {
   height: 100vh;
   width: 100%;
   background: #eaeff5;
