@@ -107,6 +107,8 @@ export default {
   outline: none;
 }
 
+
+
 /* 用户操作部分框样式 */
 .action-container {
   width: calc(100% - 20% - 50%);
@@ -175,13 +177,13 @@ export default {
   font-size: 14px;
 }
 
-.user-profile:hover .user-nick-name p{
-  color: #2f7cee;
-}
-
 .user-profile i {
   font-size: 18px;
   color: #78818e;
   margin-right: 5px;
+}
+
+.user-profile i:hover {
+  color: #2f7cee;
 }
 </style>

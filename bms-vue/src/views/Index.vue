@@ -5,6 +5,9 @@
     <!-- index页面主要内容 -->
     <div class="index-page-content">
       <HeaderBox />
+
+      <!-- 二级路由切换不同内容 -->
+      <router-view></router-view>
     </div>
 
 
@@ -14,12 +17,14 @@
 <script>
 import SideBar from "@/layout/components/SideBar/SideBar.vue";
 import HeaderBox from "@/layout/components/HeaderBox.vue";
+import IndexSection from "@/layout/components/IndexSection.vue";
 
 export default {
   name: 'Index',
   components: {
     SideBar,
-    HeaderBox
+    HeaderBox,
+    IndexSection
   },
   data() {
     return {
@@ -28,37 +33,31 @@ export default {
           icon: 'bx bx-home-alt',
           text: '仪表盘',
           link: '/dashboard',
-          isHighlight: true
         },
         {
           icon: 'bx bx-user',
           text: '项目',
           link: '/project',
-          isHighlight: false
         },
         {
           icon: 'bx bx-dock-bottom',
           text: '日历',
           link: '/calendar',
-          isHighlight: false
         },
         {
           icon: 'bx bx-buildings',
           text: '假期',
-          link: '/position',
-          isHighlight: false
+          link: '/holiday',
         },
         {
           icon: 'bx bx-calendar-check',
           text: '考勤',
-          link: '/home',
-          isHighlight: false
+          link: '/attendance',
         },
         {
           icon: 'bx bx-task',
           text: '消息',
-          link: '/home',
-          isHighlight: false
+          link: '/notify',
         },
       ]
     }

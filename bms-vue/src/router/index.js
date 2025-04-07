@@ -1,5 +1,39 @@
 import {createRouter, createWebHistory} from "vue-router"
 
+const childrenRouter = [
+    {
+        path: '/dashboard',
+        component: () => import('@/views/pages/Dashboard.vue'),
+        meta: { title: '仪表盘' },
+    },
+    {
+        path: '/project',
+        component: () => import('@/views/pages/Project.vue'),
+        meta: {title: '项目'}
+    },
+    {
+        path: '/calendar',
+        component: () => import('@/views/pages/Calendar.vue'),
+        meta: {title: '日历'}
+    },
+    {
+        path: '/holiday',
+        component: () => import('@/views/pages/Holiday.vue'),
+        meta: {title: '假期'}
+    },
+    {
+        path: '/attendance',
+        component: () => import('@/views/pages/Attendance.vue'),
+        meta: {title: '考勤'}
+    },
+    {
+        path: '/notify',
+        component: () => import('@/views/pages/Notify.vue'),
+        meta: {title: '消息'}
+    }
+
+];
+
 // 公共路由
 const publicRouter =  [
     {
@@ -7,21 +41,11 @@ const publicRouter =  [
         component: () => import('@/views/Login.vue'),
     },
     {
-        path: '/dashboard',
+        path: '',
         component: () => import('@/views/Index.vue'),
+        children: childrenRouter,
     },
-    {
-        path: '/',
-        component: () => import('@/views/Index.vue'),
-    },
-    {
-        path: '/project',
-        component: () => import('@/views/Project.vue')
-    },
-    {
-        path: '/calendar',
-        component: () => import('@/views/Calendar.vue')
-    }
+
 ];
 
 const router = createRouter({

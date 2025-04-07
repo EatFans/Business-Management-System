@@ -1,12 +1,12 @@
 <!-- 菜单物品组件 -->
 <template>
   <a :href="item.link">
-    <div class="menu-item-container" :class="{highlight:item.isHighlight}">
+    <div class="menu-item-container" :class="{highlight:isActive(item.link)}">
       <div class="menu-item-content">
         <i :class='item.icon'></i>
         <p>{{item.text}}</p>
       </div>
-      <div class="decorative-board" :class="{ highlight:item.isHighlight }"></div>
+      <div class="decorative-board" :class="{ highlight:isActive(item.link) }"></div>
     </div>
   </a>
 
@@ -33,6 +33,11 @@ export default {
       //   link: '/home',
       //   isHighlight: false
       // }
+    }
+  },
+  methods: {
+    isActive(link){
+      return this.$route.path === link;
     }
   }
 }
