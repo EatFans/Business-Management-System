@@ -319,7 +319,7 @@ export default {
 .login-page-container {
   width: 100%;
   height: 100vh;
-  background: #434343;
+  background: #eaeff5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -351,8 +351,8 @@ export default {
 .login-box-content {
   width: 100%;
   height: auto;
-  background: #f5f5f5;
-  border-radius: 8px;
+  background: #fff;
+  border-radius: 15px;
 }
 
 /* 登陆方式切换盒样式 */
