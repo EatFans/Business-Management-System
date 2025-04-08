@@ -34,7 +34,7 @@ const childrenRouter = [
 
 ];
 
-// 公共路由
+// 公共一级路由
 const publicRouter =  [
     {
         path: '/login',
@@ -50,6 +50,10 @@ const publicRouter =  [
         component: () => import('@/views/Index.vue'),
         children: childrenRouter,
     },
+    {
+        path: '/404',
+        component: () => import('@/views/error/404.vue'),
+    }
 
 ];
 
