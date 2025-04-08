@@ -13,6 +13,9 @@
         </div>
 
         <div class="important-event-menu-item-info">
+          <div class="event-status" :class="item.eventStatus">
+            <i class='bx bx-up-arrow-alt' ></i>
+          </div>
           <div class="spend-time-box">
             <i class='bx bxs-time' ></i>
             <p>{{item.spendTime}}</p>
@@ -33,6 +36,7 @@ export default {
         day: '今天',
         time: '12:00',
         spendTime: '2h',
+        eventStatus: 'low',  // 高、中、低，high、medium、low
         color: 'pink',
       }
     }
@@ -86,9 +90,36 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: end;
-  justify-content: center;
+  align-items:  center;
+  justify-content: end;
+  flex-direction: column;
+}
 
+/* 事件紧急状态样式 */
+.event-status {
+  margin-bottom: 15px;
+}
+
+/* 默认事件箭头样式 */
+.event-status i{
+  margin-left: 30px;
+  font-size: 23px;
+  color: #78818e;
+}
+
+/* 高紧急事件 */
+.event-status.high i{
+  color: #ec5a5a;
+}
+
+/* 中事件 */
+.event-status.medium i {
+  color: #f5b931;
+}
+
+/* 低事件 */
+.event-status.low i {
+  color: #1bc24a;
 }
 
 /* 花费时间标签 */
