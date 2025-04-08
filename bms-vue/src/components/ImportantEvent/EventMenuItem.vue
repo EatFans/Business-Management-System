@@ -29,16 +29,23 @@
 <script>
 export default {
   name: "EventMenuItem",
+  props:{
+    item: {
+      type: Object,
+      required: true,
+      default: null
+    }
+  },
   data() {
     return {
-      item: {
-        text: '准备开始新的项目，项目负责人为EatFan范德萨范德萨范德萨范德萨范德萨发撒放到沙发的',
-        day: '今天',
-        time: '12:00',
-        spendTime: '2h',
-        eventStatus: 'low',  // 高、中、低，high、medium、low
-        color: 'pink',
-      }
+      // item: {
+      //   text: '准备开始新的项目，项目负责人为EatFan范德萨范德萨范德萨范德萨范德萨发撒放到沙发的',
+      //   day: '今天',
+      //   time: '12:00',
+      //   spendTime: '2h',
+      //   eventStatus: 'high',  // 高、中、低，high、medium、low
+      //   color: 'pink',
+      // }
     }
   },
   methods: {
@@ -68,15 +75,16 @@ export default {
   flex-direction: row;
 }
 
+.important-event-menu-item-data {
+  width: 550px;
+  height: 100%;
+}
+
 .text-box {
   width: 70%;
   height: 40px;
   margin-top: 10px;
   font-size: 14px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display:-webkit-box;
-  -webkit-box-orient:vertical;
 }
 
 .time-box {
@@ -139,6 +147,11 @@ export default {
 .spend-time-box i{
   margin-right: 5px;
   color: #78818e;
+}
+
+.spend-time-box p {
+  color: #78818e;
+  font-size: 13px;
 }
 
 /* 颜色板样式 */

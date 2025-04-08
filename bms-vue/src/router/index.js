@@ -45,6 +45,11 @@ const publicRouter =  [
         component: () => import('@/views/Index.vue'),
         children: childrenRouter,
     },
+    {
+        path: '/',
+        component: () => import('@/views/Index.vue'),
+        children: childrenRouter,
+    },
 
 ];
 
