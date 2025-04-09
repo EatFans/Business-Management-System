@@ -10,6 +10,6 @@
 * {
   padding: 0;
   margin: 0;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 </style>

@@ -153,6 +153,7 @@ export default {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 
 /* 统计栏 */
@@ -229,6 +230,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 
 /* 项目信息盒子 */
