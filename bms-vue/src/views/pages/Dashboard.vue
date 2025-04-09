@@ -44,8 +44,27 @@
 
    <!-- 第二板块部分 -->
    <div class="second-section">
+     <!-- 项目信息 -->
      <div class="project-info-box">
+        <div class="project-info-box-header">
+          <h2>项目</h2>
 
+          <div class="look-all">
+            <a href="#">查看全部</a>
+            <i class='bx bxs-chevron-right'></i>
+          </div>
+        </div>
+
+       <div class="project-info-box-body">
+
+       </div>
+     </div>
+
+     <!--项目日志框-->
+     <div class="project-log-box">
+       <div class="project-log-box-header">
+
+       </div>
      </div>
    </div>
  </div>
@@ -102,7 +121,8 @@ export default {
 <style scoped>
 .dashboard-container {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 50px);
+  overflow: hidden;
 }
 
 .index-section {
@@ -208,7 +228,8 @@ export default {
 .second-section {
   width: 100%;
   height: 100%;
-  border: red solid 1px;
+  display: flex;
+  flex-direction: row;
 }
 
 /* 项目信息盒子 */
@@ -217,9 +238,40 @@ export default {
   min-width: 600px;
   height: 100%;
   margin-left: 25px;
-  margin-top: 10px;
-  background: #fff;
+  margin-top: 40px;
 
+}
+
+.project-info-box-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+
+.project-info-box-header h2 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.project-info-box-body {
+  width: 100%;
+  height: 49%;
+  margin-top: 10px;
+}
+
+/* 项目日志框 */
+.project-log-box {
+  width: calc(100% - 75% - 50px - 25px);
+  min-width: 330px;
+  height: 52.5%;
+  background: #fff;
+  margin-right: 20px;
+  margin-left: 20px;
+  border-radius: 20px;
+  margin-top: 40px;
 }
 
 </style>

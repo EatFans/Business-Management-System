@@ -64,6 +64,7 @@ a {
   align-items: center;
   margin-left: 15px;
   border-radius: 10px;
+
 }
 
 .menu-item-content i {
@@ -76,6 +77,7 @@ a {
   font-size: 16px;
   color: #78818e;
   margin-left: 10px;
+
 }
 
 /* 当鼠标覆盖选项样式 */
