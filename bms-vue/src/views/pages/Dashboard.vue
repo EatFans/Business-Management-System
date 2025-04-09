@@ -48,7 +48,6 @@
      <div class="project-info-box">
         <div class="project-info-box-header">
           <h2>项目</h2>
-
           <div class="look-all">
             <a href="#">查看全部</a>
             <i class='bx bxs-chevron-right'></i>
