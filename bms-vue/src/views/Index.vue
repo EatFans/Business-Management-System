@@ -1,16 +1,12 @@
 <template>
   <div class="index-page-container">
     <SideBar :menuItemList="itemList"/>
-
     <!-- index页面主要内容 -->
     <div class="index-page-content">
       <HeaderBox />
-
       <!-- 二级路由切换不同内容 -->
       <router-view></router-view>
     </div>
-
-
   </div>
 </template>
 
@@ -36,6 +32,11 @@ export default {
           icon: 'bx bx-user',
           text: '项目',
           link: '/project',
+        },
+        {
+          icon: 'bx bx-notepad',
+          text: '任务',
+          link: '/task'
         },
         {
           icon: 'bx bx-dock-bottom',

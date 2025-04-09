@@ -14,8 +14,8 @@
      </div>
    </div>
 
+   <!-- 第一步板块部分 -->
    <div class="first-section">
-
      <!-- 统计栏 -->
      <div class="statistics-box">
         <div class="statistics-box-header">
@@ -37,8 +37,15 @@
 
        <!-- 重要事件框的主体部分 -->
        <div class="important-events-box-body">
-          <ImportantEventMenu />
+          <ImportantEventMenu :itemList="itemList" />
        </div>
+     </div>
+   </div>
+
+   <!-- 第二板块部分 -->
+   <div class="second-section">
+     <div class="project-info-box">
+
      </div>
    </div>
  </div>
@@ -55,7 +62,39 @@ export default {
   data(){
     return {
       username: 'EatFan',
+      itemList: [
+        {
+          text: '准备开始新的项目，项目负责人为EatFan',
+          day: '今天',
+          time: '12:00',
+          spendTime: '2h',
+          eventStatus: 'medium',  // 高、中、低，high、medium、low
+          color: 'pink',
+        },
+        {
+          text: '小明的生日',
+          day: '明天',
+          time: '12:00',
+          spendTime: '0.5h',
+          eventStatus: 'low',
+          color: 'blue',
+        },
+        {
+          text: '企业管理系统项目开发',
+          day: '今天',
+          time: '7:00',
+          spendTime: '4h',
+          eventStatus: 'low',
+          color: 'orange'
+        }
+      ]
     }
+  },
+  methods: {
+    getImportantEventMenuItemList(){
+
+    }
+
   }
 }
 </script>
@@ -164,4 +203,23 @@ export default {
   color: #448af6;
   margin-left: 5px;
 }
+
+/* 第二部分板块 */
+.second-section {
+  width: 100%;
+  height: 100%;
+  border: red solid 1px;
+}
+
+/* 项目信息盒子 */
+.project-info-box {
+  width: 75%;
+  min-width: 600px;
+  height: 100%;
+  margin-left: 25px;
+  margin-top: 10px;
+  background: #fff;
+
+}
+
 </style>

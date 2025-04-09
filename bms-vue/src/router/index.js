@@ -12,6 +12,11 @@ const childrenRouter = [
         meta: {title: '项目'}
     },
     {
+        path: '/task',
+        component: () => import('@/views/pages/Task.vue'),
+        meta: {title: '任务'}
+    },
+    {
         path: '/calendar',
         component: () => import('@/views/pages/Calendar.vue'),
         meta: {title: '日历'}
