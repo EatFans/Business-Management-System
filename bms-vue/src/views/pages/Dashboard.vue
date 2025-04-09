@@ -55,6 +55,9 @@
         </div>
 
        <div class="project-info-box-body">
+         <ProjectInfoItem />
+         <ProjectInfoItem />
+         <ProjectInfoItem />
 
        </div>
      </div>
@@ -62,7 +65,6 @@
      <!--项目日志框-->
      <div class="project-log-box">
        <div class="project-log-box-header">
-
        </div>
      </div>
    </div>
@@ -71,10 +73,12 @@
 
 <script>
 import ImportantEventMenu from "@/layout/components/ImportantEventMenu.vue";
+import ProjectInfoItem from "@/components/project/ProjectInfoItem.vue";
 
 export default {
   name: "Dashboard",
   components: {
+    ProjectInfoItem,
     ImportantEventMenu
   },
   data(){
