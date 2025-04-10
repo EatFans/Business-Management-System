@@ -67,7 +67,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 20px;
+  padding-left: 25px;
 }
 
 .project-list-sidebar-item-main p {

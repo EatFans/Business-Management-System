@@ -27,7 +27,10 @@
         </div>
       </div>
 
-
+      <div class="project-body-main">
+        <!-- 项目路径下的三级路由 -->
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -107,11 +110,13 @@ export default {
 .project-body {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 /* 项目列表 */
 .project-list-sidebar{
-  width: 250px;
+  width: 300px;
   min-width: 200px;
   height: 89%;
   background: #fff;
@@ -147,6 +152,13 @@ export default {
 .project-list-sidebar-content {
   width: 100%;
   height: 92%;
+}
+
+/* 项目界面主要部分 */
+.project-body-main {
+  width: 100%;
+  height: 89%;
+  border: red solid 1px;
 }
 
 </style>

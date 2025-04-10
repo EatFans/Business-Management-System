@@ -3,7 +3,12 @@ import {createRouter, createWebHistory} from "vue-router"
 // 项目路径下的二级路由，总的三级路由
 const projectChildrenRouter = [
     {
+        path: ':projectCode',
+        component: () => import('@/layout/project/Index.vue')
+    },
+    {
         path: '',
+        component: () => import('@/layout/project/Default.vue')
     }
 ];
 
