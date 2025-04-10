@@ -264,7 +264,6 @@ export default {
 .project-info-box-body {
   width: 100%;
   height: 430px;
-  border: red solid 1px;
   display: flex;
   flex-direction: column;
   justify-content: center;
