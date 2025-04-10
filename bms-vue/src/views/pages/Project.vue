@@ -23,7 +23,7 @@
 
         <!-- 项目列表侧边栏核心部分 -->
         <div class="project-list-sidebar-content">
-
+          <ProjectListSideBarMenu />
         </div>
       </div>
     </div>
@@ -31,9 +31,11 @@
 </template>
 
 <script>
+import ProjectListSideBarMenu from "@/layout/components/ProjectListSideBarMenu.vue";
+
 export default {
   name: "Project",
-  components: {},
+  components: {ProjectListSideBarMenu},
   data() {
     return {
 
@@ -139,7 +141,6 @@ export default {
 .project-list-sidebar-content {
   width: 100%;
   height: 92%;
-  border: black solid 1px;
 }
 
 </style>

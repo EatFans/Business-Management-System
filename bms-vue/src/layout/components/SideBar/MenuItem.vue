@@ -1,6 +1,6 @@
 <!-- 菜单物品组件 -->
 <template>
-  <a :href="item.link">
+  <router-link :to="item.link">
     <div class="menu-item-container" :class="{highlight:isActive(item.link)}">
       <div class="menu-item-content">
         <i :class='item.icon'></i>
@@ -8,7 +8,7 @@
       </div>
       <div class="decorative-board" :class="{ highlight:isActive(item.link) }"></div>
     </div>
-  </a>
+  </router-link>
 
 
 </template>
