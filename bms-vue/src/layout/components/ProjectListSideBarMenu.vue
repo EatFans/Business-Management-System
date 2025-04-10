@@ -28,7 +28,6 @@ export default {
 .project-list-sidebar-menu {
   width: 100%;
   height: 100%;
-  background: red;
 }
 
 </style>

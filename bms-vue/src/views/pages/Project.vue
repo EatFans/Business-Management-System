@@ -26,6 +26,8 @@
           <ProjectListSideBarMenu />
         </div>
       </div>
+
+
     </div>
   </div>
 </template>
@@ -136,6 +138,10 @@ export default {
 .project-list-header i{
   margin-left: 10px;
   font-size: 20px;
+}
+
+.project-list-header:hover p, .project-list-header:hover i {
+  color: #2f7cee;
 }
 
 .project-list-sidebar-content {

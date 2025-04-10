@@ -231,7 +231,7 @@ export default {
 /* 第二部分板块 */
 .second-section {
   width: 100%;
-  height: 100%;
+  height: 800px;
   display: flex;
   flex-direction: row;
   overflow: hidden;
@@ -263,7 +263,8 @@ export default {
 
 .project-info-box-body {
   width: 100%;
-  height: 49%;
+  height: 430px;
+  border: red solid 1px;
   margin-top: 10px;
 }
 

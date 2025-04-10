@@ -15,7 +15,7 @@ export default {
 <style scoped>
 .project-info-item {
   width: 100%;
-  height: 150px;
+  height: 120px;
   background: #fff;
   border-radius: 20px;
   margin: 20px 0;
