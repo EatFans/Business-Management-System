@@ -265,7 +265,10 @@ export default {
   width: 100%;
   height: 430px;
   border: red solid 1px;
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* 项目日志框 */

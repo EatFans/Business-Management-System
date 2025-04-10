@@ -14,10 +14,10 @@ export default {
 
 <style scoped>
 .project-info-item {
-  width: 100%;
-  height: 120px;
+  width: 90%;
+  height: 160px;
   background: #fff;
   border-radius: 20px;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 </style>

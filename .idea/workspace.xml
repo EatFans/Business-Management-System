@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20a4c180-b230-4332-8bfe-ea46699ef092" name="更改" comment="添加思维导图">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bms-vue/src/components/project/ProjectListSideBarItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/bms-vue/src/components/project/ProjectListSideBarItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bms-vue/src/layout/components/ProjectListSideBarMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/bms-vue/src/layout/components/ProjectListSideBarMenu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bms-vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/bms-vue/src/router/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="20a4c180-b230-4332-8bfe-ea46699ef092" name="更改" comment="添加思维导图" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
