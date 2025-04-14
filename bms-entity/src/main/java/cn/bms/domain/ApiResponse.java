@@ -1,4 +1,4 @@
-package cn.bms.common.core.domain;
+package cn.bms.domain;
 
 import cn.bms.common.constant.HttpStatus;
 

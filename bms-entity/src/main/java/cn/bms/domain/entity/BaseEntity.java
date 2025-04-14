@@ -1,4 +1,4 @@
-package cn.bms.common.core.domain.entity;
+package cn.bms.domain.entity;
 
 
 import java.util.Date;

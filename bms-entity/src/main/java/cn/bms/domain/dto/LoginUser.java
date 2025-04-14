@@ -1,11 +1,9 @@
-package cn.bms.common.core.domain.model;
+package cn.bms.domain.dto;
 
-import cn.bms.common.core.domain.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 
@@ -15,7 +13,6 @@ import java.util.List;
  */
 //public class LoginUser implements UserDetails
 public class LoginUser implements UserDetails {
-    private SysUser sysUser;
 
     private List<String> permissions;
     @Override
@@ -25,12 +22,12 @@ public class LoginUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return sysUser.getPassword();
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return sysUser.getUserName();
+        return null;
     }
 
     @Override

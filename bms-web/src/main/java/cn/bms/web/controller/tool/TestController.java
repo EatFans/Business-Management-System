@@ -1,6 +1,6 @@
 package cn.bms.web.controller.tool;
 
-import cn.bms.common.core.domain.ApiResponse;
+import cn.bms.domain.ApiResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

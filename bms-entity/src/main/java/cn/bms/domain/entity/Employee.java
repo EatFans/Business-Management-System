@@ -1,8 +1,6 @@
-package cn.bms.system.domain.entity;
+package cn.bms.domain.entity;
 
-import cn.bms.common.core.domain.entity.BaseEntity;
 
-import java.util.Date;
 
 /**
  * 员工数据实体类

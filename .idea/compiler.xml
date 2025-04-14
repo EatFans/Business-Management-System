@@ -10,6 +10,7 @@
         <module name="bms-task" />
         <module name="bms-web" />
         <module name="bms-framework" />
+        <module name="bms-entity" />
         <module name="bms-common" />
       </profile>
     </annotationProcessing>

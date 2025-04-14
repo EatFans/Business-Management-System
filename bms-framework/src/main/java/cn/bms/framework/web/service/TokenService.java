@@ -2,10 +2,9 @@ package cn.bms.framework.web.service;
 
 import cn.bms.common.constant.CacheConstants;
 import cn.bms.common.constant.Constants;
-import cn.bms.common.core.domain.model.LoginUser;
 import cn.bms.common.core.redis.RedisCache;
-import cn.bms.common.utils.IdUtils;
 import cn.bms.common.utils.StringUtil;
+import cn.bms.domain.dto.LoginUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * token 业务处理

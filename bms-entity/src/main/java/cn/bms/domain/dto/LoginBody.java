@@ -1,4 +1,4 @@
-package cn.bms.common.core.domain.model;
+package cn.bms.domain.dto;
 
 
 public class LoginBody {

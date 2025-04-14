@@ -1,8 +1,8 @@
 package cn.bms.web.controller.common;
 
 import cn.bms.common.constant.CacheConstants;
-import cn.bms.common.core.domain.ApiResponse;
 import cn.bms.common.utils.uuid.UuidUtil;
+import cn.bms.domain.ApiResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.code.kaptcha.Producer;

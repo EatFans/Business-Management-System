@@ -32,6 +32,7 @@
         <bms-framework.version>1.0.0</bms-framework.version>
         <bms-common.version>1.0.0</bms-common.version>
         <bms-system.version>1.0.0</bms-system.version>
+        <bms-entity.version>1.0.0</bms-entity.version>
     </properties>
 
     <!--依赖管理声明-->
@@ -106,6 +107,13 @@
                 <version>${bms-system.version}</version>
             </dependency>
 
+            <!-- entity 实体模块 -->
+            <dependency>
+                <groupId>cn.bms</groupId>
+                <artifactId>bms-entity</artifactId>
+                <version>${bms-entity.version}</version>
+            </dependency>
+
 <!--            <dependency>-->
 <!--                <groupId>org.projectlombok</groupId>-->
 <!--                <artifactId>lombok</artifactId>-->
@@ -141,6 +149,7 @@
         <module>bms-framework</module>
         <module>bms-system</module>
         <module>bms-task</module>
+        <module>bms-entity</module>
     </modules>
 
     <build>

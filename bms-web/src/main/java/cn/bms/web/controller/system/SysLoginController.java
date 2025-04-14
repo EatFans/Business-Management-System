@@ -1,13 +1,16 @@
 package cn.bms.web.controller.system;
 
 import cn.bms.common.constant.Constants;
-import cn.bms.common.core.domain.ApiResponse;
-import cn.bms.common.core.domain.model.LoginBody;
+import cn.bms.common.utils.StringUtil;
+import cn.bms.domain.ApiResponse;
+import cn.bms.domain.dto.LoginBody;
 import cn.bms.framework.web.service.SysLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 系统登录控制类
@@ -41,4 +44,17 @@ public class SysLoginController {
         response.put(Constants.TOKEN,token);
         return response;
     }
+
+    @PostMapping("/logout")
+    public ApiResponse logout(HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        if (StringUtil.isNotEmpty(token)){
+            // TODO : 清除Token操作
+        } else {
+            return ApiResponse.error("退出登录失败！");
+        }
+
+        return ApiResponse.success("退出登录成功!");
+    }
+
 }

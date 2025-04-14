@@ -9,25 +9,14 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>bms-system</artifactId>
-
-
+    <artifactId>bms-entity</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>cn.bms</groupId>
-            <artifactId>bms-framework</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>cn.bms</groupId>
             <artifactId>bms-common</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>cn.bms</groupId>
-            <artifactId>bms-entity</artifactId>
-        </dependency>
     </dependencies>
-
 </project>

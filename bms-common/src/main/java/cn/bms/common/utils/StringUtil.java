@@ -37,6 +37,16 @@ public class StringUtil {
     }
 
     /**
+     * 判断字符串不是为空
+     *
+     * @param str 字符串
+     * @return 如果不是为空就返回true，否则就返回false
+     */
+    public static boolean isNotEmpty(String str){
+        return !isEmpty(str);
+    }
+
+    /**
      * * 判断一个对象数组是否为空
      *
      * @param objects 要判断的对象数组
