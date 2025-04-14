@@ -108,7 +108,8 @@ export default {
           spendTime: '4h',
           eventStatus: 'low',
           color: 'orange'
-        }
+        },
+
       ]
     }
   },
@@ -125,7 +126,6 @@ export default {
 .dashboard-container {
   width: 100%;
   height: calc(100vh - 50px);
-  overflow: hidden;
 }
 
 .index-section {

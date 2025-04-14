@@ -78,6 +78,7 @@ export default {
 .important-event-menu-item-data {
   width: 550px;
   height: 100%;
+  overflow: hidden;
 }
 
 .text-box {

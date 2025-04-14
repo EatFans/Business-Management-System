@@ -39,5 +39,7 @@ export default {
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+
 }
+
 </style>
