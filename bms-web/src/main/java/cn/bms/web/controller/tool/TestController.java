@@ -55,4 +55,25 @@ public class TestController {
             return ApiResponse.error("添加员工数据失败");
         return response;
     }
+
+    @PostMapping("/updateEmployee")
+    public ApiResponse updateEmployee(@RequestBody TestBody body){
+        ApiResponse response = ApiResponse.success();
+
+        Employee updatedEmployee = new Employee();
+        updatedEmployee.setJobNumber(body.getJobNumber());
+        updatedEmployee.setDeptId(body.getDeptId());
+        updatedEmployee.setPosId(body.getPosId());
+        updatedEmployee.setNickName(body.getNickName());
+        updatedEmployee.setEmail(body.getEmail());
+        updatedEmployee.setPhoneNumber(body.getPhoneNumber());
+        updatedEmployee.setSex(body.getSex());
+        updatedEmployee.setStatus(body.getStatus());
+        updatedEmployee.setPassword(body.getPassword());
+
+        int i = employeeMapper.updateEmployee(updatedEmployee);
+        if (i == 0)
+            return ApiResponse.error("更新失败");
+        return response;
+    }
 }

@@ -39,21 +39,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 新增员工用户数据 -->
     <insert id="insertEmployee" parameterType="Employee" useGeneratedKeys="true" keyProperty="empId">
         insert into employee (
-                              <if test="empId != null and empId != 0">emp_id,</if>
-                              <if test="jobNumber != null and jobNumber != ''">job_number,</if>
-                              <if test="email != null and email != ''">email,</if>
-                              <if test="phoneNumber != null and phoneNUmber != ''">phone_number,</if>
-                              <if test="password != null and password != ''">password</if>
-        ) values (
-                  <if test="empId != null and empId != 0">#{empId},</if>
-                  <if test="jobNumber != null and jobNumber != null">#{jobNumber},</if>
-                  <if test="email != null and email != ''">#{email},</if>
-                  <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
-                  <if test="password != null and password != ''">#{password}</if>
-
+        <trim suffixOverrides=",">
+            <if test="empId != null and empId != 0">emp_id,</if>
+            <if test="deptId != null and deptId != 0">dept_id,</if>
+            <if test="posId != null and posId != 0">pos_id,</if>
+            <if test="jobNumber != null and jobNumber != ''">job_number,</if>
+            <if test="nickName != null and nickName != ''">nick_name,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="phoneNumber != null and phoneNumber != ''">phone_number,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="avatar != null and avatar != ''">avatar,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="status != null and status != ''">status,</if>
+        </trim>
+        )
+        values (
+        <trim suffixOverrides=",">
+            <if test="empId != null and empId != 0">#{empId},</if>
+            <if test="deptId != null and deptId != 0">#{deptId},</if>
+            <if test="posId != null and posId != 0">#{posId},</if>
+            <if test="jobNumber != null and jobNumber != ''">#{jobNumber},</if>
+            <if test="nickName != null and nickName != ''">#{nickName},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="avatar != null and avatar != ''">#{avatar},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="status != null and status != ''">#{status},</if>
+        </trim>
         )
     </insert>
-
     <!-- 更新员工数据 -->
     <update id="updateEmployee" parameterType="Employee">
         update employee set
@@ -68,15 +83,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
             <if test="password != null and password != ''">password = #{password},</if>
             <if test="status != null and status != ''">status = #{status},</if>
-            del_flag = #{delFlag},
-            first_login = #{firstLogin},
             <if test="loginTime != null">login_time = #{loginTiem},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
             <if test="remark != null and remark != ''">remark = #{remark}</if>
-        where emp_id = #{empId}
+            del_flag = #{delFlag},
+            first_login = #{firstLogin}
+        where job_number = #{jobNumber}
     </update>
 
     <!-- 修改员工头像 -->

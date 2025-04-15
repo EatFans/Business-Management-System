@@ -15,4 +15,25 @@ public interface EmployeeService {
      * @return 员工用户实体
      */
     Employee selectEmployeeByUserName(String username);
+
+    /**
+     * 通过员工用户的id来查找用户
+     * @param id id
+     * @return 员工用户实体
+     */
+    Employee selectEmployeeById(Long id);
+
+    /**
+     * 添加一个员工用户
+     * @param employee 员工
+     * @return 添加成功就返回true，否则就返回false
+     */
+    boolean addEmployee(Employee employee);
+
+    /**
+     * 更新员工用户
+     * @param employee 员工
+     * @return 更新成功就返回true，否则就返回false
+     */
+    boolean updateEmployee(Employee employee);
 }
