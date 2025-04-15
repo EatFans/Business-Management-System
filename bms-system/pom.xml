@@ -14,10 +14,7 @@
 
 
     <dependencies>
-        <dependency>
-            <groupId>cn.bms</groupId>
-            <artifactId>bms-framework</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>cn.bms</groupId>
@@ -28,6 +25,9 @@
             <groupId>cn.bms</groupId>
             <artifactId>bms-entity</artifactId>
         </dependency>
+
+
+
     </dependencies>
 
 </project>

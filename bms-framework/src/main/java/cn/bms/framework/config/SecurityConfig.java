@@ -34,6 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .antMatchers("/login").permitAll() //放行登录接口
                         .antMatchers("/captchaCode").permitAll()  // 获取验证码接口
+                         .antMatchers("/test/**").permitAll()
 //                        .antMatchers("/logout").permitAll()
                         // 其他请求都需要认证
                         .anyRequest().authenticated()

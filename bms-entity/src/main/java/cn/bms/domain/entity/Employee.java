@@ -1,6 +1,7 @@
 package cn.bms.domain.entity;
 
 
+import java.util.Date;
 
 /**
  * 员工数据实体类
@@ -21,6 +22,7 @@ public class Employee extends BaseEntity {
     private String status;   // 状态
     private boolean delFlag; // 删除标识
     private boolean firstLogin;  // 是否第一次登录
+    private Date loginTime;     // 登录时间
 
     public void setEmpId(Long empId){
         this.empId = empId;
@@ -116,6 +118,14 @@ public class Employee extends BaseEntity {
 
     public boolean isDelFlag(){
         return delFlag;
+    }
+
+    public void setLoginTime(Date loginTime){
+        this.loginTime = loginTime;
+    }
+
+    public Date getLoginTime(){
+        return loginTime;
     }
 
     public void setFirstLogin(boolean firstLogin){

@@ -48,6 +48,11 @@
             <artifactId>bms-entity</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>cn.bms</groupId>
+            <artifactId>bms-system</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

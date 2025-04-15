@@ -1,7 +1,7 @@
 package cn.bms.framework.security.filter;
 
 import cn.bms.common.utils.StringUtil;
-import cn.bms.domain.dto.LoginUser;
+import cn.bms.domain.model.LoginUser;
 import cn.bms.framework.web.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,16 +34,21 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         // TODO :验证token，再请求到控制器层之前，来验证token，token验证成功了就
 
         String token = request.getHeader("Authorization");
-        if (StringUtil.isNotEmpty(token) && token.startsWith("Bearer ")) {
-            token = token.substring(7); // 去掉 "Bearer "
+
+        if (token != null) {
+            if ( token.startsWith("Bearer "))
+                token = token.substring(7); // 去掉 "Bearer "
         }
         // TODO: 测试: 如果头中有token为123456，就放行该请求
-        if (token.equalsIgnoreCase("123456"))
-            filterChain.doFilter(request,response);
-
+        if (token != null) {
+            if (token.equalsIgnoreCase("123456"))
+                filterChain.doFilter(request, response);
+        }
         // 从请求中获取token
-        LoginUser loginUser = tokenService.getLoginUser(request);
+//        LoginUser loginUser = tokenService.getLoginUser(request);
 
+        // 放行
+        filterChain.doFilter(request, response);
     }
 
 }

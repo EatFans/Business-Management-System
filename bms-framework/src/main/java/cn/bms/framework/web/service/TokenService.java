@@ -4,7 +4,7 @@ import cn.bms.common.constant.CacheConstants;
 import cn.bms.common.constant.Constants;
 import cn.bms.common.core.redis.RedisCache;
 import cn.bms.common.utils.StringUtil;
-import cn.bms.domain.dto.LoginUser;
+import cn.bms.domain.model.LoginUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,11 +78,7 @@ public class TokenService {
      * @return 返回token
      */
     private String getToken(HttpServletRequest request){
-        String token = request.getHeader(this.header);
-        if (StringUtil.isEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)){
-            token = token.replace(Constants.TOKEN_PREFIX, "");
-        }
-        return token;
+        return null;
     }
 
     /**

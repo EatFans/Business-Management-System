@@ -28,6 +28,7 @@
         <fastjson.version>2.0.53</fastjson.version>
         <jwt.version>0.9.1</jwt.version>
         <bitwalker.version>1.21</bitwalker.version>
+        <mybaits.version>2.2.2</mybaits.version>
 
         <bms-framework.version>1.0.0</bms-framework.version>
         <bms-common.version>1.0.0</bms-common.version>
@@ -85,6 +86,12 @@
                 <version>${kaptcha.version}</version>
             </dependency>
 
+            <!-- MyBait 中间件依赖 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybaits.version}</version>
+            </dependency>
 
             <!--核心模块-->
             <dependency>

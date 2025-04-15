@@ -1,4 +1,4 @@
-package cn.bms.domain.dto;
+package cn.bms.domain.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,6 @@ import java.util.List;
 //public class LoginUser implements UserDetails
 public class LoginUser implements UserDetails {
 
-    private List<String> permissions;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
