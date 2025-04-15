@@ -71,7 +71,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     <!-- 更新员工数据 -->
     <update id="updateEmployee" parameterType="Employee">
-        update employee set
+        update employee
+        <set>
             <if test="empId != null and empId != 0">emp_id = #{empId},</if>
             <if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
             <if test="posId != null and posId != 0">pos_id = #{posId},</if>
@@ -83,16 +84,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
             <if test="password != null and password != ''">password = #{password},</if>
             <if test="status != null and status != ''">status = #{status},</if>
-            <if test="loginTime != null">login_time = #{loginTiem},</if>
+            <if test="loginTime != null">login_time = #{loginTime},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
-            <if test="remark != null and remark != ''">remark = #{remark}</if>
-            del_flag = #{delFlag},
-            first_login = #{firstLogin}
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="firstLogin != null">first_login = #{firstLogin}</if>
+        </set>
         where job_number = #{jobNumber}
     </update>
+
 
     <!-- 修改员工头像 -->
     <update id="updateEmployeeAvatar" parameterType="String">
