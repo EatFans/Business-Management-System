@@ -7,6 +7,9 @@ import cn.bms.system.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * 用户业务实现类
  *
@@ -65,5 +68,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean updateEmployee(Employee employee) {
         int flag = employeeMapper.updateEmployee(employee);
         return flag > 0;
+    }
+
+    /**
+     * 生成工号
+     * @return 返回生成好的工号
+     */
+    @Override
+    public String generateJobNumber() {
+        String datePrefix = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        String maxJobNumber = employeeMapper.selectMaxJobNumberWithPrefix(datePrefix);
+
+        int nextNum = 1;
+        if (maxJobNumber != null && maxJobNumber.length() > 8){
+            String suffix = maxJobNumber.substring(8);
+            nextNum = Integer.parseInt(suffix) + 1;
+        }
+        return datePrefix + String.format("%03d",nextNum);
+
     }
 }

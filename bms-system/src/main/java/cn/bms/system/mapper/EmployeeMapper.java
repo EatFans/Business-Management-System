@@ -16,28 +16,28 @@ public interface EmployeeMapper {
      * @param userName 用户名
      * @return 用户对象信息
      */
-    public Employee selectEmployeeByUserName(String userName);
+    Employee selectEmployeeByUserName(String userName);
 
     /**
      * 通过员工主键id查询用户
      * @param empId 员工id
      * @return 员工对象信息
      */
-    public Employee selectEmployeeById(Long empId);
+    Employee selectEmployeeById(Long empId);
 
     /**
      * 插入员工信息
      * @param employee 员工信息
      * @return 结果
      */
-    public int insertEmployee(Employee employee);
+    int insertEmployee(Employee employee);
 
     /**
      * 修改员工信息
      * @param employee 员工信息
      * @return 结果
      */
-    public int updateEmployee(Employee employee);
+    int updateEmployee(Employee employee);
 
     /**
      * 修改与员工头像
@@ -45,7 +45,7 @@ public interface EmployeeMapper {
      * @param avatar 头像地址
      * @return 结果
      */
-    public int updateEmployeeAvatar(String userName, String avatar);
+    int updateEmployeeAvatar(String userName, String avatar);
 
     /**
      * 修改员工账号状态
@@ -53,5 +53,12 @@ public interface EmployeeMapper {
      * @param status 状态
      * @return 结果
      */
-    public int updateEmployeeStatus(String userName, String status);
+    int updateEmployeeStatus(String userName, String status);
+
+    /**
+     * 查询带有前缀的最大工号
+     * @param prefix 工号前缀
+     * @return 返回最大工号
+     */
+    String selectMaxJobNumberWithPrefix(String prefix);
 }

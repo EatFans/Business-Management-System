@@ -36,4 +36,10 @@ public interface EmployeeService {
      * @return 更新成功就返回true，否则就返回false
      */
     boolean updateEmployee(Employee employee);
+
+    /**
+     * 生成工号
+     * @return 返回生成好的工号
+     */
+    String generateJobNumber();
 }

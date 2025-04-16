@@ -106,4 +106,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateEmployeeStatus" parameterType="String">
         update employee set status = #{status} where job_number = #{userName}
     </update>
+
+    <!-- 查询带有前缀的最大工号 -->
+    <select id="selectMaxJobNumberWithPrefix" resultType="String">
+        select MAX(job_number) from employee where job_number like concat(#{prefix},'%')
+    </select>
 </mapper>
