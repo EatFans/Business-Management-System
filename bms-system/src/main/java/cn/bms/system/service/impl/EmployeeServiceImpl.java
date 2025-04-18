@@ -1,5 +1,6 @@
 package cn.bms.system.service.impl;
 
+import cn.bms.common.constant.EmployeeConstants;
 import cn.bms.common.utils.StringUtil;
 import cn.bms.domain.entity.Employee;
 import cn.bms.system.mapper.EmployeeMapper;
@@ -87,5 +88,42 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return datePrefix + String.format("%03d",nextNum);
 
+    }
+
+    /**
+     * 检查工号（用户名）是否唯一
+     * @param employee 员工
+     * @return 如果唯一就返回true，否则就返回false
+     */
+    @Override
+    public boolean checkJobNumberUnique(Employee employee) {
+        Long empId = StringUtil.isNull(employee.getEmpId()) ? -1L : employee.getEmpId();
+        Employee info = employeeMapper.checkUserNameUnique(employee.getJobNumber());
+        if (StringUtil.isNotNull(info) && info.getEmpId().longValue() != empId.longValue()){
+            return EmployeeConstants.NOT_UNIQUE;
+        }
+        return EmployeeConstants.UNIQUE;
+    }
+
+    /**
+     * 检查员工邮箱是否唯一
+     * @param employee 员工
+     * @return 如果唯一就返回true，否则就返回false
+     */
+    @Override
+    public boolean checkEmailUnique(Employee employee) {
+        int count = employeeMapper.checkEmailUnique(employee.getEmail());
+        return count > 0 ? EmployeeConstants.NOT_UNIQUE : EmployeeConstants.UNIQUE;
+    }
+
+    /**
+     * 检查员工手机号码是否唯一
+     * @param employee 员工
+     * @return 如果唯一就返回true，否则就返回false
+     */
+    @Override
+    public boolean checkPhoneNumberUnique(Employee employee) {
+        int count = employeeMapper.checkPhoneNumberUnique(employee.getPhoneNUmber());
+        return count > 0 ? EmployeeConstants.NOT_UNIQUE : EmployeeConstants.UNIQUE;
     }
 }

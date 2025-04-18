@@ -47,6 +47,17 @@ public class StringUtil {
     }
 
     /**
+     * * 判断一个对象是否非空
+     *
+     * @param object Object
+     * @return true：非空 false：空
+     */
+    public static boolean isNotNull(Object object)
+    {
+        return !isNull(object);
+    }
+
+    /**
      * * 判断一个对象数组是否为空
      *
      * @param objects 要判断的对象数组

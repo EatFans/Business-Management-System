@@ -42,4 +42,25 @@ public interface EmployeeService {
      * @return 返回生成好的工号
      */
     String generateJobNumber();
+
+    /**
+     * 检查工号（用户名）是否唯一
+     * @param employee 员工
+     * @return 如果唯一就返回true，否则就返回false
+     */
+    boolean checkJobNumberUnique(Employee employee);
+
+    /**
+     * 检查员工邮箱是否唯一
+     * @param employee 员工
+     * @return 如果唯一就返回true，否则就就返回false
+     */
+    boolean checkEmailUnique(Employee employee);
+
+    /**
+     * 检查员工手机号是否唯一
+     * @param employee 员工
+     * @return 如果唯一就返回true，否则就返回false
+     */
+    boolean checkPhoneNumberUnique(Employee employee);
 }

@@ -4,6 +4,7 @@ import cn.bms.common.utils.StringUtil;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.entity.Employee;
 import cn.bms.system.service.EmployeeService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,8 +30,17 @@ public class EmployeeController {
         if (StringUtil.isNull(jobNumber))
             return ApiResponse.error("工号生成失败");
         employee.setJobNumber(jobNumber);
-        //TODO: 添加员工之前要检查一些唯一性
-
+        if (!employeeService.checkJobNumberUnique(employee)){
+            return ApiResponse.error("工号不唯一，无法创建员工");
+        }
+        // 员工邮箱是不是唯一的
+        if (!employeeService.checkEmailUnique(employee)){
+            return ApiResponse.error("邮箱不唯一，无法创建员工");
+        }
+        // 员工手机号码是不是唯一的
+        if (!employeeService.checkPhoneNumberUnique(employee)){
+            return ApiResponse.error("手机号不唯一，无法创建员工");
+        }
 
         boolean b = employeeService.addEmployee(employee);
         if (!b)

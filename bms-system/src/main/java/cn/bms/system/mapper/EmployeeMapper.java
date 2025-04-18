@@ -61,4 +61,25 @@ public interface EmployeeMapper {
      * @return 返回最大工号
      */
     String selectMaxJobNumberWithPrefix(String prefix);
+
+    /**
+     * 检查用户名（工号）是不是唯一
+     * @param username 用户名（工号）
+     * @return 结果
+     */
+    Employee checkUserNameUnique(String username);
+
+    /**
+     * 检查员工邮箱是不是唯一
+     * @param email 邮箱
+     * @return 结果
+     */
+    int checkEmailUnique(String email);
+
+    /**
+     * 检查员工手机号是不是唯一
+     * @param phoneNumber 手机号
+     * @return 结果
+     */
+    int checkPhoneNumberUnique(String phoneNumber);
 }

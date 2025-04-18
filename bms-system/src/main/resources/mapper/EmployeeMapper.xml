@@ -111,4 +111,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectMaxJobNumberWithPrefix" resultType="String">
         select MAX(job_number) from employee where job_number like concat(#{prefix},'%')
     </select>
+
+    <!-- 检查用户名（工号）是不是唯一 -->
+    <select id="checkUserNameUnique" resultType="Employee" parameterType="String">
+        select emp_id, job_number from employee  where job_number = #{userName} and del_flag = '0' limit 1
+    </select>
+
+    <!-- 检查员工邮箱是不是唯一 -->
+    <select id="checkEmailUnique" resultType="int" parameterType="String">
+        select count(1) from employee where email = #{email} and del_flag = '0'
+    </select>
+
+    <!-- 检查员工手机好是不是唯一 -->
+    <select id="checkPhoneNumberUnique" resultType="int" parameterType="String">
+        select count(1) from employee where phone_number = #{phoneNumber} and del_flag = '0'
+    </select>
 </mapper>
