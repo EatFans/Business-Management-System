@@ -3,16 +3,24 @@ package cn.bms.framework.web.service;
 import cn.bms.common.constant.CacheConstants;
 import cn.bms.common.constant.Constants;
 import cn.bms.common.core.redis.RedisCache;
-import cn.bms.common.utils.StringUtil;
+import cn.bms.common.utils.StringUtils;
+import cn.bms.common.utils.uuid.UuidUtil;
 import cn.bms.domain.model.LoginUser;
+import com.alibaba.fastjson2.JSONObject;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * token 业务处理
@@ -23,6 +31,7 @@ import java.util.Map;
  */
 @Component
 public class TokenService {
+    private static final Logger log = LoggerFactory.getLogger(TokenService.class);
 
     @Value("${token.header}")
     private String header;
@@ -38,13 +47,54 @@ public class TokenService {
 
     private static final Long MILLIS_MINUTE_TWENTY = 20 * 60 * 1000L;
 
-    private final RedisCache redisCache;
-
     @Autowired
-    public TokenService(RedisCache redisCache){
-        this.redisCache = redisCache;
+    private RedisCache redisCache;
+
+
+    /**
+     * 创建登录令牌
+     * @param loginUser 登录信息
+     * @return 登录令牌
+     */
+    public String createLoginToken(LoginUser loginUser){
+        String loginUserKey = UuidUtil.fastUUID();
+        loginUser.setLoginUserKey(loginUserKey);
+
+        refreshToken(loginUser);    // 把这个loginUser对象存入Redis中，每次做验证时候只需要从缓存中找，不需要从数据库里查
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(Constants.LOGIN_USER_KEY, loginUserKey);
+        claims.put(Constants.JWT_USERNAME, loginUser.getUsername());
+
+        return createLoginToken(claims);
     }
 
+
+    /**
+     * 从已有的数据去生成登录令牌
+     * @param claims 数据
+     * @return 登录令牌
+     */
+    private String createLoginToken(Map<String, Object> claims){
+        String token = Jwts.builder()
+                .setClaims(claims)
+                .signWith(SignatureAlgorithm.HS512,secret)
+                .compact();
+        return token;
+    }
+
+    /**
+     * 刷新令牌有效期
+     *
+     * @param loginUser 登录信息
+     */
+    public void refreshToken(LoginUser loginUser){
+        loginUser.setLoginTime(System.currentTimeMillis());
+        loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
+        // 根据uuid将loginUser登录信息存储到缓存中
+        String loginUserKey = getTokenKey(loginUser.getLoginUserKey());
+        redisCache.setCacheObject(loginUserKey,loginUser,expireTime, TimeUnit.MINUTES);
+    }
 
     /**
      * 获取登录用户
@@ -54,18 +104,24 @@ public class TokenService {
     public LoginUser getLoginUser(HttpServletRequest request){
         String token = getToken(request);
         // 检查token令牌是否为空
-        if (StringUtil.isEmpty(token)){
+        if (StringUtils.isNotEmpty(token)){
             try {
                 Claims claims = parseToken(token);
                 String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
                 String tokenKey = getTokenKey(uuid);
-                LoginUser user = redisCache.getCacheObject(tokenKey);
+                JSONObject jsonObject = (JSONObject) redisCache.getCacheObject(tokenKey);
 
-                return user;
+                LoginUser loginUser = jsonObject.toJavaObject(LoginUser.class);
+
+                if (loginUser != null && loginUser.getEmployee() == null) {
+                    log.warn("Employee is null for LoginUser with empId: {}", loginUser.getEmpId());
+                }
+
+                return loginUser;
 
             } catch (Exception e){
                 // TODO： 将异常记录到日志文件中
-                e.printStackTrace();
+                log.error("获取用户信息异常'{}'", e.getMessage());
             }
         }
         return null;
@@ -78,7 +134,11 @@ public class TokenService {
      * @return 返回token
      */
     private String getToken(HttpServletRequest request){
-        return null;
+        String token = request.getHeader(header);
+        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)){
+            token = token.replace(Constants.TOKEN_PREFIX, "");
+        }
+        return token;
     }
 
     /**
@@ -103,44 +163,14 @@ public class TokenService {
     }
 
     /**
-     * 创建Token
-     * @param loginUser 登录用户
-     * @return 返回创建完成的token
+     * 验证登录token
+     * @param loginUser 登录信息
      */
-    public String createToken(LoginUser loginUser){
-//        String token = IdUtils.fastUUID();
-//        loginUser.setToken(token);
-//        setUserAgent(loginUser);
-//        refreshToken(loginUser);
-//
-//        Map<String, Object> claims = new HashMap<>();
-//        claims.put(Constants.LOGIN_USER_KEY, token);
-//        claims.put(Constants.JWT_USERNAME, loginUser.getUsername());
-//        return createToken(claims);
-
-        return "";
-    }
-
-    public void setUserAgent(LoginUser loginUser){
-        // TODO
-//        UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
-//        String ip = IpUtils.getIpAddr();
-//        loginUser.setIpaddr(ip);
-//        loginUser.setLoginLocation(AddressUtils.getRealAddressByIP(ip));
-//        loginUser.setBrowser(userAgent.getBrowser().getName());
-//        loginUser.setOs(userAgent.getOperatingSystem().getName());
-    }
-
-    public void refreshToken(LoginUser loginUser){
-//        loginUser.setLoginTime(System.currentTimeMillis());
-//        loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
-//        // 根据uuid将loginUser缓存
-//        String userKey = getTokenKey(loginUser.getToken());
-//        redisCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
-    }
-
-    public String createToken(Map<String,Object> claims) {
-        // TODO:
-        return " ";
+    public void verifyToken(LoginUser loginUser){
+        Long expireTime = loginUser.getExpireTime();
+        Long currentTime = System.currentTimeMillis();
+        if (expireTime - currentTime <= MILLIS_MINUTE_TWENTY){
+            refreshToken(loginUser);
+        }
     }
 }

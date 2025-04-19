@@ -1,7 +1,7 @@
 package cn.bms.system.service.impl;
 
 import cn.bms.common.constant.EmployeeConstants;
-import cn.bms.common.utils.StringUtil;
+import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.entity.Employee;
 import cn.bms.system.mapper.EmployeeMapper;
 import cn.bms.system.service.EmployeeService;
@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public Employee selectEmployeeByUserName(String username) {
-        if (StringUtil.isNotEmpty(username)){
+        if (StringUtils.isNotEmpty(username)){
             return employeeMapper.selectEmployeeByUserName(username);
         }
         return null;
@@ -97,9 +97,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public boolean checkJobNumberUnique(Employee employee) {
-        Long empId = StringUtil.isNull(employee.getEmpId()) ? -1L : employee.getEmpId();
+        Long empId = StringUtils.isNull(employee.getEmpId()) ? -1L : employee.getEmpId();
         Employee info = employeeMapper.checkUserNameUnique(employee.getJobNumber());
-        if (StringUtil.isNotNull(info) && info.getEmpId().longValue() != empId.longValue()){
+        if (StringUtils.isNotNull(info) && info.getEmpId().longValue() != empId.longValue()){
             return EmployeeConstants.NOT_UNIQUE;
         }
         return EmployeeConstants.UNIQUE;

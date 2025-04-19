@@ -1,6 +1,8 @@
 package cn.bms.framework.web.service;
 
-import cn.bms.common.utils.StringUtil;
+import cn.bms.common.enums.UserStatus;
+import cn.bms.common.exception.service.ServiceException;
+import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.entity.Employee;
 import cn.bms.domain.model.LoginUser;
 import cn.bms.system.service.EmployeeService;
@@ -10,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
 
 /**
  * 员工用户加载服务
  *
  * @author Fan
  */
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
@@ -41,22 +46,29 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        //TODO
         Employee user = employeeService.selectEmployeeByUserName(username);
-        if (StringUtil.isNull(user)){
+        if (StringUtils.isNull(user)){
             log.info("登录用户：{} 不存在.", username);
-
+            throw new ServiceException(4006,"user.login","不存在该用户");
         }
-        //TODO 检查员工是否被删除
+        if (user.isDelFlag()){
+            log.info("登录用户：{} 已经被删除.",username);
+            throw new ServiceException(4007,"user.login","该员工已经被删除");
+        }
+        if (UserStatus.DISABLE.getCode().equals(user.getStatus())){
+            log.info("登录用户：{} 已经被停用",username);
+            throw new ServiceException(4008,"user.login","该员工已经被停用");
+        }
 
-        //TODO 检查员工账号状态
-
-
-        return new LoginUser();
+        return createLoginUser(user);
     }
 
+    /**
+     * 创建登录信息
+     * @param employee 员工用户
+     * @return 结果
+     */
     private LoginUser createLoginUser(Employee employee){
-        // TODO
-        return new LoginUser();
+        return new LoginUser(employee.getEmpId(),employee);
     }
 }

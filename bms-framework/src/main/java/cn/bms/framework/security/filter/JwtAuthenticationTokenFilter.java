@@ -1,9 +1,16 @@
 package cn.bms.framework.security.filter;
 
-import cn.bms.common.utils.StringUtil;
+import cn.bms.common.utils.SecurityUtils;
+import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.model.LoginUser;
 import cn.bms.framework.web.service.TokenService;
+import cn.bms.framework.web.service.UserDetailsServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,8 +27,10 @@ import java.io.IOException;
  */
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
+    private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
-    private final TokenService tokenService;
+    @Autowired
+    private TokenService tokenService;
 
     @Autowired
     public JwtAuthenticationTokenFilter(TokenService tokenService){
@@ -33,20 +42,18 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         // TODO :验证token，再请求到控制器层之前，来验证token，token验证成功了就
 
-        String token = request.getHeader("Authorization");
+        LoginUser loginUser = tokenService.getLoginUser(request);
+        if (loginUser != null && StringUtils.isNull(SecurityUtils.getAuthentication())){
+            // 验证token
+            tokenService.verifyToken(loginUser);
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                    loginUser, null, loginUser.getAuthorities());
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-        if (token != null) {
-            if ( token.startsWith("Bearer "))
-                token = token.substring(7); // 去掉 "Bearer "
-        }
-        // TODO: 测试: 如果头中有token为123456，就放行该请求
-        if (token != null) {
-            if (token.equalsIgnoreCase("123456"))
-                filterChain.doFilter(request, response);
-        }
-        // 从请求中获取token
-//        LoginUser loginUser = tokenService.getLoginUser(request);
+            // 设置SecurityContextHolder中的认证信息
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        }
         // 放行
         filterChain.doFilter(request, response);
     }

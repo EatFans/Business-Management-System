@@ -3,14 +3,18 @@ package cn.bms.framework.web.service;
 import cn.bms.common.constant.CacheConstants;
 import cn.bms.common.constant.UserConstants;
 import cn.bms.common.core.redis.RedisCache;
-import cn.bms.common.exception.user.CaptchaException;
-import cn.bms.common.exception.user.CaptchaExpireException;
-import cn.bms.common.exception.user.UserNameOrPasswordNullException;
-import cn.bms.common.exception.user.UserNotMatchException;
-import cn.bms.common.utils.StringUtil;
+import cn.bms.common.exception.service.ServiceException;
+import cn.bms.common.exception.user.*;
+import cn.bms.common.utils.StringUtils;
+import cn.bms.domain.model.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 
 @Component
@@ -18,9 +22,12 @@ public class SysLoginService {
     @Autowired
     private RedisCache redisCache;
 
-    public SysLoginService(){
+    @Autowired
+    private TokenService tokenService;
 
-    }
+    @Resource
+    private AuthenticationManager authenticationManager;
+
 
     /**
      * 系统登录业务
@@ -34,12 +41,31 @@ public class SysLoginService {
         checkImageCode(username,code,uuid); // 检查图片验证码
         loginPreCheck(username,password);  // 登录前置条件检查
 
-        // 登录验证
         Authentication authentication = null;
-
-
+        // 登录验证
+        try {
+            UsernamePasswordAuthenticationToken authenticationToken =
+                    new UsernamePasswordAuthenticationToken(username, password);
+            authentication = authenticationManager.authenticate(authenticationToken);
+        } catch (Exception e){
+            if (e instanceof BadCredentialsException){
+                throw new UserAccountPasswordNotMatchException();
+            }else {
+                throw new ServiceException(4005,"null",e.getMessage());
+            }
+        }
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        recordLoginInfo(loginUser.getEmpId());
         // 生成token
-        return " ";
+        return tokenService.createLoginToken(loginUser);
+    }
+
+    /**
+     * 记录登录信息
+     * @param empId 员工id
+     */
+    private void recordLoginInfo(Long empId){
+        // TODO: 更新员工用户数据表
     }
 
     /**
@@ -49,7 +75,7 @@ public class SysLoginService {
      * @param uuid 验证码唯一标识符
      */
     private void checkImageCode(String username,String code,String uuid) {
-        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtil.nvl(uuid, "");
+        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
         String captcha = redisCache.getCacheObject(verifyKey);
         if (captcha == null){
             throw new CaptchaExpireException();
@@ -67,7 +93,7 @@ public class SysLoginService {
      */
     private void loginPreCheck(String username, String password) {
         // 用户名或者密码为空
-        if (StringUtil.isEmpty(username) || StringUtil.isEmpty(password)){
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
             throw new UserNameOrPasswordNullException();
         }
         // 检查密码是否在指定范围

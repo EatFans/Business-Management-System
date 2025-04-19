@@ -5,7 +5,7 @@ package cn.bms.common.utils;
  *
  * @author Fan
  */
-public class StringUtil {
+public class StringUtils {
     private static final String NULLSTR = "";
 
     /**

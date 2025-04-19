@@ -1,5 +1,6 @@
 package cn.bms.framework.exception;
 
+import cn.bms.common.exception.service.ServiceException;
 import cn.bms.common.exception.user.UserException;
 import cn.bms.domain.ApiResponse;
 import org.slf4j.Logger;
@@ -18,10 +19,10 @@ public class GlobalExceptionHandler {
 
 
     /**
-     * 用户部分异常错误
+     * 用户异常错误
      */
     @ExceptionHandler(UserException.class)
-    public ApiResponse handler(UserException e){
+    public ApiResponse handlerUserException(UserException e){
         log.warn(e.getMessage() + " -- "+ e.getModule());
         ApiResponse error = ApiResponse.error(e.getMessage());
         error.put("status",e.getCode());
@@ -29,5 +30,15 @@ public class GlobalExceptionHandler {
         return error;
     }
 
-
+    /**
+     * 业务异常错误
+     */
+    @ExceptionHandler(ServiceException.class)
+    public ApiResponse handlerServiceException(ServiceException e){
+        log.warn(e.getMessage() + " -- " + e.getModule());
+        ApiResponse error = ApiResponse.error(e.getMessage());
+        error.put("status",e.getCode());
+        error.put("module",e.getModule());
+        return error;
+    }
 }

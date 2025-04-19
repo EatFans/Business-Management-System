@@ -6,6 +6,6 @@ package cn.bms.common.exception.user;
  */
 public class UserNotMatchException extends UserException{
     public UserNotMatchException(){
-        super(4004,"account","密码不符合规范");
+        super(4004,"account","不符合规范");
     }
 }

@@ -1,10 +1,10 @@
 package cn.bms.web.controller.system;
 
-import cn.bms.common.utils.StringUtil;
+import cn.bms.common.utils.SecurityUtils;
+import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.entity.Employee;
 import cn.bms.system.service.EmployeeService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,9 +27,10 @@ public class EmployeeController {
     public ApiResponse addEmployee(@RequestBody Employee employee){
         ApiResponse response = ApiResponse.success();
         String jobNumber = employeeService.generateJobNumber();
-        if (StringUtil.isNull(jobNumber))
+        if (StringUtils.isNull(jobNumber))
             return ApiResponse.error("工号生成失败");
         employee.setJobNumber(jobNumber);
+        employee.setPassword(SecurityUtils.encryptPassword(employee.getPassword()));
         if (!employeeService.checkJobNumberUnique(employee)){
             return ApiResponse.error("工号不唯一，无法创建员工");
         }
