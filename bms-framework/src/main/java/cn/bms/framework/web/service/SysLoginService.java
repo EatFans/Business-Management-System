@@ -3,11 +3,13 @@ package cn.bms.framework.web.service;
 import cn.bms.common.constant.CacheConstants;
 import cn.bms.common.constant.UserConstants;
 import cn.bms.common.core.redis.RedisCache;
-import cn.bms.common.exception.CaptchaException;
-import cn.bms.common.exception.CaptchaExpireException;
-import cn.bms.common.exception.UserNameOrPasswordNullException;
+import cn.bms.common.exception.user.CaptchaException;
+import cn.bms.common.exception.user.CaptchaExpireException;
+import cn.bms.common.exception.user.UserNameOrPasswordNullException;
+import cn.bms.common.exception.user.UserNotMatchException;
 import cn.bms.common.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 
@@ -33,6 +35,7 @@ public class SysLoginService {
         loginPreCheck(username,password);  // 登录前置条件检查
 
         // 登录验证
+        Authentication authentication = null;
 
 
         // 生成token
@@ -70,11 +73,13 @@ public class SysLoginService {
         // 检查密码是否在指定范围
         if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
                 || password.length() > UserConstants.PASSWORD_MAX_LENGTH){
-
+            throw new UserNotMatchException();
         }
-
         // 检查用户名是否在指定范围
-
+        if (username.length() < UserConstants.USERNAME_MIN_LENGTH
+                || username.length() > UserConstants.USERNAME_MAX_LENGTH){
+            throw new UserNotMatchException();
+        }
 
     }
 }

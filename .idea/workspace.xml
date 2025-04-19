@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20a4c180-b230-4332-8bfe-ea46699ef092" name="更改" comment="后端完善获取图片验证码接口">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/constant/UserConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/CaptchaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/CaptchaExpireException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/UserNameOrPasswordNullException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/UserPasswordNotMatchException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bms-framework/src/main/java/cn/bms/framework/exception/GlobalExceptionHandler.java" afterDir="false" />
+    <list default="true" id="20a4c180-b230-4332-8bfe-ea46699ef092" name="更改" comment="后端添加一些异常类，添加全局异常处理类，准备重构异常">
+      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/BaseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/user/UserException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/user/UserNotMatchException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/utils/StringUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/utils/StringUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/CaptchaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/user/CaptchaException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/CaptchaExpireException.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/user/CaptchaExpireException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/UserNameOrPasswordNullException.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/user/UserNameOrPasswordNullException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/UserPasswordNotMatchException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bms-framework/src/main/java/cn/bms/framework/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-framework/src/main/java/cn/bms/framework/exception/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bms-framework/src/main/java/cn/bms/framework/web/service/SysLoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-framework/src/main/java/cn/bms/framework/web/service/SysLoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bms-vue/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/bms-vue/src/views/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bms-web/src/main/java/cn/bms/web/controller/tool/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-web/src/main/java/cn/bms/web/controller/tool/TestController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -187,7 +186,7 @@
       <workItem from="1744554649921" duration="49000" />
       <workItem from="1744606237370" duration="36629000" />
       <workItem from="1745067374423" duration="25000" />
-      <workItem from="1745084843677" duration="2033000" />
+      <workItem from="1745084843677" duration="4017000" />
     </task>
     <task id="LOCAL-00001" summary="...">
       <option name="closed" value="true" />
@@ -269,7 +268,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744960255034</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="后端添加一些异常类，添加全局异常处理类，准备重构异常">
+      <option name="closed" value="true" />
+      <created>1745086961848</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745086961848</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,6 +304,7 @@
     <MESSAGE value="修改EmployeeMapper.xml" />
     <MESSAGE value="后端添加工号生成" />
     <MESSAGE value="后端完善获取图片验证码接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="后端完善获取图片验证码接口" />
+    <MESSAGE value="后端添加一些异常类，添加全局异常处理类，准备重构异常" />
+    <option name="LAST_COMMIT_MESSAGE" value="后端添加一些异常类，添加全局异常处理类，准备重构异常" />
   </component>
 </project>

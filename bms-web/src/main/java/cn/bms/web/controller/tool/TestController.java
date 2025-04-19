@@ -1,11 +1,10 @@
 package cn.bms.web.controller.tool;
 
-import cn.bms.common.exception.CaptchaExpireException;
+import cn.bms.common.exception.user.CaptchaExpireException;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.dto.TestBody;
 import cn.bms.domain.entity.Employee;
 import cn.bms.system.mapper.EmployeeMapper;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
