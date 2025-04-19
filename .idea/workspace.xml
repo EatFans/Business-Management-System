@@ -4,15 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20a4c180-b230-4332-8bfe-ea46699ef092" name="更改" comment="添加思维导图" />
+    <list default="true" id="20a4c180-b230-4332-8bfe-ea46699ef092" name="更改" comment="后端完善获取图片验证码接口">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/constant/UserConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/CaptchaException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/CaptchaExpireException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/UserNameOrPasswordNullException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/exception/UserPasswordNotMatchException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bms-framework/src/main/java/cn/bms/framework/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/utils/StringUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-common/src/main/java/cn/bms/common/utils/StringUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bms-framework/src/main/java/cn/bms/framework/web/service/SysLoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-framework/src/main/java/cn/bms/framework/web/service/SysLoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bms-vue/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/bms-vue/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bms-web/src/main/java/cn/bms/web/controller/tool/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bms-web/src/main/java/cn/bms/web/controller/tool/TestController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -37,18 +61,36 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Spring Boot.BusinessManagerSystemApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-21&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/fanzijian/WorkSpace/BusinessManagerSystem&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/fanzijian/WorkSpace/BusinessManagerSystem/bms-web/src/main/resources/mybaits&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;redis&quot;
+    ]
   }
 }</component>
-  <component name="RunManager" selected="Maven.BusinessManagerSystem [清除]">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bms-web/src/main/resources/mybaits" />
+      <recent name="$PROJECT_DIR$/bms-web/src/main/resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.bms.common.constant" />
+      <recent name="cn.bms.framework.config" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.BusinessManagerSystemApplication">
     <configuration name="BusinessManagerSystem [清除]" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -140,7 +182,12 @@
       <updated>1743950543306</updated>
       <workItem from="1743950544385" duration="4762000" />
       <workItem from="1744252342842" duration="5535000" />
-      <workItem from="1744270841033" duration="812000" />
+      <workItem from="1744270841033" duration="2011000" />
+      <workItem from="1744308720838" duration="1853000" />
+      <workItem from="1744554649921" duration="49000" />
+      <workItem from="1744606237370" duration="36629000" />
+      <workItem from="1745067374423" duration="25000" />
+      <workItem from="1745084843677" duration="2033000" />
     </task>
     <task id="LOCAL-00001" summary="...">
       <option name="closed" value="true" />
@@ -158,15 +205,98 @@
       <option name="project" value="LOCAL" />
       <updated>1743951123302</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="前端更新">
+      <option name="closed" value="true" />
+      <created>1744623510344</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744623510344</updated>
+    </task>
+    <task id="LOCAL-00004" summary="后端添加Employee员工数据实体类">
+      <option name="closed" value="true" />
+      <created>1744623525719</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744623525719</updated>
+    </task>
+    <task id="LOCAL-00005" summary="后端开发...">
+      <option name="closed" value="true" />
+      <created>1744638589309</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744638589309</updated>
+    </task>
+    <task id="LOCAL-00006" summary="后端完成Mybatis配置，然后大体完成EmployeeMapper数据层部分">
+      <option name="closed" value="true" />
+      <created>1744732493794</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744732493794</updated>
+    </task>
+    <task id="LOCAL-00007" summary="后端开发测试中🤪...">
+      <option name="closed" value="true" />
+      <created>1744743296366</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744743296366</updated>
+    </task>
+    <task id="LOCAL-00008" summary="修改EmployeeMapper.xml">
+      <option name="closed" value="true" />
+      <created>1744743410286</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744743410286</updated>
+    </task>
+    <task id="LOCAL-00009" summary="后端添加工号生成">
+      <option name="closed" value="true" />
+      <created>1744809018554</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744809018554</updated>
+    </task>
+    <task id="LOCAL-00010" summary="后端完善获取图片验证码接口">
+      <option name="closed" value="true" />
+      <created>1744960255034</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1744960255034</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="..." />
     <MESSAGE value="添加思维导图" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加思维导图" />
+    <MESSAGE value="前端更新" />
+    <MESSAGE value="后端添加Employee员工数据实体类" />
+    <MESSAGE value="后端开发..." />
+    <MESSAGE value="后端完成Mybatis配置，然后大体完成EmployeeMapper数据层部分" />
+    <MESSAGE value="后端开发测试中..." />
+    <MESSAGE value="修改EmployeeMapper.xml" />
+    <MESSAGE value="后端添加工号生成" />
+    <MESSAGE value="后端完善获取图片验证码接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="后端完善获取图片验证码接口" />
   </component>
 </project>

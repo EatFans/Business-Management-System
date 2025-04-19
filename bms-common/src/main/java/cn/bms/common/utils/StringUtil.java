@@ -58,6 +58,17 @@ public class StringUtil {
     }
 
     /**
+     * 获取参数不为空值
+     *
+     * @param value defaultValue 要判断的value
+     * @return value 返回值
+     */
+    public static <T> T nvl(T value, T defaultValue)
+    {
+        return value != null ? value : defaultValue;
+    }
+
+    /**
      * * 判断一个对象数组是否为空
      *
      * @param objects 要判断的对象数组

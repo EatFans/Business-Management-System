@@ -130,6 +130,7 @@ export default {
     getCode() {
       getCodeImg().then(res => {
         // console.log(res.img);
+        console.log(res);
         if (this.captchaEnabled) {
           this.codeUrl = "data:image/jpeg;base64," + res.img;
           this.loginData.uuid = res.uuid;

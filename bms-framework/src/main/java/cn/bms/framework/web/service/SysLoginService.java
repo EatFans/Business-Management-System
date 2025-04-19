@@ -1,11 +1,20 @@
 package cn.bms.framework.web.service;
 
+import cn.bms.common.constant.CacheConstants;
+import cn.bms.common.constant.UserConstants;
+import cn.bms.common.core.redis.RedisCache;
+import cn.bms.common.exception.CaptchaException;
+import cn.bms.common.exception.CaptchaExpireException;
+import cn.bms.common.exception.UserNameOrPasswordNullException;
+import cn.bms.common.utils.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class SysLoginService {
-
+    @Autowired
+    private RedisCache redisCache;
 
     public SysLoginService(){
 
@@ -30,11 +39,42 @@ public class SysLoginService {
         return " ";
     }
 
+    /**
+     * 检查图片验证码
+     * @param username 用户名
+     * @param code 验证码
+     * @param uuid 验证码唯一标识符
+     */
     private void checkImageCode(String username,String code,String uuid) {
-
+        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtil.nvl(uuid, "");
+        String captcha = redisCache.getCacheObject(verifyKey);
+        if (captcha == null){
+            throw new CaptchaExpireException();
+        }
+        if (!code.equalsIgnoreCase(captcha)){
+            throw new CaptchaException();
+        }
+        redisCache.deleteObject(verifyKey);
     }
 
+    /**
+     * 登录前做准备检查
+     * @param username 用户名
+     * @param password 用户密码
+     */
     private void loginPreCheck(String username, String password) {
+        // 用户名或者密码为空
+        if (StringUtil.isEmpty(username) || StringUtil.isEmpty(password)){
+            throw new UserNameOrPasswordNullException();
+        }
+        // 检查密码是否在指定范围
+        if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
+                || password.length() > UserConstants.PASSWORD_MAX_LENGTH){
+
+        }
+
+        // 检查用户名是否在指定范围
+
 
     }
 }

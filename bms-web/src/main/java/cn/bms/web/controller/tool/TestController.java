@@ -1,5 +1,6 @@
 package cn.bms.web.controller.tool;
 
+import cn.bms.common.exception.CaptchaExpireException;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.dto.TestBody;
 import cn.bms.domain.entity.Employee;
@@ -75,5 +76,16 @@ public class TestController {
         if (i == 0)
             return ApiResponse.error("更新失败");
         return response;
+    }
+
+    @GetMapping("/testException")
+    public ApiResponse test1(){
+        ApiResponse response = ApiResponse.success();
+        testException();
+        return response;
+    }
+
+    private void testException(){
+        throw new CaptchaExpireException();
     }
 }
