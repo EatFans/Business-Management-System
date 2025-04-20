@@ -1,4 +1,14 @@
 <template>
+  <!-- 添加消息提示组件 -->
+  <transition name="fade">
+    <div v-if="tipItem.showMessage" class="message-tip" :class="tipItem.messageType">
+      <div class="message-content">
+        <i class="message-icon" :class="tipItem.messageType">{{ tipItem.messageType === 'success' ? '✓' : '✕' }}</i>
+        {{ tipItem.message }}
+      </div>
+    </div>
+  </transition>
+
   <div class="login-page-container">
 
     <div class="login-box-container">
@@ -110,6 +120,12 @@ export default {
         uuid: ''
       },
 
+      tipItem: {
+        messageType: '',
+        showMessage: false,
+        message: ''
+      },
+
       // 是否启用图片验证码
       captchaEnabled: true,
       // 图片验证码图片url
@@ -137,6 +153,20 @@ export default {
       });
     },
 
+    /**
+     * 显示提示框
+     * @param type 类型
+     * @param msg 消息文本
+     */
+    showTipMessage(type,msg){
+      this.tipItem.message = msg;
+      this.tipItem.messageType = type;
+      this.tipItem.showMessage = true;
+      setTimeout(() => {
+        this.tipItem.showMessage = false
+      }, 3000)
+    },
+
 	/**
 	 * 登录
 	 */
@@ -150,11 +180,15 @@ export default {
           if (res !== null){
             // 检查请求结果是否成功
             if (res.code === 200){
+              this.showTipMessage("success","成功登录！");
               const token = res.token;
               localStorage.setItem("loginToken", token);
 
-              this.$router.push('/dashboard');
+              setTimeout(() => {
+                this.$router.push('/dashboard');
+              },1000);
             } else {
+              this.showTipMessage("error",res.msg);
               console.log(res);
             }
         }
@@ -422,5 +456,108 @@ export default {
 /* 微信扫码登陆框关闭样式 */
 .wechat-login-form.close {
   display: none;
+}
+
+/* 错误提示框样式 */
+.message-tip.error {
+  border: 1px solid #ffdce0;
+  background-color: #fff2f0;
+}
+
+.message-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.message-icon {
+  font-style: normal;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+/* 错误图标样式 */
+.message-icon.error {
+  color: white;
+  background: #ff4d4f;
+}
+
+/* 成功图标样式 */
+.message-icon.success {
+  color: white;
+  background: #52c41a;
+}
+
+/* 错误消息文字颜色 */
+.message-tip.error .message-content {
+  color: #cf1322;
+}
+
+/* 成功消息文字颜色 */
+.message-tip.success {
+  border: 1px solid #b7eb8f;
+  background-color: #f6ffed;
+}
+
+.message-tip.success .message-content {
+  color: #52c41a;
+}
+
+/* 修改消息提示样式 */
+.message-tip {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 1000;
+  padding: 16px 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  border: 1px solid #ffdce0;
+  background-color: #fff2f0;
+  min-width: 320px;
+}
+
+.message-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #cf1322;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.message-icon {
+  color: #ff4d4f;
+  font-style: normal;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 77, 79, 0.1);
+  border-radius: 50%;
+}
+
+/* 调整动画效果 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(50px);
 }
 </style>
