@@ -40,7 +40,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        // TODO :验证token，再请求到控制器层之前，来验证token，token验证成功了就
 
         LoginUser loginUser = tokenService.getLoginUser(request);
         if (loginUser != null && StringUtils.isNull(SecurityUtils.getAuthentication())){

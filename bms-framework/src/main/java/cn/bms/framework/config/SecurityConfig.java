@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.filter.CorsFilter;
 
 /**
  * SpringBoot Security配置类
@@ -26,6 +28,11 @@ public class SecurityConfig {
     private UserDetailsService userDetailsService;
 
     /**
+     * 跨域过滤器
+     */
+    @Autowired
+    private CorsFilter corsFilter;
+    /**
      * token认证过滤器
      */
     @Autowired
@@ -38,15 +45,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                                 .antMatchers("/login").permitAll() //放行登录接口
                                 .antMatchers("/captchaCode").permitAll()  // 获取验证码接口
+                                .antMatchers("/verityToken").permitAll()
                                 .antMatchers("/test/**").permitAll()
-                                .antMatchers("/employee/**").permitAll()
                                 // 其他请求都需要认证
                                 .anyRequest().authenticated()
                 )
                 // 关闭 CSRF（前后端分离项目通常需要关闭
                 .csrf(csrf -> csrf.disable())
                 // 添加 JWT token验证过滤器
-                .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                // 添加CORS filter
+                .addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class)
+                .addFilterBefore(corsFilter, LogoutFilter.class);
 
         return http.build();
     }

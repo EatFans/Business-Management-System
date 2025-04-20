@@ -121,7 +121,7 @@ public class TokenService {
 
             } catch (Exception e){
                 // TODO： 将异常记录到日志文件中
-                log.error("获取用户信息异常'{}'", e.getMessage());
+//                log.info("获取用户信息异常'{}'", e.getMessage());
             }
         }
         return null;

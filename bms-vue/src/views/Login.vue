@@ -104,8 +104,8 @@ export default {
 
       // 登录数据
       loginData: {
-        username: 'admin',
-        password: '123456@abc',
+        username: '',
+        password: '',
         code: '',
         uuid: ''
       },
@@ -129,8 +129,6 @@ export default {
     // 获取验证码
     getCode() {
       getCodeImg().then(res => {
-        // console.log(res.img);
-        console.log(res);
         if (this.captchaEnabled) {
           this.codeUrl = "data:image/jpeg;base64," + res.img;
           this.loginData.uuid = res.uuid;
@@ -144,9 +142,22 @@ export default {
 	 */
 	login() {
 		console.log("登录中...");
-		login(this.loginData.username,this.loginData.password, this.loginData.code, this.loginData.uuid).then(res => {
-			if (res !== null)
-				console.log(res);
+		login(this.loginData.username,
+        this.loginData.password,
+        this.loginData.code,
+        this.loginData.uuid).then(res => {
+			    // 检查请求结果是否为空
+          if (res !== null){
+            // 检查请求结果是否成功
+            if (res.code === 200){
+              const token = res.token;
+              localStorage.setItem("loginToken", token);
+
+              this.$router.push('/dashboard');
+            } else {
+              console.log(res);
+            }
+        }
 		})
 	}
 
@@ -298,10 +309,11 @@ export default {
   width: 80%;
   height: 60px;
   margin-top: 5px;
+  overflow-x: hidden;
 }
 
 .form-group input {
-  width: 95%;
+  width: 90%;
   height: 35px;
   padding-left: 10px;
   padding-right: 10px;

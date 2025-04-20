@@ -4,11 +4,12 @@ import cn.bms.common.constant.Constants;
 import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.dto.LoginBody;
+import cn.bms.domain.model.LoginUser;
 import cn.bms.framework.web.service.SysLoginService;
+import cn.bms.framework.web.service.TokenService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,13 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class SysLoginController {
 
-    private final SysLoginService loginService;
-
     @Autowired
-    public SysLoginController(SysLoginService loginService){
-        this.loginService = loginService;
-
-    }
+    private SysLoginService loginService;
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * 登录接口
@@ -43,6 +41,18 @@ public class SysLoginController {
                 loginBody.getUuid());
         response.put(Constants.TOKEN,token);
         return response;
+    }
+
+    /**
+     * 验证token接口
+     * @param request http请求
+     * @return 结果
+     */
+    @GetMapping("/verityToken")
+    public ApiResponse verityToken(HttpServletRequest request){
+        ApiResponse response = ApiResponse.success();
+        LoginUser loginUser = tokenService.getLoginUser(request);
+        return loginUser != null ? response : ApiResponse.error();
     }
 
     @PostMapping("/logout")

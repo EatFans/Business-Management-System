@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
  * 启动程序
  * @author Fan
  */
-@SpringBootApplication // 临时禁用security
+@SpringBootApplication
 @MapperScan("cn.bms.system.mapper")
 public class BusinessManagerSystemApplication {
     public static void main(String[] args){
