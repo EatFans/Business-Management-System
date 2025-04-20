@@ -2,7 +2,7 @@
 <template>
   <router-link :to="item.link">
     <div class="project-list-sidebar-item">
-      <div class="project-list-sidebar-item-main">
+      <div class="project-list-sidebar-item-main" :class="{highlight:isActive(item.link)}">
         <p>{{item.code}}</p>
         <h3>{{item.name}}</h3>
 
@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="color-board" ></div>
+      <div class="color-board" :class="{highlight:isActive(item.link)}" ></div>
     </div>
   </router-link>
 
@@ -21,21 +21,19 @@
 <script>
 export default {
   name: "ProjectListSideBarItem",
-  data() {
-    return {
-      item: {
-        code: 'PN0001235',
-        name: '送餐服务系统',
-        link: '/project/test',
-      }
+  props: {
+    item: {
+      type: Object,
+      required: true,
     }
-
   },
+
   methods: {
     isActive(link){
-      console.log(link);
-      console.log(this.$route.path);
-      return this.$route.path === link;
+      const urlPath = this.$route.path;
+      // console.log('当前link '+link);
+      // console.log('当前routerUrl ',this.$route.path);
+      return urlPath === link;
     }
   }
 }
@@ -110,5 +108,13 @@ a {
   display: block;
   color: #2f7cee;
 
+}
+/* 选项高亮样式 */
+.project-list-sidebar-item-main.highlight {
+  background-color: #e3eaf6;
+}
+
+.color-board.highlight {
+  background: #2f7cee;
 }
 </style>

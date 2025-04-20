@@ -23,7 +23,7 @@
 
         <!-- 项目列表侧边栏核心部分 -->
         <div class="project-list-sidebar-content">
-          <ProjectListSideBarMenu />
+          <ProjectListSideBarMenu :itemList="itemList" />
         </div>
       </div>
 
@@ -43,7 +43,63 @@ export default {
   components: {ProjectListSideBarMenu},
   data() {
     return {
-
+      itemList: [
+        {
+          code: 'PN0001235',
+          name: '送餐服务系统',
+          link: '/project/test',
+        },
+        {
+          code: 'PN0001234',
+          name: '内部项目系统2',
+          link: '/project/test2',
+        },
+        {
+          code: 'PN0001234',
+          name: '测试3',
+          link: '/project/test3',
+        },
+        {
+          code: 'PN0001234',
+          name: '测试4',
+          link: '/project/test4',
+        },
+        {
+          code: 'PN0001234',
+          name: '测试5',
+          link: '/project/test5',
+        },
+        {
+          code: 'PN0001234',
+          name: '测试6',
+          link: '/project/test6',
+        },
+        {
+          code: 'PN0001234',
+          name: '测试7',
+          link: '/project/test7',
+        },
+        {
+          code: 'PN0001234',
+          name: '测试8',
+          link: '/project/test8',
+        },
+        {
+          code: 'PN0001234',
+          name: '测试9',
+          link: '/project/test9',
+        },
+        {
+          code: 'PN0001234',
+          name: '测试10',
+          link: '/project/test10',
+        },
+        {
+          code: 'PN0001234',
+          name: '测试11',
+          link: '/project/test11',
+        },
+      ]
     }
   },
   methods: {
@@ -158,7 +214,6 @@ export default {
 .project-body-main {
   width: 100%;
   height: 89%;
-  border: red solid 1px;
 }
 
 </style>

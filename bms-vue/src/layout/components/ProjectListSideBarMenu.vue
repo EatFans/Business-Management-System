@@ -1,7 +1,7 @@
 <!-- 项目列表侧边栏菜单容器 -->
 <template>
   <div class="project-list-sidebar-menu">
-    <ProjectListSideBarItem />
+    <ProjectListSideBarItem v-for="(item, index) in itemList" :key="item" :item="item" />
   </div>
 </template>
 
@@ -14,11 +14,12 @@ export default {
   components: {
     ProjectListSideBarItem
   },
-  data() {
-    return {
-
+  props: {
+    itemList: {
+      type: Array,
+      required: true,
     }
-  },
+  }
 
 }
 </script>
@@ -28,6 +29,7 @@ export default {
 .project-list-sidebar-menu {
   width: 100%;
   height: 100%;
+  overflow-y: auto;
 }
 
 </style>

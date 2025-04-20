@@ -37,7 +37,8 @@ export default {
   },
   methods: {
     isActive(link){
-      return this.$route.path === link;
+      const urlPath = this.$route.path;
+      return urlPath.indexOf(link) !== -1
     }
   }
 }
