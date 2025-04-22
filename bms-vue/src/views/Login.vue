@@ -114,8 +114,8 @@ export default {
 
       // 登录数据
       loginData: {
-        username: '',
-        password: '',
+        username: '20250420001',
+        password: '1234@abc',
         code: '',
         uuid: ''
       },
@@ -171,7 +171,6 @@ export default {
 	 * 登录
 	 */
 	login() {
-		console.log("登录中...");
 		login(this.loginData.username,
         this.loginData.password,
         this.loginData.code,
@@ -189,7 +188,6 @@ export default {
               },1000);
             } else {
               this.showTipMessage("error",res.msg);
-              console.log(res);
             }
         }
 		})

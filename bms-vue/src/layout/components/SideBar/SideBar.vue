@@ -17,7 +17,7 @@
 
     <!-- 侧边栏底部部分 -->
     <div class="side-bar-bottom">
-      <div class="exit-login-button">
+      <div class="exit-login-button" @click="logout">
         <i class="bx bxs-exit" />
         <p>退出登录</p>
       </div>
@@ -27,6 +27,7 @@
 
 <script>
 	import Menu from "@/layout/components/SideBar/Menu.vue";
+  import {logout} from "@/api/login.js";
 
   export default {
 		name: 'SideBar',
@@ -42,7 +43,22 @@
 
 
 			}
-		}
+		},
+    methods: {
+      logout() {
+        logout().then(res  => {
+          if (res.code === 200) {
+            localStorage.removeItem("loginToken");
+            console.log("已经清楚本地token");
+            this.$router.push('/login');
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+
+
+      }
+    }
 	}
 </script>
 
