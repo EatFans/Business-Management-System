@@ -3,6 +3,7 @@ package cn.bms.framework.web.service;
 import cn.bms.common.constant.CacheConstants;
 import cn.bms.common.constant.Constants;
 import cn.bms.common.core.redis.RedisCache;
+import cn.bms.common.exception.user.UserDeleteTokenException;
 import cn.bms.common.utils.StringUtils;
 import cn.bms.common.utils.uuid.UuidUtil;
 import cn.bms.domain.model.LoginUser;
@@ -14,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * token 业务处理
  *
- // TODO: TokenService待完成
  *
  * @author Fan
  */
@@ -103,7 +102,6 @@ public class TokenService {
      */
     public LoginUser getLoginUser(HttpServletRequest request){
         String token = getToken(request);
-        // 检查token令牌是否为空
         if (StringUtils.isNotEmpty(token)){
             try {
                 Claims claims = parseToken(token);
@@ -120,12 +118,13 @@ public class TokenService {
                 return loginUser;
 
             } catch (Exception e){
-                // TODO： 将异常记录到日志文件中
 //                log.info("获取用户信息异常'{}'", e.getMessage());
             }
         }
         return null;
     }
+
+
 
     /**
      * 获取请求token
@@ -171,6 +170,19 @@ public class TokenService {
         Long currentTime = System.currentTimeMillis();
         if (expireTime - currentTime <= MILLIS_MINUTE_TWENTY){
             refreshToken(loginUser);
+        }
+    }
+
+    /**
+     * 从缓存中删除token登录信息
+     * @param loginUser 登录信息
+     */
+    public void deleteToken(LoginUser loginUser){
+        String loginUserKey = getTokenKey(loginUser.getLoginUserKey());
+        if (StringUtils.isNotEmpty(loginUserKey)){
+            redisCache.deleteObject(loginUserKey);
+        } else {
+            throw new UserDeleteTokenException();
         }
     }
 }

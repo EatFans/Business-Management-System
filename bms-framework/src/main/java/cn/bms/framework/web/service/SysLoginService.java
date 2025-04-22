@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 
 @Component
@@ -58,6 +59,16 @@ public class SysLoginService {
         recordLoginInfo(loginUser.getEmpId());
         // 生成token
         return tokenService.createLoginToken(loginUser);
+    }
+
+    /**
+     * 退出登录
+     */
+    public void logout(HttpServletRequest request){
+        LoginUser loginUser = tokenService.getLoginUser(request);
+        if (loginUser != null){
+            tokenService.deleteToken(loginUser);
+        }
     }
 
     /**

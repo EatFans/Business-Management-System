@@ -57,12 +57,7 @@ public class SysLoginController {
 
     @PostMapping("/logout")
     public ApiResponse logout(HttpServletRequest request){
-        String token = request.getHeader("Authorization");
-        if (StringUtils.isNotEmpty(token)){
-            // TODO : 清除Token操作
-        } else {
-            return ApiResponse.error("退出登录失败！");
-        }
+        loginService.logout(request);
 
         return ApiResponse.success("退出登录成功!");
     }
