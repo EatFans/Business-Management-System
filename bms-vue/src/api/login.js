@@ -33,3 +33,12 @@ export function verityToken() {
 		timeout: 20000
 	})
 }
+
+// 退出登录接口
+export function logout() {
+	return request({
+		url: '/logout',
+		method: 'post',
+		timeout: 20000
+	})
+}
