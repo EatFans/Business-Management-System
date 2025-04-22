@@ -1,13 +1,11 @@
 package cn.bms.web.controller.system;
 
 import cn.bms.common.constant.Constants;
-import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.dto.LoginBody;
 import cn.bms.domain.model.LoginUser;
 import cn.bms.framework.web.service.SysLoginService;
 import cn.bms.framework.web.service.TokenService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

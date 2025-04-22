@@ -5,7 +5,7 @@ public class LoginBody {
     private String username; // 用户名
     private String password;  // 密码
     private String code;   // 验证码
-    private String uuid;   // 唯一标识符
+    private String uuid;   // 验证码的唯一标识符
 
     public void setUsername(String username){
         this.username = username;
