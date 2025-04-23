@@ -4,9 +4,15 @@ import cn.bms.common.exception.user.CaptchaExpireException;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.dto.TestBody;
 import cn.bms.domain.entity.Employee;
+import cn.bms.domain.entity.Permission;
 import cn.bms.system.mapper.EmployeeMapper;
+import cn.bms.system.service.PermissionService;
+import com.sun.org.apache.bcel.internal.generic.DREM;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 /**
  * Test测试控制器
@@ -18,6 +24,9 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
     @Autowired
     private EmployeeMapper employeeMapper;
+
+    @Autowired
+    private PermissionService permissionService;
     public TestController(){
 
     }
@@ -86,5 +95,24 @@ public class TestController {
 
     private void testException(){
         throw new CaptchaExpireException();
+    }
+
+    @PostMapping("/addPermission")
+    public ApiResponse addPermission(@RequestBody Permission permission){
+        ApiResponse response = ApiResponse.success("成功添加权限");
+
+        permission.setCreateTime(new Date(System.currentTimeMillis()));
+        permission.setCreateBy("System");
+
+        boolean b = permissionService.addPermission(permission);
+        return b ? response : ApiResponse.error("添加权限失败");
+    }
+
+    @PostMapping("/updatePermission")
+    public ApiResponse updatePermission(@RequestBody Permission permission){
+        ApiResponse response = ApiResponse.success("成功更新权限");
+
+        boolean b = permissionService.updatePermission(permission);
+        return b ? response : ApiResponse.error("更新权限失败");
     }
 }
