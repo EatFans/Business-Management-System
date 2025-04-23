@@ -4,8 +4,67 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bms.system.mapper.PermissionMapper">
 
-    <resultMap id="Permission" type="PermissionResult" >
-
+    <resultMap type="Permission" id="PermissionResult">
+        <id property="permissionId" column="permission_id" />
+        <result property="code" column="permission_code" />
+        <result property="name" column="permission_name" />
+        <result property="status" column="status" />
+        <result property="createTime" column="create_time" />
+        <result property="createBy" column="create_by" />
+        <result property="updateTime" column="update_time" />
+        <result property="update_by" column="update_by" />
+        <result property="remark" column="remark" />
     </resultMap>
 
+    <!-- 通过id来查询Permission权限 -->
+    <select id="selectPermissionById" resultType="Permission" parameterType="Long" >
+        select * from permission where permission_id = #{id}
+    </select>
+
+    <!-- 新增权限数据 -->
+    <insert id="insertPermission" parameterType="Permission" >
+        insert into permission (
+        <trim suffixOverrides=",">
+            <if test="permissionId != null and permissionId != 0">permission_id,</if>
+            <if test="code != null and code != ''">permission_code,</if>
+            <if test="name != null and name != ''">permission_name,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null and updateBy != ''">update_by,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+        </trim>
+        )
+        values (
+        <trim suffixOverrides=",">
+            <if test="permissionId != null and permissionId != 0">#{permissionId},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+        </trim>
+        )
+    </insert>
+
+    <!-- 更新员工数据 -->
+    <update id="updatePermission" parameterType="Permission">
+        update permission
+        <set>
+            <if test="permissionId != null and permissionId != 0">permission_id = #{permissionId},</if>
+            <if test="code != null and code != ''">permission_code = #{code},</if>
+            <if test="name != null and name != ''">permission_name = #{name},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </set>
+        where permission_id = #{permissionId}
+    </update>
 </mapper>
