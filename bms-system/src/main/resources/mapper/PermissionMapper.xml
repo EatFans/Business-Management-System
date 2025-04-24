@@ -67,4 +67,9 @@
         </set>
         where permission_id = #{permissionId}
     </update>
+
+    <!-- 检查权限是否唯一 -->
+    <select id="checkPermissionUnique" resultType="int" parameterType="String">
+        select count(1) from permission where permission_code = #{code}
+    </select>
 </mapper>

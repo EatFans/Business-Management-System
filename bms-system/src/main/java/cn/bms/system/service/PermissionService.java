@@ -29,4 +29,11 @@ public interface PermissionService {
      * @return 如果更新成功就返回true，否则就返回false
      */
     boolean updatePermission(Permission permission);
+
+    /**
+     * 检查权限是否唯一
+     * @param code 权限码
+     * @return 如果唯一就返回true，否则就返回false
+     */
+    boolean checkPermissionUnique(String code);
 }

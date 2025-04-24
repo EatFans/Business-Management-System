@@ -31,4 +31,11 @@ public interface PermissionMapper {
      * @return 结果
      */
     int updatePermission(Permission permission);
+
+    /**
+     * 检查权限是否唯一
+     * @param code 权限码
+     * @return 如果权限唯一就返回true，否则就返回false
+     */
+    int checkPermissionUnique(String code);
 }

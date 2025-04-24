@@ -51,5 +51,16 @@ public class PermissionServiceImpl implements PermissionService {
         int flag = permissionMapper.updatePermission(permission);
         return flag > 0;
     }
+
+    /**
+     * 检查权限是否唯一
+     * @param code 权限码
+     * @return 如果唯一就返回true，否则就返回false
+     */
+    @Override
+    public boolean checkPermissionUnique(String code) {
+        int count = permissionMapper.checkPermissionUnique(code);
+        return count <= 0;
+    }
 }
 
