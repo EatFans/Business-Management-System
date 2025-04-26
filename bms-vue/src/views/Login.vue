@@ -114,7 +114,7 @@ export default {
 
       // 登录数据
       loginData: {
-        username: '20250420001',
+        username: 'super_admin',
         password: '1234@abc',
         code: '',
         uuid: ''
@@ -185,6 +185,7 @@ export default {
               localStorage.setItem("loginToken", token);
               this.showTipMessage("success","成功登录！");
 
+              // console.log(token);
 
               setTimeout(() => {
                 this.$router.push({

@@ -49,14 +49,15 @@
         logout().then(res  => {
           if (res.code === 200) {
             localStorage.removeItem("loginToken");
-            console.log("已经清楚本地token");
             this.$router.push('/login');
           }
         }).catch(error => {
-          console.log(error)
+          localStorage.removeItem("loginToken");
+          this.$router.push('/login');
         })
 
 
+        console.log(localStorage.getItem("loginToken"));
       }
     }
 	}

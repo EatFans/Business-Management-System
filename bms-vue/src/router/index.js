@@ -106,38 +106,17 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('loginToken');
 
-    // 1. 没有 token 且不是访问 /login，则跳转到 /login
     if (!token && to.path !== '/login') {
+        // 没有 token 又不是去登录页，强制跳转登录
         return next('/login');
     }
 
-    // 2. 有 token，验证 token 合法性
-    if (token) {
-        // 如果访问的是登录页，不需要校验 token
-        if (to.path === '/login') {
-            return next(); // 放行
-        }
-
-        // 否则验证 token（异步）
-        verityToken().then(res => {
-            if (res.code === 200) {
-                // TODO：测试用
-                console.log(localStorage.getItem('loginToken'));
-
-                next(); // token 有效
-            } else {
-                localStorage.removeItem('loginToken');
-                // console.log(res);
-                next('/login'); // token 无效
-            }
-        }).catch(() => {
-            next('/login'); // 请求错误也跳登录
-        });
-
-        return;
+    if (token && to.path === '/login') {
+        // 已经登录了，还去登录页？跳回首页或者别的页
+        return next('/dashboard');
     }
 
-    // 3. 没有 token 且访问的是 /login
+    // 其他情况，直接放行
     next();
 });
 

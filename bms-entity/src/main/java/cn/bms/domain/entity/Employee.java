@@ -135,4 +135,8 @@ public class Employee extends BaseEntity {
     public boolean isFirstLogin(){
         return firstLogin;
     }
+
+    public boolean isSuperAdmin(){
+        return empId != null && empId == 1L;
+    }
 }
