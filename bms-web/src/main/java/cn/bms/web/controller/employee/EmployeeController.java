@@ -1,4 +1,4 @@
-package cn.bms.web.controller.system;
+package cn.bms.web.controller.employee;
 
 import cn.bms.common.utils.SecurityUtils;
 import cn.bms.common.utils.StringUtils;

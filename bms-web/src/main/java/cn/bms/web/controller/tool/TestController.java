@@ -5,11 +5,16 @@ import cn.bms.domain.ApiResponse;
 import cn.bms.domain.dto.TestBody;
 import cn.bms.domain.entity.Employee;
 import cn.bms.domain.entity.Permission;
+import cn.bms.domain.entity.Role;
+import cn.bms.domain.entity.SystemMenu;
 import cn.bms.system.mapper.EmployeeMapper;
+import cn.bms.system.mapper.RoleMapper;
+import cn.bms.system.mapper.SystemMenuMapper;
 import cn.bms.system.service.PermissionService;
 import com.sun.org.apache.bcel.internal.generic.DREM;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -27,6 +32,13 @@ public class TestController {
 
     @Autowired
     private PermissionService permissionService;
+
+    @Autowired
+    private RoleMapper roleMapper;
+
+    @Autowired
+    private SystemMenuMapper systemMenuMapper;
+
     public TestController(){
 
     }
@@ -114,5 +126,50 @@ public class TestController {
 
         boolean b = permissionService.updatePermission(permission);
         return b ? response : ApiResponse.error("更新权限失败");
+    }
+
+    @PostMapping("/addRole")
+    public ApiResponse addRole(@RequestBody Role role){
+        ApiResponse response = ApiResponse.success("成功添加角色");
+
+        role.setCreateTime(new Date(System.currentTimeMillis()));
+        role.setCreateBy("System");
+
+        int i = roleMapper.insertRole(role);
+        return i > 0 ? response : ApiResponse.error("添加角色失败");
+    }
+
+    @PostMapping("/updateRole")
+    public ApiResponse updateRole(@RequestBody Role role){
+        ApiResponse response = ApiResponse.success("成功修改");
+
+        if (role.getRoleId() <= 0)
+            return ApiResponse.error("修改失败！");
+
+        int i = roleMapper.updateRole(role);
+
+
+        return i > 0 ? response : ApiResponse.error("修改失败");
+    }
+
+    @PostMapping("/addSystemMenu")
+    public ApiResponse addSystemMenu(@RequestBody SystemMenu systemMenu){
+        ApiResponse response = ApiResponse.success("添加菜单成功");
+
+        systemMenu.setCreateTime(new Date(System.currentTimeMillis()));
+        systemMenu.setCreateBy("System");
+
+        int i = systemMenuMapper.insertSystemMenu(systemMenu);
+        return i > 0 ? response : ApiResponse.error("添加菜单选项错误");
+    }
+
+    @PostMapping("/updateSystemMenu")
+    public ApiResponse updateSystemMenu(@RequestBody SystemMenu systemMenu){
+        ApiResponse response = ApiResponse.success("成功修改");
+
+        if (systemMenu.getMenuId() <= 0)
+            return ApiResponse.error("修改失败");
+        int i = systemMenuMapper.updateSystemMenu(systemMenu);
+        return i > 0 ? response : ApiResponse.error("修改失败");
     }
 }

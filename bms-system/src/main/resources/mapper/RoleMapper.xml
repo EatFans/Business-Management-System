@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bms.system.mapper.RoleMapper">
+
+    <resultMap type="Role" id="RoleResult">
+        <id property="roleId" column="role_id" />
+        <result property="roleName" column="role_name" />
+        <result property="roleKey" column="role_key" />
+        <result property="status" column="status" />
+        <result property="delFlag" column="del_flag" />
+        <result property="createTime" column="create_time" />
+        <result property="createBy" column="create_by" />
+        <result property="updateTime" column="update_time" />
+        <result property="update_by" column="update_by" />
+        <result property="remark" column="remark" />
+    </resultMap>
+
+    <!-- 通过角色id来查找角色 -->
+    <select id="selectRoleById" parameterType="Long" resultType="Role">
+        select * from role where role_id = #{roleId};
+    </select>
+
+    <!-- 通过角色名来查找角色 -->
+    <select id="selectRoleByName" parameterType="String" resultType="Role">
+        select * from  role where role_name = #{roleName}
+    </select>
+
+    <!-- 通过角色key来获取角色 -->
+    <select id="selectRoleByKey" parameterType="String" resultType="Role">
+        select * from  role where role_key = #{roleKey}
+    </select>
+
+    <!-- 插入角色信息 -->
+    <insert id="insertRole" parameterType="Role" useGeneratedKeys="true" keyProperty="roleId">
+        insert into role (
+        <trim suffixOverrides=",">
+            <if test="roleId != null and roleId != 0">role_id,</if>
+            <if test="roleName != null and roleName != ''">role_name,</if>
+            <if test="roleKey != null and roleKey != ''">role_key,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null and updateBy != ''">update_by,</if>
+            <if test="remark != null and remark !=''">remark,</if>
+        </trim>
+        )
+        values (
+        <trim suffixOverrides=",">
+            <if test="roleId != null and roleId != 0">#{roleId},</if>
+            <if test="roleName != null and roleName != ''">#{roleName},</if>
+            <if test="roleKey != null and roleKey != ''">#{roleKey},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null and remark !=''">#{remark},</if>
+        </trim>
+        )
+    </insert>
+
+    <!-- 更新角色信息 -->
+    <update id="updateRole" parameterType="Role">
+        update role
+        <set>
+            <if test="roleId != null and roleId != 0">role_id = #{roleId},</if>
+            <if test="roleName != null and roleName != ''">role_name = #{roleName},</if>
+            <if test="roleKey != null and roleKey != ''">role_key = #{roleKey},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </set>
+        where role_id = #{roleId}
+    </update>
+</mapper>
