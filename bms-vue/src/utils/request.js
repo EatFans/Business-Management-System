@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 创建 Axios 实例
 const request = axios.create({
-    baseURL: 'http://localhost:8080', // 你的后端接口地址
+    baseURL: 'http://127.0.0.1:8080', // 你的后端接口地址
     timeout: 10000, // 请求超时时间
 });
 
