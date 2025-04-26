@@ -8,6 +8,7 @@ import ProjectChildrenRouter from "@/router/project/ProjectChildrenRouter.js";
 const childrenRouter = [
     {
         path: '/dashboard',
+        name: 'Dashboard',
         component: () => import('@/views/pages/Dashboard.vue'),
         meta: { title: '仪表盘' },
     },
@@ -41,6 +42,31 @@ const childrenRouter = [
         path: '/notify',
         component: () => import('@/views/pages/Notify.vue'),
         meta: {title: '消息'}
+    },
+    {
+        path: '/employee',
+        component: () => import('@/views/pages/Employee.vue'),
+        meta: {title: '员工管理'}
+    },
+    {
+        path: '/role',
+        component: () => import('@/views/pages/Role.vue'),
+        meta: {title: '角色管理'}
+    },
+    {
+        path: '/permission',
+        component: () => import('@/views/pages/Permission.vue'),
+        meta: {title: '权限管理'}
+    },
+    {
+        path: '/PManager',
+        component: () => import('@/views/pages/ProjectManager.vue'),
+        meta: {title: '项目管理'}
+    },
+    {
+        path: '/TManager',
+        component: () => import('@/views/pages/TaskManager.vue'),
+        meta: {title: '任务管理'}
     }
 
 ];
@@ -95,9 +121,13 @@ router.beforeEach((to, from, next) => {
         // 否则验证 token（异步）
         verityToken().then(res => {
             if (res.code === 200) {
+                // TODO：测试用
+                console.log(localStorage.getItem('loginToken'));
+
                 next(); // token 有效
             } else {
                 localStorage.removeItem('loginToken');
+                // console.log(res);
                 next('/login'); // token 无效
             }
         }).catch(() => {

@@ -175,17 +175,23 @@ export default {
         this.loginData.password,
         this.loginData.code,
         this.loginData.uuid).then(res => {
+          console.log("login response:", res);
 			    // 检查请求结果是否为空
           if (res !== null){
             // 检查请求结果是否成功
             if (res.code === 200){
-              this.showTipMessage("success","成功登录！");
               const token = res.token;
+              console.log(token);
               localStorage.setItem("loginToken", token);
+              this.showTipMessage("success","成功登录！");
+
 
               setTimeout(() => {
-                this.$router.push('/dashboard');
-              },1000);
+                this.$router.push({
+                  path: '/dashboard',
+                  name: 'Dashboard'
+                });
+              },500);
             } else {
               this.showTipMessage("error",res.msg);
             }

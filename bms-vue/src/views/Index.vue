@@ -58,6 +58,31 @@ export default {
           text: '消息',
           link: '/notify',
         },
+        {
+          icon: 'bx bxs-user-account',
+          text: '员工管理',
+          link: '/employee',
+        },
+        {
+          icon: 'bx bx-group',
+          text: '角色管理',
+          link: '/role',
+        },
+        {
+          icon: 'bx bx-sitemap',
+          text: "权限管理",
+          link: '/permission'
+        },
+        {
+          icon: 'bx bx-user',
+          text: '项目管理',
+          link: '/PManager',
+        },
+        {
+          icon: 'bx bx-notepad',
+          text: '任务管理',
+          link: '/TManager'
+        }
       ]
     }
   },
