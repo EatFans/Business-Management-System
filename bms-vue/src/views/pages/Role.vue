@@ -155,30 +155,111 @@
           <!-- 关联菜单选择 -->
           <div class="form-group">
             <label>关联菜单</label>
-            <div class="checkbox-group">
-              <label v-for="menu in menus" :key="menu.menu_id" class="checkbox-item">
-                <input 
-                  type="checkbox" 
-                  :value="menu.menu_id" 
-                  v-model="selectedMenus"
-                />
-                <span>{{ menu.menu_name }}</span>
-              </label>
+            <div class="selector-trigger" @click="showMenuSelector = true">
+              <span v-if="selectedMenus.length > 0">已选择 {{ selectedMenus.length }} 项</span>
+              <span v-else>请选择菜单</span>
+              <i class="bx bx-chevron-down"></i>
             </div>
           </div>
-          
+
           <!-- 关联员工选择 -->
           <div class="form-group">
             <label>关联员工</label>
-            <div class="checkbox-group">
-              <label v-for="emp in employees" :key="emp.emp_id" class="checkbox-item">
-                <input 
-                  type="checkbox" 
-                  :value="emp.emp_id" 
-                  v-model="selectedEmployees"
-                />
-                <span>{{ emp.nick_name }}</span>
-              </label>
+            <div class="selector-trigger" @click="showEmpSelector = true">
+              <span v-if="selectedEmployees.length > 0">已选择 {{ selectedEmployees.length }} 项</span>
+              <span v-else>请选择员工</span>
+              <i class="bx bx-chevron-down"></i>
+            </div>
+          </div>
+
+          <!-- 菜单选择器弹窗 -->
+          <div class="selector-overlay" v-if="showMenuSelector" @click.self="showMenuSelector = false">
+            <div class="selector-content">
+              <div class="selector-header">
+                <h3>选择菜单</h3>
+                <button type="button" class="select-all-btn" @click="selectAllMenus">
+                  {{ isAllMenusSelected ? '取消全选' : '全选' }}
+                </button>
+                <button class="close-btn" @click="showMenuSelector = false">
+                  <i class="bx bx-x"></i>
+                </button>
+              </div>
+              <div class="selector-body">
+                <div class="selector-search">
+                  <i class="bx bx-search"></i>
+                  <input type="text" v-model="menuSearchQuery" placeholder="搜索菜单" />
+                </div>
+                
+                <!-- 已选菜单预览 -->
+                <div class="selected-preview" v-if="selectedMenus.length > 0">
+                  <div class="preview-title">已选择 ({{ selectedMenus.length }})</div>
+                  <div class="selected-tags">
+                    <div class="selected-tag" v-for="menuId in selectedMenus" :key="'selected-'+menuId">
+                      <span>{{ getMenuName(menuId) }}</span>
+                      <button @click="removeSelectedMenu(menuId)">×</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="selector-list">
+                  <div class="selector-item" v-for="menu in filteredMenus" :key="menu.menu_id">
+                    <label>
+                      <input type="checkbox" :value="menu.menu_id" v-model="selectedMenus" />
+                      <span>{{ menu.menu_name }}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="selector-footer">
+                <button class="cancel-btn" @click="showMenuSelector = false">取消</button>
+                <button class="submit-btn" @click="showMenuSelector = false">确定</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 员工选择器弹窗 -->
+          <div class="selector-overlay" v-if="showEmpSelector" @click.self="showEmpSelector = false">
+            <div class="selector-content">
+              <div class="selector-header">
+                <h3>选择员工</h3>
+                <button type="button" class="select-all-btn" @click="selectAllEmployees">
+                  {{ isAllEmployeesSelected ? '取消全选' : '全选' }}
+                </button>
+                <button class="close-btn" @click="showEmpSelector = false">
+                  <i class="bx bx-x"></i>
+                </button>
+              </div>
+              <div class="selector-body">
+                <div class="selector-search">
+                  <i class="bx bx-search"></i>
+                  <input type="text" v-model="empSearchQuery" placeholder="搜索员工" />
+                </div>
+                
+                <!-- 已选员工预览 -->
+                <div class="selected-preview" v-if="selectedEmployees.length > 0">
+                  <div class="preview-title">已选择 ({{ selectedEmployees.length }})</div>
+                  <div class="selected-tags">
+                    <div class="selected-tag" v-for="empId in selectedEmployees" :key="'selected-'+empId">
+                      <span>{{ getEmployeeName(empId) }}</span>
+                      <button @click="removeSelectedEmployee(empId)">×</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 员工分组显示 -->
+                <div class="selector-list">
+                  <div class="selector-item" v-for="emp in filteredEmployees" :key="emp.emp_id">
+                    <label>
+                      <input type="checkbox" :value="emp.emp_id" v-model="selectedEmployees" />
+                      <span>{{ emp.nick_name }}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="selector-footer">
+                <button class="cancel-btn" @click="showEmpSelector = false">取消</button>
+                <button class="submit-btn" @click="showEmpSelector = false">确定</button>
+              </div>
             </div>
           </div>
           
@@ -299,6 +380,15 @@ export default {
   name: "Role",
   data() {
     return {
+
+      // 二级弹窗中关联菜单和关联员工搜索
+      menuSearchQuery: '',
+      empSearchQuery: '',
+
+      // 选择器显示状态
+      showMenuSelector: false,
+      showEmpSelector: false,
+
       // 选中的菜单和员工
       selectedMenus: [],
       selectedEmployees: [],
@@ -449,7 +539,7 @@ export default {
       return this.employees.filter(emp => empIds.includes(emp.emp_id))
     },
 
-      // 是否全选菜单
+    // 是否全选菜单
     isAllMenusSelected() {
       return this.selectedMenus.length === this.menus.length
     },
@@ -457,6 +547,20 @@ export default {
     // 是否全选员工
     isAllEmployeesSelected() {
       return this.selectedEmployees.length === this.employees.length
+    },
+    
+    // 过滤后的菜单列表
+    filteredMenus() {
+      if (!this.menuSearchQuery) return this.menus
+      return this.menus.filter(menu => 
+        menu.menu_name.toLowerCase().includes(this.menuSearchQuery.toLowerCase()))
+    },
+    
+    // 过滤后的员工列表
+    filteredEmployees() {
+      if (!this.empSearchQuery) return this.employees
+      return this.employees.filter(emp => 
+        emp.nick_name.toLowerCase().includes(this.empSearchQuery.toLowerCase()))
     }
   },
   methods: {
@@ -475,6 +579,34 @@ export default {
         this.selectedEmployees = []
       } else {
         this.selectedEmployees = this.employees.map(emp => emp.emp_id)
+      }
+    },
+
+    // 获取菜单名称
+    getMenuName(menuId) {
+      const menu = this.menus.find(m => m.menu_id === menuId);
+      return menu ? menu.menu_name : '';
+    },
+    
+    // 获取员工名称
+    getEmployeeName(empId) {
+      const emp = this.employees.find(e => e.emp_id === empId);
+      return emp ? emp.nick_name : '';
+    },
+    
+    // 移除选中的菜单
+    removeSelectedMenu(menuId) {
+      const index = this.selectedMenus.indexOf(menuId);
+      if (index !== -1) {
+        this.selectedMenus.splice(index, 1);
+      }
+    },
+    
+    // 移除选中的员工
+    removeSelectedEmployee(empId) {
+      const index = this.selectedEmployees.indexOf(empId);
+      if (index !== -1) {
+        this.selectedEmployees.splice(index, 1);
       }
     },
 
@@ -1241,5 +1373,177 @@ export default {
 .checkbox-item input {
   margin-right: 5px;
   width: auto;
+}
+
+/* 选择器触发器样式 */
+.selector-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.selector-trigger:hover {
+  border-color: #c0c4cc;
+}
+
+/* 选择器弹窗样式 */
+.selector-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+
+.selector-content {
+  width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.selector-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ebeef5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selector-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #303133;
+  flex: 1;
+}
+
+.select-all-btn {
+  background: none;
+  border: none;
+  color: #409eff;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 15px;
+}
+
+.select-all-btn:hover {
+  text-decoration: underline;
+}
+
+.selector-body {
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.selector-search {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.selector-search i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #909399;
+}
+
+.selector-search input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.selected-preview {
+  margin-bottom: 15px;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #f5f7fa;
+}
+
+.preview-title {
+  font-size: 14px;
+  color: #606266;
+  margin-bottom: 8px;
+}
+
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selected-tag {
+  display: flex;
+  align-items: center;
+  background-color: #ecf5ff;
+  color: #409eff;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.selected-tag button {
+  background: none;
+  border: none;
+  color: #409eff;
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.selector-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.selector-item {
+  width: calc(33.33% - 10px);
+  margin-bottom: 10px;
+}
+
+.selector-item label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.selector-item label:hover {
+  background-color: #f5f7fa;
+}
+
+.selector-item input {
+  margin-right: 5px;
+}
+
+.selector-footer {
+  padding: 10px 20px 20px;
+  text-align: right;
+  border-top: 1px solid #ebeef5;
+  margin-top: 15px;
 }
 </style>
