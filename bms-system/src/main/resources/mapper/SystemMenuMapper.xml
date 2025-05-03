@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bms.system.mapper.SystemMenuMapper">
+
+    <resultMap type="SystemMenu" id="SystemMenuResult">
+        <id property="menuId" column="menu_id" />
+        <result property="text" column="text" />
+        <result property="icon" column="icon" />
+        <result property="link" column="link" />
+        <result property="orderNumber" column="order_number" />
+        <result property="createTime" column="create_time" />
+        <result property="createBy" column="create_by" />
+        <result property="updateTime" column="update_time" />
+        <result property="update_by" column="update_by" />
+        <result property="remark" column="remark" />
+    </resultMap>
+
+    <!-- 通过菜单id来获取 -->
+    <select id="selectSystemMenuById" parameterType="Long" resultType="SystemMenu">
+        select * from system_menu where menu_id = #{menuId}
+    </select>
+
+    <!-- 插入一条菜单信息 -->
+    <insert id="insertSystemMenu" parameterType="SystemMenu" useGeneratedKeys="true" keyProperty="menuId">
+        insert into system_menu (
+        <trim suffixOverrides=",">
+            <if test="menuId != null and menuId != 0">menu_id,</if>
+            <if test="text != null and text != ''">text,</if>
+            <if test="icon != null and icon != ''">icon,</if>
+            <if test="link != null and link != ''">link,</if>
+            <if test="orderNumber != null and orderNumber != 0">order_number,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null and updateBy != ''">update_by,</if>
+            <if test="remark != null and remark !=''">remark,</if>
+        </trim>
+        )
+        values (
+        <trim suffixOverrides=",">
+            <if test="menuId != null and menuId != 0">#{menuId},</if>
+            <if test="text != null and text != ''">#{text},</if>
+            <if test="icon != null and icon != ''">#{icon},</if>
+            <if test="link != null and link != ''">#{link},</if>
+            <if test="orderNumber != null and orderNumber != 0">#{orderNumber},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null and remark !=''">#{remark},</if>
+        </trim>
+        )
+    </insert>
+
+    <!-- 更新系统菜单 -->
+    <update id="updateSystemMenu" parameterType="SystemMenu">
+        update system_menu
+        <set>
+            <if test="menuId != null and menuId != 0">menu_id = #{menuId},</if>
+            <if test="text != null and text != ''">text = #{text},</if>
+            <if test="icon != null and icon != ''">icon = #{icon},</if>
+            <if test="link != null and link != ''">link = #{link},</if>
+            <if test="orderNumber != null and orderNumber != 0">order_number = #{orderNumber},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </set>
+        where menu_id = #{menuId}
+    </update>
+</mapper>

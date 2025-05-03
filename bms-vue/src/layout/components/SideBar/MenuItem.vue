@@ -1,13 +1,15 @@
 <!-- 菜单物品组件 -->
 <template>
-  <a :href="item.link">
-    <div class="menu-item" :class="{ highlight:item.isHighlight }">
-      <!--装饰板-->
-      <div class="decorative-board" :class="{ highlight:item.isHighlight }"></div>
-      <i :class='item.icon'></i>
-      <p>{{ item.text }}</p>
+  <router-link :to="item.link">
+    <div class="menu-item-container" :class="{highlight:isActive(item.link)}">
+      <div class="menu-item-content">
+        <i :class='item.icon'></i>
+        <p>{{item.text}}</p>
+      </div>
+      <div class="decorative-board" :class="{ highlight:isActive(item.link) }"></div>
     </div>
-  </a>
+  </router-link>
+
 
 </template>
 
@@ -32,6 +34,12 @@ export default {
       //   isHighlight: false
       // }
     }
+  },
+  methods: {
+    isActive(link){
+      const urlPath = this.$route.path;
+      return urlPath.indexOf(link) !== -1
+    }
   }
 }
 </script>
@@ -42,48 +50,67 @@ a {
   text-decoration: none;
 }
 
-.menu-item {
+.menu-item-container {
   width: 100%;
   height: 40px;
   display: flex;
-  align-items: center;
-  color: #c5c3c3;
-
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
-.decorative-board {
-  width: 5px;
+.menu-item-content {
+  width: 80%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  border-radius: 10px;
+
 }
 
-.menu-item i {
+.menu-item-content i {
+  font-size: 20px;
+  color: #78818e;
   margin-left: 20px;
 }
 
-.menu-item p {
-  font-size: 14px;
-  margin-left: 12px;
-  font-weight: 400;
+.menu-item-content p {
+  font-size: 16px;
+  color: #78818e;
+  margin-left: 10px;
+
 }
 
-/* 正常情况下时候，当menu-item类被鼠标覆盖就高亮显示 */
-.menu-item:hover {
-  background: #2c3137;
-  color: #fff;
+/* 当鼠标覆盖选项样式 */
+.menu-item-container:hover .menu-item-content {
+  background-color: #e3eaf6;
 }
 
-.menu-item:hover .decorative-board {
-  background: #219837;
+.menu-item-container:hover .menu-item-content i, .menu-item-container:hover .menu-item-content p{
+  color: #2f7cee;
 }
 
-
-/* 如果有highlight类，就始终为高亮显示 */
-.menu-item.highlight {
-  background: #2c3137;
-  color: #fff;
+.menu-item-container:hover .decorative-board {
+  width: 5px;
+  height: 100%;
+  background: #2f7cee;
+  margin-left: 15px;
 }
 
-.menu-item .decorative-board.highlight {
-  background: #219837;
+/* 选项高亮样式 */
+.menu-item-container.highlight .menu-item-content {
+  background-color: #e3eaf6;
 }
+
+.menu-item-container.highlight .menu-item-content i, .menu-item-container.highlight .menu-item-content p{
+  color: #2f7cee;
+}
+
+.menu-item-container.highlight .decorative-board {
+  width: 5px;
+  height: 100%;
+  background: #2f7cee;
+  margin-left: 15px;
+}
+/**/
 </style>

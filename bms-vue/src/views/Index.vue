@@ -1,22 +1,89 @@
 <template>
   <div class="index-page-container">
-    <SideBar />
-
+    <SideBar :menuItemList="itemList"/>
+    <!-- index页面主要内容 -->
+    <div class="index-page-content">
+      <HeaderBox />
+      <!-- 二级路由切换不同内容 -->
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
 import SideBar from "@/layout/components/SideBar/SideBar.vue";
+import HeaderBox from "@/layout/components/HeaderBox.vue";
 
 export default {
   name: 'Index',
   components: {
-    SideBar
-
+    SideBar,
+    HeaderBox,
   },
   data() {
     return {
-		
+      itemList: [
+        {
+          icon: 'bx bx-home-alt',
+          text: '仪表盘',
+          link: '/dashboard',
+        },
+        {
+          icon: 'bx bx-user',
+          text: '项目',
+          link: '/project',
+        },
+        {
+          icon: 'bx bx-notepad',
+          text: '任务',
+          link: '/task'
+        },
+        {
+          icon: 'bx bx-dock-bottom',
+          text: '日历',
+          link: '/calendar',
+        },
+        {
+          icon: 'bx bx-buildings',
+          text: '假期',
+          link: '/holiday',
+        },
+        {
+          icon: 'bx bx-calendar-check',
+          text: '考勤',
+          link: '/attendance',
+        },
+        {
+          icon: 'bx bx-task',
+          text: '消息',
+          link: '/notify',
+        },
+        {
+          icon: 'bx bxs-user-account',
+          text: '员工管理',
+          link: '/employee',
+        },
+        {
+          icon: 'bx bx-group',
+          text: '角色管理',
+          link: '/role',
+        },
+        {
+          icon: 'bx bx-sitemap',
+          text: "权限管理",
+          link: '/permission'
+        },
+        {
+          icon: 'bx bx-user',
+          text: '项目管理',
+          link: '/PManager',
+        },
+        {
+          icon: 'bx bx-notepad',
+          text: '任务管理',
+          link: '/TManager'
+        }
+      ]
     }
   },
   methods: {
@@ -26,11 +93,18 @@ export default {
 </script>
 
 <style scoped>
+.index-page-content {
+  width: 100%;
+  height: 100%;
+}
+
 .index-page-container {
   height: 100vh;
   width: 100%;
-  background: #e9e9e9;
+  background: #eaeff5;
   padding: 5px;
+  display: flex;
+  flex-direction: row;
 }
 
 </style>

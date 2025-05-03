@@ -11,6 +11,11 @@ web:
   # 允许跨域的服务器ip
   allowedOrigins: http://localhost:5173
 
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: cn.bms.domain.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
 
 # token配置
 token:
@@ -19,4 +24,11 @@ token:
   # 令牌密钥
   secret: abcdefghijklmnopqrstuvwxyz
   # 令牌有效期（默认30分钟）
-  expireTime: 30
+  expireTime: 60
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bms?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver

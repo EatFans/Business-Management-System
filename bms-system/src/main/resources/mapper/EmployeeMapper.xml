@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bms.system.mapper.EmployeeMapper">
+
+    <resultMap type="Employee" id="EmployeeResult">
+        <id property="empId" column="emp_id"  />
+        <result property="deptId" column="dept_id" />
+        <result property="posId" column="pos_id" />
+        <result property="jobNumber" column="job_number"/>
+        <result property="nickName" column="nick_name" />
+        <result property="email" column="email" />
+        <result property="phoneNumber" column="phone_number" />
+        <result property="sex" column="sex" />
+        <result property="avatar" column="avatar" />
+        <result property="password" column="password" />
+        <result property="status" column="status" />
+        <result property="delFlag" column="del_flag" />
+        <result property="firstLogin" column="first_login" />
+        <result property="loginTime" column="login_time" />
+        <result property="createTime" column="create_time" />
+        <result property="createBy" column="create_by" />
+        <result property="updateTime" column="update_time" />
+        <result property="update_by" column="update_by" />
+        <result property="remark" column="remark" />
+    </resultMap>
+
+    <!-- 通过用户名（工号）来查找员工 -->
+    <select id="selectEmployeeByUserName" parameterType="String" resultMap="EmployeeResult">
+        select * from employee where job_number = #{userName} and del_flag = '0'
+    </select>
+
+    <!-- 通过员工id来查找员工 -->
+    <select id="selectEmployeeById" parameterType="Long" resultMap="EmployeeResult" >
+        select * from employee where emp_id = #{empId}
+    </select>
+
+    <!-- 新增员工用户数据 -->
+    <insert id="insertEmployee" parameterType="Employee" useGeneratedKeys="true" keyProperty="empId">
+        insert into employee (
+        <trim suffixOverrides=",">
+            <if test="empId != null and empId != 0">emp_id,</if>
+            <if test="deptId != null and deptId != 0">dept_id,</if>
+            <if test="posId != null and posId != 0">pos_id,</if>
+            <if test="jobNumber != null and jobNumber != ''">job_number,</if>
+            <if test="nickName != null and nickName != ''">nick_name,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="phoneNumber != null and phoneNumber != ''">phone_number,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="avatar != null and avatar != ''">avatar,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null and updateBy != ''">update_by,</if>
+            <if test="remark != null and remark !=''">remark,</if>
+        </trim>
+        )
+        values (
+        <trim suffixOverrides=",">
+            <if test="empId != null and empId != 0">#{empId},</if>
+            <if test="deptId != null and deptId != 0">#{deptId},</if>
+            <if test="posId != null and posId != 0">#{posId},</if>
+            <if test="jobNumber != null and jobNumber != ''">#{jobNumber},</if>
+            <if test="nickName != null and nickName != ''">#{nickName},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="avatar != null and avatar != ''">#{avatar},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null and remark !=''">#{remark},</if>
+        </trim>
+        )
+    </insert>
+    <!-- 更新员工数据 -->
+    <update id="updateEmployee" parameterType="Employee">
+        update employee
+        <set>
+            <if test="empId != null and empId != 0">emp_id = #{empId},</if>
+            <if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
+            <if test="posId != null and posId != 0">pos_id = #{posId},</if>
+            <if test="jobNumber != null and jobNumber != ''">job_number = #{jobNumber},</if>
+            <if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="phoneNumber != null and phoneNumber != ''">phone_number = #{phoneNumber},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="loginTime != null">login_time = #{loginTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="firstLogin != null">first_login = #{firstLogin}</if>
+        </set>
+        where job_number = #{jobNumber}
+    </update>
+
+
+    <!-- 修改员工头像 -->
+    <update id="updateEmployeeAvatar" parameterType="String">
+        update employee set avatar = #{avatar} where job_number = #{userName}
+    </update>
+
+    <!-- 修改员工账号状态 -->
+    <update id="updateEmployeeStatus" parameterType="String">
+        update employee set status = #{status} where job_number = #{userName}
+    </update>
+
+    <!-- 查询带有前缀的最大工号 -->
+    <select id="selectMaxJobNumberWithPrefix" resultType="String">
+        select MAX(job_number) from employee where job_number like concat(#{prefix},'%')
+    </select>
+
+    <!-- 检查用户名（工号）是不是唯一 -->
+    <select id="checkUserNameUnique" resultType="Employee" parameterType="String">
+        select emp_id, job_number from employee  where job_number = #{userName} and del_flag = '0' limit 1
+    </select>
+
+    <!-- 检查员工邮箱是不是唯一 -->
+    <select id="checkEmailUnique" resultType="int" parameterType="String">
+        select count(1) from employee where email = #{email} and del_flag = '0'
+    </select>
+
+    <!-- 检查员工手机好是不是唯一 -->
+    <select id="checkPhoneNumberUnique" resultType="int" parameterType="String">
+        select count(1) from employee where phone_number = #{phoneNumber} and del_flag = '0'
+    </select>
+</mapper>

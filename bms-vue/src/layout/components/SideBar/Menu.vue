@@ -11,46 +11,13 @@ import MenuItem from "@/layout/components/SideBar/MenuItem.vue";
 export default {
   name: 'Menu',
   components: {MenuItem},
+  props:{
+    itemList:Array,
+    required: true
+  },
   data() {
     return {
-      itemList: [
-        {
-          icon: 'bx bx-home-alt',
-          text: '首页',
-          link: '/home',
-          isHighlight: true
-        },
-        {
-          icon: 'bx bx-user',
-          text: '员工管理',
-          link: '/employee',
-          isHighlight: false
-        },
-        {
-          icon: 'bx bx-dock-bottom',
-          text: '岗位管理',
-          link: '/department',
-          isHighlight: false
-        },
-        {
-          icon: 'bx bx-buildings',
-          text: '部门管理',
-          link: '/position',
-          isHighlight: false
-        },
-        {
-          icon: 'bx bx-calendar-check',
-          text: '考勤',
-          link: '/home',
-          isHighlight: false
-        },
-        {
-          icon: 'bx bx-task',
-          text: '任务',
-          link: '/home',
-          isHighlight: false
-        },
-      ]
+
     }
   },
   // 当菜单组件被创建时候，就去给服务器发送请求，获取数据进行渲染

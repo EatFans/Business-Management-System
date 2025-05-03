@@ -1,8 +1,11 @@
 package cn.bms.web.controller.common;
 
 import cn.bms.common.constant.CacheConstants;
-import cn.bms.common.core.domain.ApiResponse;
+import cn.bms.common.constant.Constants;
+import cn.bms.common.core.redis.RedisCache;
 import cn.bms.common.utils.uuid.UuidUtil;
+import cn.bms.domain.ApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.code.kaptcha.Producer;
@@ -13,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -29,6 +33,9 @@ public class CaptchaController {
 
     @Resource(name = "captchaProducerMath")
     private Producer captchaProducerMath;
+
+    @Autowired
+    private RedisCache redisCache;
 
     /**
      * 获取图片验证码
@@ -47,7 +54,7 @@ public class CaptchaController {
         capStr = code = captchaProducer.createText();
         image = captchaProducer.createImage(capStr);
 
-        // TODO: redis 将图片验证码信息存入缓存
+        redisCache.setCacheObject(verifyKey,code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
         // 转换流
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

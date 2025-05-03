@@ -34,13 +34,19 @@
             <artifactId>kaptcha</artifactId>
         </dependency>
 
-
-
-
-
         <dependency>
             <groupId>cn.bms</groupId>
             <artifactId>bms-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.bms</groupId>
+            <artifactId>bms-entity</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.bms</groupId>
+            <artifactId>bms-system</artifactId>
         </dependency>
 
     </dependencies>

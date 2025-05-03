@@ -35,11 +35,6 @@
             <version>1.6.2</version>
         </dependency>
 
-        <!-- Mysql驱动包 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
 
 
         <dependency>
@@ -50,6 +45,16 @@
         <dependency>
             <groupId>cn.bms</groupId>
             <artifactId>bms-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.bms</groupId>
+            <artifactId>bms-entity</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.bms</groupId>
+            <artifactId>bms-system</artifactId>
         </dependency>
     </dependencies>
 
