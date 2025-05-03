@@ -9,7 +9,7 @@ bms:
 
 web:
   # 允许跨域的服务器ip
-  allowedOrigins: http://localhost:5173
+  allowedOrigins: http://localhost:5173,http://121.40.119.149
 
 mybatis:
   # 搜索指定包别名
