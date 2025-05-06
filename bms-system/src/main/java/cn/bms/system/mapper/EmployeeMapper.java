@@ -1,6 +1,7 @@
 package cn.bms.system.mapper;
 
 import cn.bms.domain.entity.Employee;
+import cn.bms.domain.entity.EmployeeRole;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -82,4 +83,10 @@ public interface EmployeeMapper {
      * @return 结果
      */
     int checkPhoneNumberUnique(String phoneNumber);
+
+    /**
+     * 添加员工角色
+     * @return 结果
+     */
+    int addEmployeeRole(EmployeeRole employeeRole);
 }

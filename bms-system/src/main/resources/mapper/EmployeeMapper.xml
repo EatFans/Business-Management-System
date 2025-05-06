@@ -26,6 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark" column="remark" />
     </resultMap>
 
+    <resultMap id="EmployeeRoleResult" type="EmployeeRole">
+        <id property="id" column="id" />
+        <result property="empId" column="emp_id" />
+        <result property="roleId" column="role_id" />
+    </resultMap>
+
     <!-- 通过用户名（工号）来查找员工 -->
     <select id="selectEmployeeByUserName" parameterType="String" resultMap="EmployeeResult">
         select * from employee where job_number = #{userName} and del_flag = '0'
@@ -136,4 +142,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="checkPhoneNumberUnique" resultType="int" parameterType="String">
         select count(1) from employee where phone_number = #{phoneNumber} and del_flag = '0'
     </select>
+
+    <!-- 添加员工角色  -->
+    <insert id="addEmployeeRole" useGeneratedKeys="true" keyProperty="id"  parameterType="EmployeeRole">
+        insert into employee_role(
+        <trim suffixOverrides=",">
+            <if test="empId != null and empId != 0">emp_id,</if>
+            <if test="roleId != null and roleId != 0">role_id</if>
+        </trim>
+        )
+        values (
+        <trim suffixOverrides=",">
+            <if test="empId != null and empId != 0">#{empId},</if>
+            <if test="roleId != null and roleId != 0">#{roleId},</if>
+        </trim>
+        )
+    </insert>
 </mapper>
