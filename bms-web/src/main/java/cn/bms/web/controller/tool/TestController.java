@@ -3,18 +3,12 @@ package cn.bms.web.controller.tool;
 import cn.bms.common.exception.user.CaptchaExpireException;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.dto.TestBody;
-import cn.bms.domain.entity.Employee;
-import cn.bms.domain.entity.Permission;
-import cn.bms.domain.entity.Role;
-import cn.bms.domain.entity.SystemMenu;
+import cn.bms.domain.entity.*;
 import cn.bms.system.mapper.EmployeeMapper;
 import cn.bms.system.mapper.RoleMapper;
 import cn.bms.system.mapper.SystemMenuMapper;
 import cn.bms.system.service.PermissionService;
-import com.sun.org.apache.bcel.internal.generic.DREM;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -171,5 +165,14 @@ public class TestController {
             return ApiResponse.error("修改失败");
         int i = systemMenuMapper.updateSystemMenu(systemMenu);
         return i > 0 ? response : ApiResponse.error("修改失败");
+    }
+
+    @PostMapping("/addEmployeeRole")
+    public ApiResponse addEmployeeRole(@RequestBody EmployeeRole body){
+        ApiResponse response = ApiResponse.success("添加成功");
+        int i = employeeMapper.addEmployeeRole(body);
+        if (i <= 0)
+            return ApiResponse.error("添加失败");
+        return response;
     }
 }
