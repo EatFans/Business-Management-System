@@ -3,6 +3,7 @@ package cn.bms.system.service.impl;
 import cn.bms.common.constant.EmployeeConstants;
 import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.entity.Employee;
+import cn.bms.domain.entity.EmployeeRole;
 import cn.bms.system.mapper.EmployeeMapper;
 import cn.bms.system.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,5 +126,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean checkPhoneNumberUnique(Employee employee) {
         int count = employeeMapper.checkPhoneNumberUnique(employee.getPhoneNUmber());
         return count > 0 ? EmployeeConstants.NOT_UNIQUE : EmployeeConstants.UNIQUE;
+    }
+
+    /**
+     * 给员工分配角色
+     */
+    @Override
+    public void assignRole(EmployeeRole employeeRole) {
+        employeeMapper.addEmployeeRole(employeeRole);
+
     }
 }

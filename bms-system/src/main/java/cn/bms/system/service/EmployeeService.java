@@ -1,6 +1,7 @@
 package cn.bms.system.service;
 
 import cn.bms.domain.entity.Employee;
+import cn.bms.domain.entity.EmployeeRole;
 
 /**
  * 员工业务接口类
@@ -64,4 +65,8 @@ public interface EmployeeService {
      */
     boolean checkPhoneNumberUnique(Employee employee);
 
+    /**
+     * 分配角色
+     */
+    void assignRole(EmployeeRole employeeRole);
 }
