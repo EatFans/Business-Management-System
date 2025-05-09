@@ -89,4 +89,11 @@ public interface EmployeeMapper {
      * @return 结果
      */
     int addEmployeeRole(EmployeeRole employeeRole);
+
+    /**
+     * 更新员工角色
+     * @param employeeRole 员工角色
+     * @return 结果
+     */
+    int updateEmployeeRole(EmployeeRole employeeRole);
 }
