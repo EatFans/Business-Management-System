@@ -8,6 +8,7 @@ import cn.bms.system.mapper.EmployeeMapper;
 import cn.bms.system.mapper.RoleMapper;
 import cn.bms.system.mapper.SystemMenuMapper;
 import cn.bms.system.service.PermissionService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -176,4 +177,13 @@ public class TestController {
         return response;
     }
 
+
+    @PostMapping("/updateEmployeeRole")
+    public ApiResponse updateEmployeeRole(@RequestBody EmployeeRole body){
+        ApiResponse response = ApiResponse.success("更新成功");
+        int i = employeeMapper.updateEmployeeRole(body);
+        if (i <= 0)
+            return ApiResponse.error("更新失败");
+        return response;
+    }
 }
