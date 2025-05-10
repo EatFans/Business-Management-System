@@ -4,6 +4,7 @@ import cn.bms.common.utils.SecurityUtils;
 import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.entity.Employee;
+import cn.bms.domain.entity.EmployeeRole;
 import cn.bms.system.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,9 +44,17 @@ public class EmployeeController {
             return ApiResponse.error("手机号不唯一，无法创建员工");
         }
 
-        boolean b = employeeService.addEmployee(employee);
-        if (!b)
+        // 添加员工数据
+        boolean flag1 = employeeService.addEmployee(employee);
+
+        // 添加员工默认的角色
+        boolean flag2 = employeeService.assignDefaultRole(employee.getEmpId());
+
+
+        if (!flag1)
             return ApiResponse.error("添加 " + employee.getNickName() +" 员工失败");
+        if (!flag2)
+            return ApiResponse.error("分配默认角色失败");
         return response.put("data",employee);
     }
 
