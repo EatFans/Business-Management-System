@@ -82,6 +82,11 @@ export default {
           icon: 'bx bx-notepad',
           text: '任务管理',
           link: '/TManager'
+        },
+        {
+          icon: 'bx bx-cog',
+          text: '系统设置',
+          link: '/settings'
         }
       ]
     }
