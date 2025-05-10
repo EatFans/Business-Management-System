@@ -18,7 +18,7 @@
     </resultMap>
 
     <!-- 通过菜单id来获取 -->
-    <select id="selectSystemMenuById" parameterType="Long" resultType="SystemMenu">
+    <select id="selectSystemMenuById" parameterType="Long" resultMap="SystemMenuResult">
         select * from system_menu where menu_id = #{menuId}
     </select>
 
@@ -73,7 +73,7 @@
     </update>
 
     <!--通过角色id来获取完整的SystemMenu列表对象-->
-    <select id="selectSystemMenusByRoleId" parameterType="Long" resultType="SystemMenu">
+    <select id="selectSystemMenusByRoleId" parameterType="Long" resultMap="SystemMenuResult">
         select m.* from system_menu m join system_role_menu rm on m.menu_id = rm.menu_id where role_id = #{roleId}
     </select>
 </mapper>
