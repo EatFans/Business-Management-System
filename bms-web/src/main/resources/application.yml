@@ -6,6 +6,8 @@ bms:
   version: 1.0.0
   # 验证码类型 math 数字计算 char 字符验证
   captchaType: char
+  # 默认给员工分配的角色id
+  defaultRole: 4
 
 web:
   # 允许跨域的服务器ip

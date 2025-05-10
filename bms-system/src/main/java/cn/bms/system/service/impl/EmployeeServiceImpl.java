@@ -7,6 +7,7 @@ import cn.bms.domain.entity.EmployeeRole;
 import cn.bms.system.mapper.EmployeeMapper;
 import cn.bms.system.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,6 +23,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeMapper employeeMapper;
+
+    @Value("${bms.defaultRole}")
+    private Long defaultRoleId;
 
 
     /**
@@ -130,10 +134,38 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 给员工分配角色
+     * @param employeeRole 员工角色关联数据
+     * @return 分配成功就返回true，否则就返回false
      */
     @Override
-    public void assignRole(EmployeeRole employeeRole) {
-        employeeMapper.addEmployeeRole(employeeRole);
+    public boolean assignRole(EmployeeRole employeeRole) {
+        int count = employeeMapper.addEmployeeRole(employeeRole);
+        return count > 0;
 
+    }
+
+    /**
+     * 给员工分配默认角色
+     * @param empId 员工id
+     * @return 返回
+     */
+    @Override
+    public boolean assignDefaultRole(Long empId) {
+        EmployeeRole employeeRole = new EmployeeRole();
+        employeeRole.setEmpId(empId);
+        employeeRole.setRoleId(defaultRoleId);
+        int count = employeeMapper.addEmployeeRole(employeeRole);
+        return count > 0;
+    }
+
+    /**
+     * 更新员工角色
+     * @param employeeRole 用户角色关联表
+     * @return 更新成功就返回true，否则就返回false
+     */
+    @Override
+    public boolean updateRole(EmployeeRole employeeRole) {
+        int count = employeeMapper.updateEmployeeRole(employeeRole);
+        return count > 0;
     }
 }

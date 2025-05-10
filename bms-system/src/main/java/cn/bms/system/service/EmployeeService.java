@@ -68,5 +68,20 @@ public interface EmployeeService {
     /**
      * 分配角色
      */
-    void assignRole(EmployeeRole employeeRole);
+    boolean assignRole(EmployeeRole employeeRole);
+
+    /**
+     * 给员工分配默认角色
+     * @param empId 员工id
+     * @return 如果分配成功就返回true，否则就返回false
+     */
+    boolean assignDefaultRole(Long empId);
+
+    /**
+     * 更新用户角色
+     * @param employeeRole 用户角色关联表
+     * @return 更新成功就返回true，否则就返回false
+     */
+    boolean updateRole(EmployeeRole employeeRole);
+
 }
