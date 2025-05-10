@@ -7,6 +7,7 @@ import cn.bms.domain.entity.*;
 import cn.bms.system.mapper.EmployeeMapper;
 import cn.bms.system.mapper.RoleMapper;
 import cn.bms.system.mapper.SystemMenuMapper;
+import cn.bms.system.mapper.SystemRoleMenuMapper;
 import cn.bms.system.service.PermissionService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class TestController {
 
     @Autowired
     private SystemMenuMapper systemMenuMapper;
+
+    @Autowired
+    private SystemRoleMenuMapper systemRoleMenuMapper;
 
     public TestController(){
 
@@ -182,6 +186,24 @@ public class TestController {
     public ApiResponse updateEmployeeRole(@RequestBody EmployeeRole body){
         ApiResponse response = ApiResponse.success("更新成功");
         int i = employeeMapper.updateEmployeeRole(body);
+        if (i <= 0)
+            return ApiResponse.error("更新失败");
+        return response;
+    }
+
+    @PostMapping("/addRoleMenu")
+    public ApiResponse addRoleMenu(@RequestBody SystemRoleMenu body){
+        ApiResponse response = ApiResponse.success("添加成功");
+        int i = systemRoleMenuMapper.addRoleMenu(body);
+        if (i <= 0)
+            return ApiResponse.error("添加失败");
+        return response;
+    }
+
+    @PostMapping("/updateRoleMenu")
+    public ApiResponse updateRoleMenu(@RequestBody SystemRoleMenu body){
+        ApiResponse response = ApiResponse.success("更新成功");
+        int i = systemRoleMenuMapper.updateRoleMenu(body);
         if (i <= 0)
             return ApiResponse.error("更新失败");
         return response;
