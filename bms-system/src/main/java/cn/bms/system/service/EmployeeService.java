@@ -1,6 +1,7 @@
 package cn.bms.system.service;
 
 import cn.bms.domain.entity.Employee;
+import cn.bms.domain.entity.EmployeeRole;
 
 /**
  * 员工业务接口类
@@ -63,5 +64,24 @@ public interface EmployeeService {
      * @return 如果唯一就返回true，否则就返回false
      */
     boolean checkPhoneNumberUnique(Employee employee);
+
+    /**
+     * 分配角色
+     */
+    boolean assignRole(EmployeeRole employeeRole);
+
+    /**
+     * 给员工分配默认角色
+     * @param empId 员工id
+     * @return 如果分配成功就返回true，否则就返回false
+     */
+    boolean assignDefaultRole(Long empId);
+
+    /**
+     * 更新用户角色
+     * @param employeeRole 用户角色关联表
+     * @return 更新成功就返回true，否则就返回false
+     */
+    boolean updateRole(EmployeeRole employeeRole);
 
 }

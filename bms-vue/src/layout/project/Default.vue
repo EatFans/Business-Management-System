@@ -1,7 +1,7 @@
 
 <template>
   <div class="default-content">
-    <h4>暂无项目内容，请点击或创建新项目</h4>
+    <h4>暂无项目内容，请点击选择或创建新项目</h4>
   </div>
 </template>
 
