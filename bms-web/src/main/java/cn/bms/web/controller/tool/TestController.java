@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Test测试控制器
@@ -206,6 +207,14 @@ public class TestController {
         int i = systemRoleMenuMapper.updateRoleMenu(body);
         if (i <= 0)
             return ApiResponse.error("更新失败");
+        return response;
+    }
+
+    @GetMapping("/getMenuIds")
+    public ApiResponse getMenuIds(@RequestParam("roleId") Long roleId){
+        ApiResponse response = ApiResponse.success();
+        List<Long> menus = systemRoleMenuMapper.selectMenusByRoleId(roleId);
+        response.put("data",menus);
         return response;
     }
 }
