@@ -217,4 +217,12 @@ public class TestController {
         response.put("data",menus);
         return response;
     }
+
+    @GetMapping("/getMenus")
+    public ApiResponse getMenus(@RequestParam("roleId") Long roleId){
+        ApiResponse response = ApiResponse.success();
+        List<SystemMenu> systemMenus = systemMenuMapper.selectSystemMenusByRoleId(roleId);
+        response.put("data",systemMenus);
+        return response;
+    }
 }
