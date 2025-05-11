@@ -96,4 +96,11 @@ public interface EmployeeMapper {
      * @return 结果
      */
     int updateEmployeeRole(EmployeeRole employeeRole);
+
+    /**
+     * 通过员工id来查询角色id
+     * @param empId 员工id
+     * @return 结果
+     */
+    Long selectRoleByEmpId(Long empId);
 }

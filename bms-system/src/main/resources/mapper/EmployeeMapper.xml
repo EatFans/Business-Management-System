@@ -169,4 +169,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </set>
         where id = #{id}
     </update>
+
+    <!-- 通过员工id来查询角色id -->
+    <select id="selectRoleByEmpId" parameterType="Long" resultType="Long">
+        select er.role_id from employee e join employee_role er on e.emp_id = er.emp_id where er.emp_id = #{empId}
+    </select>
 </mapper>
