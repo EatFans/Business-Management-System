@@ -225,4 +225,13 @@ public class TestController {
         response.put("data",systemMenus);
         return response;
     }
+
+    @GetMapping("/getRoleId")
+    public ApiResponse getRoleId(@RequestParam("empId") Long empId){
+        ApiResponse response = ApiResponse.success();
+        Long roleId = employeeMapper.selectRoleByEmpId(empId);
+        response.put("roleId",roleId);
+        return response;
+
+    }
 }
