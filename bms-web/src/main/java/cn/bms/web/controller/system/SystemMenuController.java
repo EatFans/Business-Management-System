@@ -1,6 +1,7 @@
 package cn.bms.web.controller.system;
 
 import cn.bms.domain.ApiResponse;
+import cn.bms.domain.entity.SystemMenu;
 import cn.bms.domain.model.LoginUser;
 import cn.bms.framework.web.service.TokenService;
 import cn.bms.system.service.SystemMenuService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 系统菜单控制器
@@ -38,8 +40,8 @@ public class SystemMenuController {
         if (loginUser == null)
             return ApiResponse.error("登录用户不存在");
         Long empId = loginUser.getEmpId();
-
-
+        List<SystemMenu> menus = systemMenuService.getMenusByEmpId(empId);
+        response.put("menus",menus);
         return response;
     }
 
