@@ -9,6 +9,7 @@ import cn.bms.system.mapper.RoleMapper;
 import cn.bms.system.mapper.SystemMenuMapper;
 import cn.bms.system.mapper.SystemRoleMenuMapper;
 import cn.bms.system.service.PermissionService;
+import cn.bms.system.service.SystemMenuService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,9 @@ public class TestController {
 
     @Autowired
     private PermissionService permissionService;
+
+    @Autowired
+    private SystemMenuService systemMenuService;
 
     @Autowired
     private RoleMapper roleMapper;
@@ -234,4 +238,14 @@ public class TestController {
         return response;
 
     }
+
+    @GetMapping("/getMenusByEmpId")
+    public ApiResponse getMenusByEmpId(@RequestParam("empId") Long empId){
+        ApiResponse response = ApiResponse.success();
+
+        List<SystemMenu> menus = systemMenuService.getMenusByEmpId(empId);
+        response.put("data",menus);
+        return response;
+    }
+
 }
