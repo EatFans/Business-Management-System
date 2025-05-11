@@ -40,4 +40,10 @@ public interface SystemMenuMapper {
      * @return 结果
      */
     List<SystemMenu> selectSystemMenusByRoleId(Long roleId);
+
+    /**
+     * 获取所有的菜单
+     * @return 结果
+     */
+    List<SystemMenu> selectAllSystemMenu();
 }

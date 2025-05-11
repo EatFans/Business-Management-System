@@ -8,6 +8,7 @@ bms:
   captchaType: char
   # 默认给员工分配的角色id
   defaultRole: 4
+  superAdminRole: 2
 
 web:
   # 允许跨域的服务器ip
