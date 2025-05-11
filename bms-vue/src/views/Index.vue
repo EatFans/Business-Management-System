@@ -13,6 +13,7 @@
 <script>
 import SideBar from "@/layout/components/SideBar/SideBar.vue";
 import HeaderBox from "@/layout/components/HeaderBox.vue";
+import {getMenuList} from "@/api/system/menu.js";
 
 export default {
   name: 'Index',
@@ -22,77 +23,29 @@ export default {
   },
   data() {
     return {
-      itemList: [
-        {
-          icon: 'bx bx-home-alt',
-          text: '仪表盘',
-          link: '/dashboard',
-        },
-        {
-          icon: 'bx bx-user',
-          text: '项目',
-          link: '/project',
-        },
-        {
-          icon: 'bx bx-notepad',
-          text: '任务',
-          link: '/task'
-        },
-        {
-          icon: 'bx bx-dock-bottom',
-          text: '日历',
-          link: '/calendar',
-        },
-        {
-          icon: 'bx bx-buildings',
-          text: '假期',
-          link: '/holiday',
-        },
-        {
-          icon: 'bx bx-calendar-check',
-          text: '考勤',
-          link: '/attendance',
-        },
-        {
-          icon: 'bx bx-task',
-          text: '消息',
-          link: '/notify',
-        },
-        {
-          icon: 'bx bxs-user-account',
-          text: '员工管理',
-          link: '/employee',
-        },
-        {
-          icon: 'bx bx-group',
-          text: '角色管理',
-          link: '/role',
-        },
-        {
-          icon: 'bx bx-sitemap',
-          text: "权限管理",
-          link: '/permission'
-        },
-        {
-          icon: 'bx bx-user',
-          text: '项目管理',
-          link: '/PManager',
-        },
-        {
-          icon: 'bx bx-notepad',
-          text: '任务管理',
-          link: '/TManager'
-        },
-        {
-          icon: 'bx bx-cog',
-          text: '系统设置',
-          link: '/settings'
-        }
-      ]
+      itemList: []
     }
   },
   methods: {
+    /**
+     * 获取菜单物品
+     */
+    getMenus(){
+      getMenuList().then(res=>{
+        // console.log(res)
+        if (res.code == 200){
+          this.itemList = res.menus
 
+        } else {
+          this.$router.push('/login');
+        }
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+  },
+  created() {
+    this.getMenus();
   }
 }
 </script>

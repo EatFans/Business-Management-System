@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory} from "vue-router"
-import {verityToken} from "@/api/login.js";
+import {verityToken} from "@/api/system/login.js";
 import ProjectChildrenRouter from "@/router/project/ProjectChildrenRouter.js";
 
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '@/router/index.js';
 
 // 创建 Axios 实例
 const request = axios.create({
@@ -25,7 +26,8 @@ request.interceptors.response.use(response => {
 }, error => {
     if (error.response && error.response.status === 403) {
         console.log("未授权，请重新登录")
-        this.$router.push('/login');
+        localStorage.removeItem('loginToken');
+        window.location.href= "/login";
     }
     return Promise.reject(error);
 });
