@@ -8,11 +8,9 @@ import cn.bms.domain.model.LoginUser;
 import cn.bms.framework.web.service.TokenService;
 import cn.bms.system.service.EmployeeService;
 import cn.bms.system.service.PermissionService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -67,4 +65,16 @@ public class PermissionController {
         return b ? response : ApiResponse.error("添加失败");
     }
 
+    /**
+     * 更新权限接口方法
+     * @param permission 更新的权限
+     * @param request 请求
+     * @return 结果
+     */
+    @PutMapping("/update")
+    public ApiResponse updatePermission(@RequestBody Permission permission, HttpServletRequest request){
+        ApiResponse response = ApiResponse.success();
+
+        return response;
+    }
 }
