@@ -35,7 +35,6 @@ public class SystemMenuController {
     @GetMapping("/get")
     public ApiResponse getMenu(HttpServletRequest request){
         ApiResponse response = ApiResponse.success();
-
         LoginUser loginUser = tokenService.getLoginUser(request);
         if (loginUser == null)
             return ApiResponse.error("登录用户不存在");

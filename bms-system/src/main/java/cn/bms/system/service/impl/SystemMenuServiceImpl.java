@@ -35,7 +35,7 @@ public class SystemMenuServiceImpl implements SystemMenuService {
     @Override
     public List<SystemMenu> getMenusByEmpId(Long empId) {
         // 通过员工id来获取该员工的角色id
-        Long roleId = employeeMapper.selectRoleByEmpId(empId);
+        Long roleId = employeeMapper.selectRoleIdByEmpId(empId);
         if (roleId == null || roleId == 0)
             throw new RoleIsNullException();
         // 通过员工的角色id来去查询菜单

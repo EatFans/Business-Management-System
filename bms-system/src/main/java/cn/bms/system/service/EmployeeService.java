@@ -2,6 +2,7 @@ package cn.bms.system.service;
 
 import cn.bms.domain.entity.Employee;
 import cn.bms.domain.entity.EmployeeRole;
+import cn.bms.domain.entity.Role;
 
 /**
  * 员工业务接口类
@@ -84,4 +85,10 @@ public interface EmployeeService {
      */
     boolean updateRole(EmployeeRole employeeRole);
 
+    /**
+     * 获取角色
+     * @param empId 员工id
+     * @return 角色
+     */
+    Role getRole(Long empId);
 }

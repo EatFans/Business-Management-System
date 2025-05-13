@@ -2,6 +2,7 @@ package cn.bms.system.mapper;
 
 import cn.bms.domain.entity.Employee;
 import cn.bms.domain.entity.EmployeeRole;
+import cn.bms.domain.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -102,5 +103,12 @@ public interface EmployeeMapper {
      * @param empId 员工id
      * @return 结果
      */
-    Long selectRoleByEmpId(Long empId);
+    Long selectRoleIdByEmpId(Long empId);
+
+    /**
+     * 通过员工Id来查询角色
+     * @param empId 员工id
+     * @return 结果
+     */
+    Role selectRoleByEmpId(Long empId);
 }
