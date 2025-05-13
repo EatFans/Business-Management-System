@@ -8,7 +8,6 @@ import cn.bms.domain.model.LoginUser;
 import cn.bms.framework.web.service.TokenService;
 import cn.bms.system.service.EmployeeService;
 import cn.bms.system.service.PermissionService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,6 +74,22 @@ public class PermissionController {
     public ApiResponse updatePermission(@RequestBody Permission permission, HttpServletRequest request){
         ApiResponse response = ApiResponse.success();
 
-        return response;
+        // 检查传输过来的数据中是否存在permissionId
+        Long permissionId = permission.getPermissionId();
+        if (permissionId == null || permissionId == 0)
+            return ApiResponse.error("未知权限");
+
+        // 设置更新时间
+        permission.setUpdateTime(new Date(System.currentTimeMillis()));
+
+        // 设置更新者
+        LoginUser loginUser = tokenService.getLoginUser(request);
+        if (loginUser == null)
+            return ApiResponse.error(403,"登录数据不存在");
+        Role role = employeeService.getRole(loginUser.getEmpId());
+        permission.setUpdateBy(role.getRoleKey());
+
+        boolean b = permissionService.updatePermission(permission);
+        return b ? response : ApiResponse.error("更新失败");
     }
 }
