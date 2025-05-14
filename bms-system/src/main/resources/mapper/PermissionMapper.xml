@@ -12,12 +12,12 @@
         <result property="createTime" column="create_time" />
         <result property="createBy" column="create_by" />
         <result property="updateTime" column="update_time" />
-        <result property="update_by" column="update_by" />
+        <result property="updateBy" column="update_by" />
         <result property="remark" column="remark" />
     </resultMap>
 
     <!-- 通过id来查询Permission权限 -->
-    <select id="selectPermissionById" resultType="Permission" parameterType="Long" >
+    <select id="selectPermissionById" resultMap="PermissionResult" parameterType="Long" >
         select * from permission where permission_id = #{id}
     </select>
 
@@ -71,5 +71,10 @@
     <!-- 检查权限是否唯一 -->
     <select id="checkPermissionUnique" resultType="int" parameterType="String">
         select count(1) from permission where permission_code = #{code}
+    </select>
+
+    <!-- 查询获取所有的权限 -->
+    <select id="selectPermissions" resultMap="PermissionResult">
+        select * from permission
     </select>
 </mapper>

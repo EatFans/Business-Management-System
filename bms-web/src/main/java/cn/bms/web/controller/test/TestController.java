@@ -1,16 +1,12 @@
-package cn.bms.web.controller.tool;
+package cn.bms.web.controller.test;
 
 import cn.bms.common.exception.user.CaptchaExpireException;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.dto.TestBody;
 import cn.bms.domain.entity.*;
-import cn.bms.system.mapper.EmployeeMapper;
-import cn.bms.system.mapper.RoleMapper;
-import cn.bms.system.mapper.SystemMenuMapper;
-import cn.bms.system.mapper.SystemRoleMenuMapper;
+import cn.bms.system.mapper.*;
 import cn.bms.system.service.PermissionService;
 import cn.bms.system.service.SystemMenuService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +38,9 @@ public class TestController {
 
     @Autowired
     private SystemRoleMenuMapper systemRoleMenuMapper;
+
+    @Autowired
+    private PermissionMapper permissionMapper;
 
     public TestController(){
 
@@ -253,6 +252,23 @@ public class TestController {
         ApiResponse response = ApiResponse.success();
         Role role = employeeMapper.selectRoleByEmpId(empId);
         response.put("data",role);
+        return response;
+    }
+
+    @GetMapping("/getPermission")
+    public ApiResponse getPermissions(@RequestParam("id") Long id){
+        ApiResponse response = ApiResponse.success();
+
+        Permission permission = permissionMapper.selectPermissionById(id);
+        response.put("data",permission);
+        return response;
+    }
+
+    @GetMapping("/getPermissions")
+    public ApiResponse getPermission(){
+        ApiResponse response = ApiResponse.success();
+        List<Permission> permissions = permissionMapper.selectPermissions();
+        response.put("data",permissions);
         return response;
     }
 }

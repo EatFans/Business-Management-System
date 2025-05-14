@@ -92,4 +92,23 @@ public class PermissionController {
         boolean b = permissionService.updatePermission(permission);
         return b ? response : ApiResponse.error("更新失败");
     }
+
+    /**
+     * 获取权限
+     * @param id 请求的id
+     * @param request 请求
+     * @return 结果
+     */
+    @GetMapping("/get")
+    public ApiResponse getPermission(@RequestParam("id") Long id, HttpServletRequest request){
+        ApiResponse response = ApiResponse.success();
+        if (id == null || id == 0){
+            // 如果id为空或者为0，就获取所有的权限
+        } else {
+            // 获取指定的id的权限
+
+        }
+
+        return response;
+    }
 }

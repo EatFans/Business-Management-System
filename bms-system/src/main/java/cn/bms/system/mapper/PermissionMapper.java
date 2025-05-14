@@ -3,6 +3,8 @@ package cn.bms.system.mapper;
 import cn.bms.domain.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * 权限数据映射类
  *
@@ -38,4 +40,10 @@ public interface PermissionMapper {
      * @return 如果权限唯一就返回true，否则就返回false
      */
     int checkPermissionUnique(String code);
+
+    /**
+     * 获取全部权限
+     * @return 结果
+     */
+    List<Permission> selectPermissions();
 }

@@ -2,6 +2,8 @@ package cn.bms.system.service;
 
 import cn.bms.domain.entity.Permission;
 
+import java.util.List;
+
 /**
  * 权限业务接口类
  *
@@ -15,6 +17,7 @@ public interface PermissionService {
      * @return 权限信息
      */
     Permission selectPermissionById(Long id);
+
 
     /**
      * 添加权限
@@ -36,4 +39,10 @@ public interface PermissionService {
      * @return 如果唯一就返回true，否则就返回false
      */
     boolean checkPermissionUnique(String code);
+
+    /**
+     * 获取所有的权限
+     * @return 结果
+     */
+    List<Permission> selectPermission();
 }
