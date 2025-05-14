@@ -6,6 +6,8 @@ import cn.bms.system.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 权限业务实现类
  *
@@ -61,6 +63,27 @@ public class PermissionServiceImpl implements PermissionService {
     public boolean checkPermissionUnique(String code) {
         int count = permissionMapper.checkPermissionUnique(code);
         return count <= 0;
+    }
+
+    /**
+     * 获取全部的权限
+     * @return 结果
+     */
+    @Override
+    public List<Permission> selectPermission() {
+        return permissionMapper.selectPermissions();
+    }
+
+    /**
+     * 删除权限
+     * @param id 权限id
+     * @return 如果删除成功就返回true，否则就返回false
+     */
+    @Override
+    public boolean deletePermission(Long id) {
+        int i = permissionMapper.deleteRolePermission(id);
+        int j = permissionMapper.deletePermission(id);
+        return i +j >= 2;
     }
 }
 

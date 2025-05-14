@@ -1,9 +1,11 @@
 package cn.bms.system.service.impl;
 
 import cn.bms.common.constant.EmployeeConstants;
+import cn.bms.common.exception.user.RoleIsNullException;
 import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.entity.Employee;
 import cn.bms.domain.entity.EmployeeRole;
+import cn.bms.domain.entity.Role;
 import cn.bms.system.mapper.EmployeeMapper;
 import cn.bms.system.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -167,5 +169,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean updateRole(EmployeeRole employeeRole) {
         int count = employeeMapper.updateEmployeeRole(employeeRole);
         return count > 0;
+    }
+
+    /**
+     * 获取角色
+     * @param empId 员工id
+     * @return 角色
+     */
+    @Override
+    public Role getRole(Long empId) {
+        Role role = employeeMapper.selectRoleByEmpId(empId);
+        if (role == null)
+            throw new RoleIsNullException();
+        return role;
     }
 }

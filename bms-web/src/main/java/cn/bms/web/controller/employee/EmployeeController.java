@@ -4,7 +4,6 @@ import cn.bms.common.utils.SecurityUtils;
 import cn.bms.common.utils.StringUtils;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.entity.Employee;
-import cn.bms.domain.entity.EmployeeRole;
 import cn.bms.system.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

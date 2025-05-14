@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import {getCodeImg, login} from "@/api/login.js";
+import {getCodeImg, login} from "@/api/system/login.js";
 
 export default {
   name: "Login",

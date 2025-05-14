@@ -1,18 +1,17 @@
-package cn.bms.web.controller.tool;
+package cn.bms.web.controller.test;
 
 import cn.bms.common.exception.user.CaptchaExpireException;
 import cn.bms.domain.ApiResponse;
 import cn.bms.domain.dto.TestBody;
 import cn.bms.domain.entity.*;
-import cn.bms.system.mapper.EmployeeMapper;
-import cn.bms.system.mapper.RoleMapper;
-import cn.bms.system.mapper.SystemMenuMapper;
+import cn.bms.system.mapper.*;
 import cn.bms.system.service.PermissionService;
-import io.swagger.annotations.Api;
+import cn.bms.system.service.SystemMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Test测试控制器
@@ -29,10 +28,19 @@ public class TestController {
     private PermissionService permissionService;
 
     @Autowired
+    private SystemMenuService systemMenuService;
+
+    @Autowired
     private RoleMapper roleMapper;
 
     @Autowired
     private SystemMenuMapper systemMenuMapper;
+
+    @Autowired
+    private SystemRoleMenuMapper systemRoleMenuMapper;
+
+    @Autowired
+    private PermissionMapper permissionMapper;
 
     public TestController(){
 
@@ -184,6 +192,83 @@ public class TestController {
         int i = employeeMapper.updateEmployeeRole(body);
         if (i <= 0)
             return ApiResponse.error("更新失败");
+        return response;
+    }
+
+    @PostMapping("/addRoleMenu")
+    public ApiResponse addRoleMenu(@RequestBody SystemRoleMenu body){
+        ApiResponse response = ApiResponse.success("添加成功");
+        int i = systemRoleMenuMapper.addRoleMenu(body);
+        if (i <= 0)
+            return ApiResponse.error("添加失败");
+        return response;
+    }
+
+    @PostMapping("/updateRoleMenu")
+    public ApiResponse updateRoleMenu(@RequestBody SystemRoleMenu body){
+        ApiResponse response = ApiResponse.success("更新成功");
+        int i = systemRoleMenuMapper.updateRoleMenu(body);
+        if (i <= 0)
+            return ApiResponse.error("更新失败");
+        return response;
+    }
+
+    @GetMapping("/getMenuIds")
+    public ApiResponse getMenuIds(@RequestParam("roleId") Long roleId){
+        ApiResponse response = ApiResponse.success();
+        List<Long> menus = systemRoleMenuMapper.selectMenusByRoleId(roleId);
+        response.put("data",menus);
+        return response;
+    }
+
+    @GetMapping("/getMenus")
+    public ApiResponse getMenus(@RequestParam("roleId") Long roleId){
+        ApiResponse response = ApiResponse.success();
+        List<SystemMenu> systemMenus = systemMenuMapper.selectSystemMenusByRoleId(roleId);
+        response.put("data",systemMenus);
+        return response;
+    }
+
+    @GetMapping("/getRoleId")
+    public ApiResponse getRoleId(@RequestParam("empId") Long empId){
+        ApiResponse response = ApiResponse.success();
+        Long roleId = employeeMapper.selectRoleIdByEmpId(empId);
+        response.put("roleId",roleId);
+        return response;
+
+    }
+
+    @GetMapping("/getMenusByEmpId")
+    public ApiResponse getMenusByEmpId(@RequestParam("empId") Long empId){
+        ApiResponse response = ApiResponse.success();
+
+        List<SystemMenu> menus = systemMenuService.getMenusByEmpId(empId);
+        response.put("data",menus);
+        return response;
+    }
+
+    @GetMapping("/getRole")
+    public ApiResponse getRole(@RequestParam("empId") Long empId){
+        ApiResponse response = ApiResponse.success();
+        Role role = employeeMapper.selectRoleByEmpId(empId);
+        response.put("data",role);
+        return response;
+    }
+
+    @GetMapping("/getPermission")
+    public ApiResponse getPermissions(@RequestParam("id") Long id){
+        ApiResponse response = ApiResponse.success();
+
+        Permission permission = permissionMapper.selectPermissionById(id);
+        response.put("data",permission);
+        return response;
+    }
+
+    @GetMapping("/getPermissions")
+    public ApiResponse getPermission(){
+        ApiResponse response = ApiResponse.success();
+        List<Permission> permissions = permissionMapper.selectPermissions();
+        response.put("data",permissions);
         return response;
     }
 }

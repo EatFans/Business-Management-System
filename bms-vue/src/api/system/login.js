@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request from '@/utils/request.js'
 
 // 获取图片验证码
 export function getCodeImg() {

@@ -27,7 +27,7 @@
 
 <script>
 	import Menu from "@/layout/components/SideBar/Menu.vue";
-  import {logout} from "@/api/login.js";
+  import {logout} from "@/api/system/login.js";
 
   export default {
 		name: 'SideBar',
