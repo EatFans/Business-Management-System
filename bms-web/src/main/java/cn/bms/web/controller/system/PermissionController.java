@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 权限控制类
@@ -96,19 +97,28 @@ public class PermissionController {
     /**
      * 获取权限
      * @param id 请求的id
-     * @param request 请求
      * @return 结果
      */
     @GetMapping("/get")
-    public ApiResponse getPermission(@RequestParam("id") Long id, HttpServletRequest request){
+    public ApiResponse getPermission(@RequestParam("id") Long id){
         ApiResponse response = ApiResponse.success();
-        if (id == null || id == 0){
-            // 如果id为空或者为0，就获取所有的权限
-        } else {
-            // 获取指定的id的权限
+        if (id == null || id == 0)
+            return ApiResponse.error("id不合法");
 
-        }
+        Permission permission = permissionService.selectPermissionById(id);
+        response.put("data",permission);
+        return response;
+    }
 
+    /**
+     * 获取全部权限
+     * @return 全部权限
+     */
+    @GetMapping("/get/list")
+    public ApiResponse getPermissionList(){
+        ApiResponse response = ApiResponse.success();
+        List<Permission> permissions = permissionService.selectPermission();
+        response.put("data",permissions);
         return response;
     }
 }

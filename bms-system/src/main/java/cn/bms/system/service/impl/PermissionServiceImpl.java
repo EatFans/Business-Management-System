@@ -71,8 +71,7 @@ public class PermissionServiceImpl implements PermissionService {
      */
     @Override
     public List<Permission> selectPermission() {
-        // TODO
-        return null;
+        return permissionMapper.selectPermissions();
     }
 }
 
