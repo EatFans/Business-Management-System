@@ -46,4 +46,18 @@ public interface PermissionMapper {
      * @return 结果
      */
     List<Permission> selectPermissions();
+
+    /**
+     * 删除权限
+     * @param permissionId 权限id
+     * @return 结果
+     */
+    int deletePermission(Long permissionId);
+
+    /**
+     * 删除角色权限关联
+     * @param permissionId 权限id
+     * @return 返回结果
+     */
+    int deleteRolePermission(Long permissionId);
 }

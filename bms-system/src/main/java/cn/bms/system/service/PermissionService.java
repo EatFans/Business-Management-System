@@ -45,4 +45,11 @@ public interface PermissionService {
      * @return 结果
      */
     List<Permission> selectPermission();
+
+    /**
+     * 删除权限
+     * @param id 权限id
+     * @return 如果删除成功就返回true，否则就返回false
+     */
+    boolean deletePermission(Long id);
 }

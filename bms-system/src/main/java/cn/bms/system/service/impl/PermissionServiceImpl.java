@@ -73,5 +73,17 @@ public class PermissionServiceImpl implements PermissionService {
     public List<Permission> selectPermission() {
         return permissionMapper.selectPermissions();
     }
+
+    /**
+     * 删除权限
+     * @param id 权限id
+     * @return 如果删除成功就返回true，否则就返回false
+     */
+    @Override
+    public boolean deletePermission(Long id) {
+        int i = permissionMapper.deleteRolePermission(id);
+        int j = permissionMapper.deletePermission(id);
+        return i +j >= 2;
+    }
 }
 

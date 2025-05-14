@@ -77,4 +77,14 @@
     <select id="selectPermissions" resultMap="PermissionResult">
         select * from permission
     </select>
+
+    <!-- 删除权限 -->
+    <delete id="deletePermission" parameterType="Long">
+        delete from permission where permission_id = #{permissionId};
+    </delete>
+
+    <!-- 删除角色权限关联 -->
+    <delete id="deleteRolePermission" parameterType="Long">
+        delete from role_permission where permission_id = #{permissionId};
+    </delete>
 </mapper>

@@ -8,6 +8,7 @@ import cn.bms.domain.model.LoginUser;
 import cn.bms.framework.web.service.TokenService;
 import cn.bms.system.service.EmployeeService;
 import cn.bms.system.service.PermissionService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -120,5 +121,18 @@ public class PermissionController {
         List<Permission> permissions = permissionService.selectPermission();
         response.put("data",permissions);
         return response;
+    }
+
+    /**
+     * 删除权限接口
+     * @param id 权限id
+     * @param request 请求
+     * @return 响应
+     */
+    @DeleteMapping("/delete")
+    public ApiResponse deletePermission(@RequestParam("id") Long id,HttpServletRequest request){
+        ApiResponse response = ApiResponse.success();
+        boolean b = permissionService.deletePermission(id);
+        return b ? response : ApiResponse.error("删除失败");
     }
 }
