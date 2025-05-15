@@ -7,6 +7,7 @@ import cn.bms.domain.model.LoginUser;
 import cn.bms.framework.web.service.TokenService;
 import cn.bms.system.service.EmployeeService;
 import cn.bms.system.service.RoleService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,11 +68,34 @@ public class RoleController {
         return b ? response : ApiResponse.error("添加员工失败");
     }
 
+    /**
+     * 更新角色接口方法
+     * @param role 角色
+     * @param request 请求
+     * @return 响应
+     */
     @PutMapping("/update")
     public ApiResponse updateRole(@RequestBody Role role,HttpServletRequest request){
         ApiResponse response = ApiResponse.success();
 
-        return response;
+        // 检查传输过来的数据是否存在roleId
+        Long roleId = role.getRoleId();
+        if (roleId == null || roleId == 0)
+            return ApiResponse.error("未知角色");
+
+        // 设置更新事件
+        role.setUpdateTime(new Date(System.currentTimeMillis()));
+
+        // 设置更新者
+        LoginUser loginUser = tokenService.getLoginUser(request);
+        if (loginUser == null)
+            return ApiResponse.error(403,"登录数据不存在");
+        Role serviceRole = employeeService.getRole(loginUser.getEmpId());
+        role.setUpdateBy(serviceRole.getRoleKey());
+
+        boolean b = roleService.updateRole(role);
+
+        return b ? response : ApiResponse.error("更新失败");
     }
 
     @GetMapping("/get")
