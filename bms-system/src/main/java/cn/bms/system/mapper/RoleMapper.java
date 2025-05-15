@@ -2,6 +2,9 @@ package cn.bms.system.mapper;
 
 import cn.bms.domain.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 角色数据映射接口类
@@ -45,4 +48,25 @@ public interface RoleMapper {
      * @return 结果
      */
     int updateRole(Role role);
+
+    /**
+     * 查询所有的角色
+     * @return 角色列表
+     */
+    List<Role> selectRoles();
+
+    /**
+     * 删除角色
+     * @param roleId 角色id
+     * @return 结果
+     */
+    int deleteRole(Long roleId);
+
+    /**
+     * 检查角色是否唯一
+     * @param name 角色名
+     * @param key 角色关键字
+     * @return 结果
+     */
+    int checkRoleUnique(@Param("name") String name, @Param("key") String key);
 }
