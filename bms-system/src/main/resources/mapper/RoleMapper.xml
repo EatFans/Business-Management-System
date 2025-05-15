@@ -79,4 +79,19 @@
         </set>
         where role_id = #{roleId}
     </update>
+
+    <!-- 查询所有角色 -->
+    <select id="selectRoles" resultMap="RoleResult">
+        select * from role
+    </select>
+
+    <!-- 删除角色 -->
+    <delete id="deleteRole" parameterType="Long">
+        delete from role where role_id = #{roleId}
+    </delete>
+
+    <!-- 检查角色是否唯一 -->
+    <select id="checkRoleUnique" resultType="int">
+        select count(1) from role where role_name = #{name} or role_key = #{key}
+    </select>
 </mapper>
